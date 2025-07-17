@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Luxury Perfumes";
+}
+
+<div class="hero-section mb-5">
+    <div class="hero-content text-center">
+        <h1 class="display-4">NOIRE ESSENCE</h1>
+        <p class="lead">Discover our exclusive vintage perfume collections</p>
+        <a asp-controller="Perfume" asp-action="Index" class="btn btn-primary btn-lg">Shop Now</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2 class="text-center mb-4">Featured Collections</h2>
+
+    <div class="row">
+        @foreach (var product in Model.Take(3))
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">@product.FragranceType - @product.Size</p>
+                        <p class="text-primary h5">@product.Price.ToString("C")</p>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <a asp-controller="Perfume" asp-action="Details" asp-route-id="@product.Id"
+                           class="btn btn-outline-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .hero-section {
+        background: url('/images/hero-bg.jpg') center/cover no-repeat;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    }
+
+    .hero-content {
+        background-color: rgba(0,0,0,0.6);
+        padding: 2rem;
+        border-radius: 10px;
+    }
+</style>

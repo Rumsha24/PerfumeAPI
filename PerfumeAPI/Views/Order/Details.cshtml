@@ -1,0 +1,236 @@
+﻿@model PerfumeAPI.Models.Entities.Order
+
+@{
+    ViewData["Title"] = "Order Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Order #@Model.OrderNumber</h1>
+        <span class="badge
+              @(Model.Status == "Delivered" ? "bg-success" :
+                                            Model.Status == "Cancelled" ? "bg-danger" : "bg-primary")">
+            @Model.Status
+        </span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Order Items</h5>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <img src="~/images/products/@item.Product.ImageUrl"
+                                                 class="img-thumbnail me-3"
+                                                 style="width: 60px; height: 60px; object-fit: cover;"
+                                                 alt="@item.Product.Name">
+                                            <div>
+                                                <h6 class="mb-1">@item.Product.Name</h6>
+                                                <small class="text-muted">@item.Product.FragranceType</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>@item.PriceAtPurchase.ToString("C")</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@((item.PriceAtPurchase * item.Quantity).ToString("C"))</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Order Summary</h5>
+
+                    <div class="mb-3">
+                        <h6>Shipping Address</h6>
+                        <p>@Model.ShippingAddress</p>
+                    </div>
+
+                    <hr>
+
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between">
+                            <span>Subtotal:</span>
+                            <span>@Model.Items.Sum(i => i.PriceAtPurchase * i.Quantity).ToString("C")</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between">
+                            <span>Shipping:</span>
+                            <span>@((Model.TotalAmount - Model.Items.Sum(i => i.PriceAtPurchase * i.Quantity)).ToString("C"))</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Total:</span>
+                            <span>@Model.TotalAmount.ToString("C")</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="order-timeline">
+                        <h6>Order Timeline</h6>
+                        <ul class="list-unstyled">
+                            <li class="@(Model.Status != "Processing" ? "completed" : "active")">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Order Placed</span>
+                                <small>@Model.OrderDate.ToString("MMMM dd, yyyy")</small>
+                            </li>
+                            <li class="@(Model.Status == "Shipped" || Model.Status == "Delivered" ? "completed" :
+                                                                                                          Model.Status == "Processing" ? "pending" : "")">
+                                <i class="fas fa-truck"></i>
+                                <span>Shipped</span>
+                                @if (Model.ShippedDate.HasValue)
+                                {
+                                    <small>@Model.ShippedDate.Value.ToString("MMMM dd, yyyy")</small>
+                                }
+                            </li>
+                            <li class="@(Model.Status == "Delivered" ? "completed" :
+                                                                                                          Model.Status == "Shipped" ? "pending" : "")">
+                                <i class="fas fa-home"></i>
+                                <span>Delivered</span>
+                                @if (Model.DeliveredDate.HasValue)
+                                {
+                                    <small>@Model.DeliveredDate.Value.ToString("MMMM dd, yyyy")</small>
+                                }
+                            </li>
+                            @if (Model.Status == "Cancelled")
+                            {
+                                <li class="completed text-danger">
+                                    <i class="fas fa-times-circle"></i>
+                                    <span>Order Cancelled</span>
+                                    <small>@Model.CancelledDate?.ToString("MMMM dd, yyyy")</small>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.Status == "Processing")
+            {
+                <div class="text-center">
+                    <button class="btn btn-outline-danger" id="cancelOrder"
+                            data-id="@Model.Id">
+                        Cancel Order
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#cancelOrder').click(function () {
+                const $btn = $(this);
+                if (confirm('Are you sure you want to cancel this order?')) {
+                    $btn.prop('disabled', true).text('Cancelling...');
+                    const orderId = $btn.data('id');
+
+                    $.ajax({
+                        url: '/api/orders/' + orderId,
+                        type: 'DELETE',
+                        success: function () {
+                            window.location.reload();
+                        },
+                        error: function (xhr) {
+                            alert('Failed to cancel the order. ' + xhr.responseText);
+                            $btn.prop('disabled', false).text('Cancel Order');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+    <style>
+        .order-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+            .order-timeline ul li {
+                position: relative;
+                padding-bottom: 15px;
+                padding-left: 20px;
+                border-left: 2px solid #dee2e6;
+            }
+
+                .order-timeline ul li:last-child {
+                    border-left: 0;
+                }
+
+                .order-timeline ul li:before {
+                    content: '';
+                    position: absolute;
+                    left: -9px;
+                    top: 0;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    background: #dee2e6;
+                    border: 3px solid #fff;
+                }
+
+                .order-timeline ul li.completed:before {
+                    background: #28a745;
+                }
+
+                .order-timeline ul li.active:before {
+                    background: #007bff;
+                }
+
+                .order-timeline ul li.pending:before {
+                    background: #ffc107;
+                }
+
+                .order-timeline ul li span {
+                    display: block;
+                    font-weight: 500;
+                }
+
+                .order-timeline ul li small {
+                    color: #6c757d;
+                    font-size: 0.875em;
+                }
+
+                .order-timeline ul li i {
+                    position: absolute;
+                    left: -30px;
+                    top: 0;
+                    color: #fff;
+                    font-size: 12px;
+                    z-index: 1;
+                }
+    </style>
+}
