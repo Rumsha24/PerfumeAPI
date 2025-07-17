@@ -1,0 +1,5 @@
+C:\Users\hp\source\repos\PerfumeAPI\PerfumeAPI\wwwroot\cart.html
+C:\Users\hp\source\repos\PerfumeAPI\PerfumeAPI\wwwroot\indes.html
+C:\Users\hp\source\repos\PerfumeAPI\PerfumeAPI\wwwroot\order.html
+C:\Users\hp\source\repos\PerfumeAPI\PerfumeAPI\wwwroot\Products.html
+C:\Users\hp\source\repos\PerfumeAPI\PerfumeAPI\wwwroot\styles.css
