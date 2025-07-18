@@ -32,13 +32,11 @@ namespace PerfumeAPI.Controllers
                 .FirstOrDefaultAsync(p => p.Id == id);
 
             if (perfume == null)
-            {
                 return NotFound();
-            }
 
-            // Calculate average rating
-            ViewBag.AverageRating = perfume.Comments.Any() ?
-                perfume.Comments.Average(c => c.Rating) : 0;
+            ViewBag.AverageRating = perfume.Comments.Any()
+                ? perfume.Comments.Average(c => c.Rating)
+                : 0;
 
             return View(perfume);
         }
@@ -48,9 +46,7 @@ namespace PerfumeAPI.Controllers
         public async Task<IActionResult> AddComment(int productId, string text, int rating)
         {
             if (!User.Identity.IsAuthenticated)
-            {
                 return RedirectToAction("Login", "Account");
-            }
 
             var comment = new Comment
             {

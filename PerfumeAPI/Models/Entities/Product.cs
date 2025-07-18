@@ -16,8 +16,8 @@ namespace PerfumeAPI.Models.Entities
         [Column(TypeName = "text")]
         public required string Description { get; set; }
 
-        [Required]
-        public required string ImageUrl { get; set; }
+        // Made nullable by removing 'required' and adding '?'
+        public string? ImageUrl { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]

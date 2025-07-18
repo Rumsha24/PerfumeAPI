@@ -50,7 +50,8 @@ namespace PerfumeAPI.Services
                 ShippingCost = productDto.ShippingCost,
                 FragranceType = productDto.FragranceType,
                 Size = productDto.Size,
-                CreatedAt = DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow,
+                ImageUrl = "" // default empty string to satisfy required member
             };
 
             if (productDto.ImageFile != null)

@@ -11,6 +11,7 @@ namespace PerfumeAPI.Models.DTOs
         public string Name { get; set; }
 
         [Required]
+        [StringLength(500)]
         public string Description { get; set; }
 
         public string ImageUrl { get; set; }
@@ -24,9 +25,11 @@ namespace PerfumeAPI.Models.DTOs
         public decimal ShippingCost { get; set; }
 
         [Required]
+        [StringLength(50)]
         public string FragranceType { get; set; }
 
         [Required]
+        [StringLength(20)]
         public string Size { get; set; }
 
         public double AverageRating { get; set; }
@@ -40,6 +43,7 @@ namespace PerfumeAPI.Models.DTOs
         public string Name { get; set; }
 
         [Required]
+        [StringLength(500)]
         public string Description { get; set; }
 
         [Required]
@@ -51,9 +55,11 @@ namespace PerfumeAPI.Models.DTOs
         public decimal ShippingCost { get; set; }
 
         [Required]
+        [StringLength(50)]
         public string FragranceType { get; set; }
 
         [Required]
+        [StringLength(20)]
         public string Size { get; set; }
 
         public IFormFile? ImageFile { get; set; }
