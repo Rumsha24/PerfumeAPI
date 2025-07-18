@@ -187,3 +187,5 @@ C:\Users\hp\source\repos\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\refint\PerfumeAP
 C:\Users\hp\source\repos\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.pdb
 C:\Users\hp\source\repos\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.genruntimeconfig.cache
 C:\Users\hp\source\repos\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\ref\PerfumeAPI.dll
+C:\Users\hp\source\repos\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.RazorAssemblyInfo.cache
+C:\Users\hp\source\repos\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.RazorAssemblyInfo.cs
