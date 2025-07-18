@@ -10,14 +10,14 @@ namespace PerfumeAPI.Models.Entities
 
         [Required]
         [StringLength(100)]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         [Required]
         [Column(TypeName = "text")]
-        public string Description { get; set; }
+        public required string Description { get; set; }
 
         [Required]
-        public string ImageUrl { get; set; }
+        public required string ImageUrl { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
@@ -30,10 +30,10 @@ namespace PerfumeAPI.Models.Entities
         public decimal ShippingCost { get; set; }
 
         [Required]
-        public string FragranceType { get; set; } // E.g., Woody, Floral, Citrus
+        public required string FragranceType { get; set; }
 
         [Required]
-        public string Size { get; set; } // E.g., 50ml, 100ml
+        public required string Size { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }

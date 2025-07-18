@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Product>
+﻿@model IEnumerable<PerfumeAPI.Models.Entities.Product>
 @{
     ViewData["Title"] = "Luxury Perfumes";
 }
@@ -18,16 +18,20 @@
         @foreach (var product in Model.Take(3))
         {
             <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name">
+                <div class="card h-100 product-card">
+                    <img src="@product.ImageUrl" class="card-img-top product-image" alt="@product.Name" onerror="this.onerror=null;this.src='/images/products/default-perfume.jpg';">
                     <div class="card-body">
                         <h5 class="card-title">@product.Name</h5>
-                        <p class="card-text">@product.FragranceType - @product.Size</p>
+                        <p class="card-text text-muted">@product.FragranceType - @product.Size</p>
                         <p class="text-primary h5">@product.Price.ToString("C")</p>
+                        <small class="text-success">+ @product.ShippingCost.ToString("C") shipping</small>
                     </div>
                     <div class="card-footer bg-white">
                         <a asp-controller="Perfume" asp-action="Details" asp-route-id="@product.Id"
                            class="btn btn-outline-primary">View Details</a>
+                        <button class="btn btn-success add-to-cart" data-product-id="@product.Id">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
                     </div>
                 </div>
             </div>
@@ -35,20 +39,54 @@
     </div>
 </div>
 
-<style>
-    .hero-section {
-        background: url('/images/hero-bg.jpg') center/cover no-repeat;
-        height: 60vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-    }
+@section Styles {
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/hero-bg.jpg') center/cover no-repeat;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
 
-    .hero-content {
-        background-color: rgba(0,0,0,0.6);
-        padding: 2rem;
-        border-radius: 10px;
-    }
-</style>
+        .hero-content {
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 800px;
+        }
+
+        .product-card {
+            transition: transform 0.3s ease;
+        }
+
+            .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+        .product-image {
+            height: 250px;
+            object-fit: cover;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('.add-to-cart').click(function() {
+                const productId = $(this).data('product-id');
+
+                $.post('/Cart/AddToCart', { productId: productId, quantity: 1 })
+                    .done(function() {
+                        toastr.success('Item added to cart!');
+                    })
+                    .fail(function() {
+                        toastr.error('Failed to add item to cart');
+                    });
+            });
+        });
+    </script>
+}

@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Cors.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models.Entities;
 using PerfumeAPI.Services.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PerfumeAPI.Services
 {
@@ -32,7 +35,7 @@ namespace PerfumeAPI.Services
                 .ToListAsync();
         }
 
-        public async Task<Order> GetOrderByIdAsync(int id, string userId)
+        public async Task<Order?> GetOrderByIdAsync(int id, string userId)
         {
             return await _context.Orders
                 .Include(o => o.Items)
@@ -43,7 +46,7 @@ namespace PerfumeAPI.Services
         public async Task<Order> CreateOrderAsync(string userId, string shippingAddress)
         {
             var cart = await _cartService.GetUserCartAsync(userId);
-            if (!cart.Items.Any())
+            if (cart?.Items?.Any() != true)
                 throw new InvalidOperationException("Cart is empty");
 
             var order = new Order
@@ -56,10 +59,10 @@ namespace PerfumeAPI.Services
                 {
                     ProductId = i.ProductId,
                     Quantity = i.Quantity,
-                    PriceAtPurchase = i.Product.Price
+                    PriceAtPurchase = i.Product?.Price ?? 0m
                 }).ToList(),
-                TotalAmount = cart.Items.Sum(i => i.Product.Price * i.Quantity) +
-                             cart.Items.Sum(i => i.Product.ShippingCost)
+                TotalAmount = cart.Items.Sum(i => (i.Product?.Price ?? 0m) * i.Quantity +
+                              (i.Product?.ShippingCost ?? 0m))
             };
 
             _context.Orders.Add(order);
@@ -85,26 +88,19 @@ namespace PerfumeAPI.Services
 
         public async Task ProcessPaymentAsync(int orderId, PaymentRequest paymentRequest)
         {
-            var order = await _context.Orders.FindAsync(orderId);
-            if (order == null)
-                throw new ArgumentException("Order not found");
+            var order = await _context.Orders.FindAsync(orderId)
+                ?? throw new ArgumentException("Order not found");
 
             paymentRequest.Amount = order.TotalAmount;
-            paymentRequest.Description = $"Payment for order #{order.OrderNumber}";
+            paymentRequest.Description = $"Payment for order #{order.Id}";
 
             var result = await _paymentService.ProcessPaymentAsync(paymentRequest);
 
-            if (result.Success)
-            {
-                order.Status = "Payment Received";
-            }
-            else
-            {
-                order.Status = "Payment Failed";
-                throw new Exception(result.ErrorMessage);
-            }
-
+            order.Status = result.Success ? "Payment Received" : "Payment Failed";
             await _context.SaveChangesAsync();
+
+            if (!result.Success)
+                throw new Exception(result.ErrorMessage);
         }
     }
 }

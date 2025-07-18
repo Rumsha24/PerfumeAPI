@@ -20,7 +20,7 @@ namespace PerfumeAPI.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // User-Cart relationship (one-to-one)
+            // User-Cart relationship (one-to-one)a
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Cart)
                 .WithOne(c => c.User)

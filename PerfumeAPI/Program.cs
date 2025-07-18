@@ -2,42 +2,66 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models.Entities;
+using PerfumeAPI.Services;
+using PerfumeAPI.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// 1. Configuration Setup
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddEnvironmentVariables();
 
-// Configure Identity for MVC
+// 2. Database Configuration
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connectionString, sqlOptions =>
+    {
+        sqlOptions.EnableRetryOnFailure(
+            maxRetryCount: 5,
+            maxRetryDelay: TimeSpan.FromSeconds(30),
+            errorNumbersToAdd: null);
+    }));
+
+// 3. Identity Configuration
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
     options.Password.RequireDigit = true;
     options.Password.RequiredLength = 8;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = true;
-    options.SignIn.RequireConfirmedAccount = false;
+    options.User.RequireUniqueEmail = true;
 })
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
-// Cookie settings for MVC authentication
+// 4. Application Services
+builder.Services.AddControllersWithViews()
+    .AddRazorRuntimeCompilation(); // For development
+
+// Configure cookie settings
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
     options.LoginPath = "/Account/Login";
     options.AccessDeniedPath = "/Account/AccessDenied";
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(30);
     options.SlidingExpiration = true;
 });
 
-// Add MVC services (no API controllers)
-builder.Services.AddControllersWithViews()
-    .AddRazorRuntimeCompilation(); // Enable Razor runtime compilation for development
+// 5. Additional Services
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IPerfumeService, PerfumeService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 var app = builder.Build();
 
-// Configure the HTTP pipeline
+// 6. Middleware Pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -49,22 +73,28 @@ else
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+
+// Enhanced static files with caching
+app.UseStaticFiles(new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        ctx.Context.Response.Headers.Append(
+            "Cache-Control", "public,max-age=31536000");
+    }
+});
+
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-// MVC routing only
-app.MapControllerRoute(
-    name: "areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-
+// 7. Endpoints
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// Database initialization
+// 8. Database Initialization
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -80,8 +110,11 @@ using (var scope = app.Services.CreateScope())
     catch (Exception ex)
     {
         var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "Database initialization failed");
+        logger.LogError(ex, "An error occurred while seeding the database");
     }
 }
+
+// 9. Health Check Endpoint
+app.MapGet("/health", () => Results.Ok());
 
 await app.RunAsync();
