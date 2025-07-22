@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\NewFolder\" />
     <Folder Include="wwwroot\images\products\" />
   </ItemGroup>
 

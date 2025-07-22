@@ -1,4 +1,7 @@
-﻿namespace PerfumeAPI.Services
+﻿// File: Services/Interfaces/IPaymentService.cs
+using System.Threading.Tasks;
+
+namespace PerfumeAPI.Services.Interfaces
 {
     public interface IPaymentService
     {

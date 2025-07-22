@@ -100,7 +100,7 @@ namespace PerfumeAPI.Services
             await _context.SaveChangesAsync();
 
             if (!result.Success)
-                throw new Exception(result.ErrorMessage);
+                throw new Exception(result.ErrorMessage ?? "Payment processing failed");
         }
     }
 }

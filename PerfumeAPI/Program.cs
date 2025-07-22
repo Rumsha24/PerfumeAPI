@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models.Entities;
@@ -43,7 +43,7 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation(); // For development
 
-// Configure cookie settings
+// 5. Configure cookie settings
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
@@ -53,15 +53,16 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-// 5. Additional Services
+// 6. Additional Services
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IPerfumeService, PerfumeService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>(); // ✅ REGISTERED HERE
 
 var app = builder.Build();
 
-// 6. Middleware Pipeline
+// 7. Middleware Pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -74,7 +75,6 @@ else
 
 app.UseHttpsRedirection();
 
-// Enhanced static files with caching
 app.UseStaticFiles(new StaticFileOptions
 {
     OnPrepareResponse = ctx =>
@@ -89,12 +89,12 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// 7. Endpoints
+// 8. Endpoints
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// 8. Database Initialization
+// 9. Database Initialization
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -114,7 +114,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// 9. Health Check Endpoint
+// 10. Health Check Endpoint
 app.MapGet("/health", () => Results.Ok());
 
 await app.RunAsync();
