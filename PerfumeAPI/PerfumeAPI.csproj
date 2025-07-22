@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.436" />
+    <PackageReference Include="LigerShark.WebOptimizer.Sass" Version="3.0.123" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
@@ -32,8 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\NewFolder\" />
     <Folder Include="wwwroot\images\products\" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

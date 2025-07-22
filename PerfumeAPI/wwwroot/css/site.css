@@ -1,44 +1,24 @@
 ﻿/* wwwroot/css/site.css */
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: #C9184A;
-    color: white;
-    padding: 8px;
-    z-index: 100;
-    transition: top 0.3s;
-}
 
-    .skip-link:focus {
-        top: 0;
-    }
+/* Import Google Fonts */
+@@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
 
-.floating-cta {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background: #C9184A;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    cursor: pointer;
-    z-index: 1000;
-    transition: all 0.3s ease;
-    border: none;
-}
-
-/* Ensure footer stays at bottom */
-html {
-    position: relative;
-    min-height: 100%;
-}
-
+/* Base Styles */
 body {
-    margin-bottom: 60px; /* Footer height */
+    font-family: 'Montserrat', sans-serif;
+    padding-top: 56px; /* For fixed navbar */
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Navbar Fixes */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+/* Utility Classes */
+.min-vh-80 {
+    min-height: 80vh;
 }

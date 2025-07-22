@@ -1,66 +1,89 @@
 ﻿@{
-    ViewData["Title"] = "Our Story";
+    ViewData["Title"] = "Our Story | NOIRE ESSENCE";
 }
 
-<div class="container my-5">
-    <div class="row">
+<div class="container py-5">
+    <div class="row align-items-center">
         <div class="col-lg-6">
-            <h1 class="display-4 mb-4">Our Story</h1>
-            <p class="lead">Born from a passion for timeless fragrances</p>
+            <h1 class="display-4 fw-light mb-4">OUR LEGACY</h1>
+            <p class="lead text-muted mb-5">A journey through scent and time</p>
 
-            <p>
-                NOIRE ESSENCE was founded in 2010 by master perfumer Jacques Laurent in the heart of Paris.
-                Our mission is to preserve the art of traditional perfume-making while infusing modern elegance.
-            </p>
+            <div class="mb-4">
+                <p>Founded in the heart of Grasse, France, NOIRE ESSENCE has been crafting exquisite perfumes since 1923. Our master perfumers combine traditional techniques with modern innovation to create timeless fragrances.</p>
 
-            <p>
-                Each fragrance in our vintage collection is crafted using rare ingredients sourced from
-                sustainable growers around the world. We honor the heritage of perfumery while innovating
-                for the contemporary connoisseur.
-            </p>
+                <p>Each bottle contains not just a scent, but a story - of rare ingredients sourced from sustainable growers, of generations of perfumery knowledge, and of the passionate artisans who bring each fragrance to life.</p>
+            </div>
 
-            <p>
-                What began as a small atelier in Montmartre has grown into an internationally recognized
-                brand, yet we remain committed to our artisanal roots.
-            </p>
+            <a href="#" class="btn btn-outline-dark px-4">Visit Our Atelier</a>
         </div>
         <div class="col-lg-6">
-            <img src="~/images/paris-atelier.jpg" class="img-fluid rounded" alt="Our Paris Atelier">
+            <img src="~/images/atelier.jpg" class="img-fluid rounded shadow" alt="NOIRE ESSENCE Atelier">
         </div>
     </div>
 
-    <div class="row mt-5">
-        <div class="col-12">
-            <h2 class="mb-4">Our Philosophy</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-0">
-                        <div class="card-body text-center">
-                            <i class="fas fa-leaf fa-3x text-success mb-3"></i>
-                            <h5>Sustainability</h5>
-                            <p>Ethically sourced ingredients with minimal environmental impact</p>
-                        </div>
+    <div class="row mt-5 py-5">
+        <div class="col-12 text-center mb-5">
+            <h2 class="display-5 fw-light">RECOGNITION</h2>
+            <p class="text-muted">Our dedication to excellence has been honored with</p>
+        </div>
+
+        <div class="col-md-8 mx-auto">
+            <div class="awards-carousel owl-carousel">
+                @{
+                    // Safely cast ViewBag.Awards to a List<string> or create an empty list if it's null
+                    var awardsList = ViewBag.Awards as List<string> ?? new List<string>();
+                }
+                @foreach (var award in awardsList)
+                {
+                    <div class="award-item text-center p-4">
+                        <i class="fas fa-award fa-3x mb-3 text-gold"></i>
+                        <p class="mb-0">@award</p>
                     </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-0">
-                        <div class="card-body text-center">
-                            <i class="fas fa-gem fa-3x text-primary mb-3"></i>
-                            <h5>Quality</h5>
-                            <p>Only the finest raw materials meet our exacting standards</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 border-0">
-                        <div class="card-body text-center">
-                            <i class="fas fa-heart fa-3x text-danger mb-3"></i>
-                            <h5>Passion</h5>
-                            <p>Each bottle is crafted with dedication to the perfumer's art</p>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>
 </div>
+
+@section Styles {
+    <style>
+        .text-gold {
+            color: #d4af37;
+        }
+
+        .award-item {
+            background: white;
+            border-radius: 5px;
+            margin: 0 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .owl-carousel .owl-item img {
+            height: 100px; /* This rule seems off, as there are no images directly inside owl-item for awards */
+            width: auto;
+            margin: 0 auto;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function(){
+            $(".awards-carousel").owlCarousel({
+                items: 1,
+                loop: true,
+                margin: 30,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                responsive: {
+                    768: {
+                        items: 2
+                    },
+                    992: {
+                        items: 3
+                    }
+                }
+            });
+        });
+    </script>
+}

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PerfumeAPI.Models.DTOs;
-using PerfumeAPI.Services;
+using PerfumeAPI.Services.Interfaces;
 using System.Security.Claims;
 
 namespace PerfumeAPI.Controllers

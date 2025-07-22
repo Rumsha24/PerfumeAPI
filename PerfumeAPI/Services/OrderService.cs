@@ -20,9 +20,9 @@ namespace PerfumeAPI.Services
             ICartService cartService,
             IPaymentService paymentService)
         {
-            _context = context;
-            _cartService = cartService;
-            _paymentService = paymentService;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _cartService = cartService ?? throw new ArgumentNullException(nameof(cartService));
+            _paymentService = paymentService ?? throw new ArgumentNullException(nameof(paymentService));
         }
 
         public async Task<IEnumerable<Order>> GetUserOrdersAsync(string userId)

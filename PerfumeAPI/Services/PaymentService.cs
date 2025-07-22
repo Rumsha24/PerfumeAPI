@@ -1,5 +1,4 @@
-﻿// File: Services/PaymentService.cs
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using PerfumeAPI.Services.Interfaces;
 
@@ -16,7 +15,7 @@ namespace PerfumeAPI.Services
             {
                 Success = true,
                 TransactionId = Guid.NewGuid().ToString(),
-                ErrorMessage = null
+                ErrorMessage = string.Empty // Changed from null to empty string
             };
         }
     }

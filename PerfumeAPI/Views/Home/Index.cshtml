@@ -1,37 +1,54 @@
 ﻿@model IEnumerable<PerfumeAPI.Models.Entities.Product>
 @{
-    ViewData["Title"] = "Luxury Perfumes";
+    ViewData["Title"] = "Luxury Perfumes | NOIRE ESSENCE";
 }
 
-<div class="hero-section mb-5">
-    <div class="hero-content text-center">
-        <h1 class="display-4">NOIRE ESSENCE</h1>
-        <p class="lead">Discover our exclusive vintage perfume collections</p>
-        <a asp-controller="Perfume" asp-action="Index" class="btn btn-primary btn-lg">Shop Now</a>
+<!-- Hero Carousel -->
+<div id="perfumeCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="hero-section" style="background-image: url('/images/hero1.jpg')">
+                <div class="hero-content text-center">
+                    <h1 class="display-3 fw-light mb-4">ELEVATE YOUR SENSES</h1>
+                    <p class="lead mb-5">Discover our exclusive collection of artisanal fragrances</p>
+                    <a asp-controller="Perfume" asp-action="Index" class="btn btn-light btn-lg px-5">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="hero-section" style="background-image: url('/images/hero2.jpg')">
+                <div class="hero-content text-center">
+                    <h1 class="display-3 fw-light mb-4">TIMELESS ELEGANCE</h1>
+                    <p class="lead mb-5">Crafted with rare ingredients from around the world</p>
+                    <a href="#" class="btn btn-light btn-lg px-5">New Arrivals</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="container">
-    <h2 class="text-center mb-4">Featured Collections</h2>
+<!-- Featured Collections -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="display-5 fw-light mb-3">SIGNATURE COLLECTIONS</h2>
+        <p class="text-muted">Discover our most coveted fragrances</p>
+    </div>
 
-    <div class="row">
-        @foreach (var product in Model.Take(3))
+    <div class="row g-4">
+        @foreach (var product in Model)
         {
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 product-card">
-                    <img src="@product.ImageUrl" class="card-img-top product-image" alt="@product.Name" onerror="this.onerror=null;this.src='/images/products/default-perfume.jpg';">
-                    <div class="card-body">
-                        <h5 class="card-title">@product.Name</h5>
-                        <p class="card-text text-muted">@product.FragranceType - @product.Size</p>
-                        <p class="text-primary h5">@product.Price.ToString("C")</p>
-                        <small class="text-success">+ @product.ShippingCost.ToString("C") shipping</small>
+            <div class="col-md-3">
+                <div class="card border-0 h-100 perfume-card">
+                    <div class="perfume-badge">BESTSELLER</div>
+                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" onerror="this.onerror=null;this.src='/images/default-perfume.jpg';">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-light">@product.Name</h5>
+                        <p class="text-muted small">@product.FragranceFamily</p>
+                        <p class="text-dark h5">@product.Price.ToString("C")</p>
                     </div>
-                    <div class="card-footer bg-white">
+                    <div class="card-footer bg-transparent border-0">
                         <a asp-controller="Perfume" asp-action="Details" asp-route-id="@product.Id"
-                           class="btn btn-outline-primary">View Details</a>
-                        <button class="btn btn-success add-to-cart" data-product-id="@product.Id">
-                            <i class="fas fa-shopping-cart"></i> Add to Cart
-                        </button>
+                           class="btn btn-outline-dark w-100">Discover</a>
                     </div>
                 </div>
             </div>
@@ -39,54 +56,103 @@
     </div>
 </div>
 
+<!-- Fragrance Families -->
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-light">EXPLORE OUR FRAGRANCE FAMILIES</h2>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var family in ViewBag.FragranceFamilies as List<string> ?? new List<string>())
+            {
+                <div class="col-md-3">
+                    <div class="fragrance-family-card text-center p-4">
+                        <div class="family-icon mb-3">
+                            <i class="fas fa-spa fa-2x"></i>
+                        </div>
+                        <h5>@family</h5>
+                        <a href="#" class="stretched-link"></a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
 @section Styles {
     <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+        }
+
         .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/images/hero-bg.jpg') center/cover no-repeat;
-            height: 60vh;
+            height: 80vh;
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            position: relative;
         }
 
-        .hero-content {
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 800px;
-        }
-
-        .product-card {
-            transition: transform 0.3s ease;
-        }
-
-            .product-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.4);
             }
 
-        .product-image {
-            height: 250px;
-            object-fit: cover;
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .perfume-card {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+            .perfume-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            }
+
+        .perfume-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #000;
+            color: #fff;
+            padding: 5px 10px;
+            font-size: 12px;
+            z-index: 10;
+        }
+
+        .fragrance-family-card {
+            background: white;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+            .fragrance-family-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            }
+
+        .family-icon {
+            color: #8e6c88;
         }
     </style>
-}
-
-@section Scripts {
-    <script>
-        $(document).ready(function() {
-            $('.add-to-cart').click(function() {
-                const productId = $(this).data('product-id');
-
-                $.post('/Cart/AddToCart', { productId: productId, quantity: 1 })
-                    .done(function() {
-                        toastr.success('Item added to cart!');
-                    })
-                    .fail(function() {
-                        toastr.error('Failed to add item to cart');
-                    });
-            });
-        });
-    </script>
 }

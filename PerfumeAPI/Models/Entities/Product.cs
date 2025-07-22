@@ -16,7 +16,6 @@ namespace PerfumeAPI.Models.Entities
         [Column(TypeName = "text")]
         public required string Description { get; set; }
 
-        // Made nullable by removing 'required' and adding '?'
         public string? ImageUrl { get; set; }
 
         [Required]
@@ -31,6 +30,10 @@ namespace PerfumeAPI.Models.Entities
 
         [Required]
         public required string FragranceType { get; set; }
+
+        // Add these new properties
+        public string? FragranceFamily { get; set; } // Floral, Woody, Oriental, Fresh
+        public bool IsFeatured { get; set; } = false;
 
         [Required]
         public required string Size { get; set; }

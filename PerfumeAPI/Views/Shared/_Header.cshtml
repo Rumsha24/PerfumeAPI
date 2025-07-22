@@ -1,15 +1,34 @@
-﻿<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+﻿<nav class="navbar navbar-expand-lg navbar-dark bg-black py-3">
     <div class="container">
-        <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-            NOIRE ESSENCE
+        <a class="navbar-brand fs-2 fw-light" asp-controller="Home" asp-action="Index">
+            <i class="fas fa-spa me-2"></i>NOIRE ESSENCE
         </a>
-        <div class="navbar-collapse">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" asp-controller="Perfume" asp-action="Index">Collections</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="fragrancesDropdown" role="button" data-bs-toggle="dropdown">
+                        Fragrances
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Floral</a></li>
+                        <li><a class="dropdown-item" href="#">Oriental</a></li>
+                        <li><a class="dropdown-item" href="#">Woody</a></li>
+                        <li><a class="dropdown-item" href="#">Fresh</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="Home" asp-action="Story">Our Story</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Boutiques</a>
+                </li>
+                <li class="nav-item ms-3">
+                    <a class="btn btn-outline-light" href="#">
+                        <i class="fas fa-user"></i> Account
+                    </a>
                 </li>
             </ul>
         </div>

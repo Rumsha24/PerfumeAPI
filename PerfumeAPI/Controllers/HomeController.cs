@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models.Entities;
 using System.Diagnostics;
+using PerfumeAPI.Models; 
 
 namespace PerfumeAPI.Controllers
 {
@@ -22,8 +23,15 @@ namespace PerfumeAPI.Controllers
             try
             {
                 var featuredProducts = await _context.Products
+                    .Where(p => p.IsFeatured)
                     .OrderByDescending(p => p.CreatedAt)
-                    .Take(3)
+                    .Take(4)
+                    .ToListAsync();
+
+                ViewBag.FragranceFamilies = await _context.Products
+                    .Where(p => p.FragranceFamily != null)
+                    .Select(p => p.FragranceFamily)
+                    .Distinct()
                     .ToListAsync();
 
                 return View(featuredProducts);
@@ -31,32 +39,19 @@ namespace PerfumeAPI.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error loading featured products");
-                return View(new List<Product>()); // Return empty list if error occurs
+                return View(new List<Product>());
             }
         }
 
         public IActionResult Story()
         {
+            ViewBag.Awards = new List<string>
+            {
+                "FiFi Awards 2023 - Best New Fragrance",
+                "Luxe Beauty Prize 2022",
+                "Artisan Perfumer of the Year 2011"
+            };
             return View();
-        }
-
-        public async Task<IActionResult> Comments()
-        {
-            try
-            {
-                var comments = await _context.Comments
-                    .Include(c => c.User)
-                    .Include(c => c.Product)
-                    .OrderByDescending(c => c.CreatedAt)
-                    .ToListAsync();
-
-                return View(comments);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error loading comments");
-                return View(new List<Comment>()); // Return empty list if error occurs
-            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -67,11 +62,5 @@ namespace PerfumeAPI.Controllers
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
             });
         }
-    }
-
-    public class ErrorViewModel
-    {
-        public string? RequestId { get; set; }
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }

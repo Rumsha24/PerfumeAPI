@@ -4,22 +4,206 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - NOIRE ESSENCE</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://code.jquery.com/jquery-3.7.1.min.js" as="script">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts (Elegant typography for perfume site) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Perfume-specific styles -->
+    <style>
+        :root {
+            --perfume-gold: #d4af37;
+            --perfume-dark: #1a1a1a;
+            --perfume-light: #f8f5f0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--perfume-light);
+            color: var(--perfume-dark);
+        }
+
+        h1, h2, h3, h4, h5, .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        .navbar {
+            background-color: var(--perfume-dark) !important;
+            border-bottom: 1px solid var(--perfume-gold);
+        }
+
+        .nav-link {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .perfume-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            overflow: hidden;
+        }
+
+            .perfume-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            }
+
+        .perfume-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--perfume-gold);
+            color: var(--perfume-dark);
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        footer {
+            background-color: var(--perfume-dark);
+            color: var(--perfume-light);
+            border-top: 1px solid var(--perfume-gold);
+        }
+    </style>
+
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-    <partial name="_Header" />
+    <!-- Luxury Navigation Bar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container">
+                <a class="navbar-brand fs-2" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-spa me-2"></i>NOIRE ESSENCE
+                </a>
 
-    <div class="container">
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    <partial name="_Footer" />
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="perfumesDropdown" role="button" data-bs-toggle="dropdown">
+                                Collections
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Signature</a></li>
+                                <li><a class="dropdown-item" href="#">Limited Edition</a></li>
+                                <li><a class="dropdown-item" href="#">Private Blend</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Story">Our Story</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Boutiques</a>
+                        </li>
+                        <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                            <a class="btn btn-outline-light" href="#">
+                                <i class="fas fa-user me-1"></i> Account
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @RenderSection("Scripts", required: false)
+    <!-- Main Content -->
+    <main>
+        @RenderBody()
+    </main>
+
+    <!-- Luxury Footer -->
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-4">NOIRE ESSENCE</h5>
+                    <p class="small">Timeless fragrances crafted with passion in Grasse, France since 1923.</p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="mb-4">Explore</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-decoration-none">Our Collections</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none">Fragrance Finder</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none">Gift Services</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="mb-4">Connect</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-decoration-none me-3">
+                            <i class="fab fa-instagram fa-lg"></i>
+                        </a>
+                        <a href="#" class="text-decoration-none me-3">
+                            <i class="fab fa-facebook-f fa-lg"></i>
+                        </a>
+                        <a href="#" class="text-decoration-none">
+                            <i class="fab fa-pinterest-p fa-lg"></i>
+                        </a>
+                    </div>
+                    <p class="small mt-3">&copy; @DateTime.Now.Year NOIRE ESSENCE. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="btn btn-outline-secondary position-fixed bottom-0 end-0 m-3 rounded-circle p-3 d-none">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+
+    <script>
+        // Back to top button
+        $(document).ready(function() {
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    $('#back-to-top').removeClass('d-none');
+                } else {
+                    $('#back-to-top').addClass('d-none');
+                }
+            });
+
+            $('#back-to-top').click(function() {
+                $('html, body').animate({scrollTop: 0}, 'smooth');
+                return false;
+            });
+
+            // Initialize tooltips
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

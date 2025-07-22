@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models.DTOs;
 using PerfumeAPI.Models.Entities;
-using PerfumeAPI.Services;
+using PerfumeAPI.Services.Interfaces;
 using System.Security.Claims;
 
 namespace PerfumeAPI.Controllers.Api

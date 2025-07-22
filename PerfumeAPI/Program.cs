@@ -2,90 +2,66 @@
 using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models.Entities;
-using PerfumeAPI.Services;
-using PerfumeAPI.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Configuration Setup
-builder.Configuration
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
-    .AddEnvironmentVariables();
+// 1. Add Configuration
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-// 2. Database Configuration
+// 2. Database Setup
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
-    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    ?? throw new InvalidOperationException("Connection string not found");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString, sqlOptions =>
-    {
-        sqlOptions.EnableRetryOnFailure(
-            maxRetryCount: 5,
-            maxRetryDelay: TimeSpan.FromSeconds(30),
-            errorNumbersToAdd: null);
-    }));
+    options.UseSqlServer(connectionString));
 
 // 3. Identity Configuration
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
-    options.Password.RequireDigit = true;
     options.Password.RequiredLength = 8;
-    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireDigit = true;
     options.Password.RequireUppercase = true;
-    options.User.RequireUniqueEmail = true;
 })
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
 
-// 4. Application Services
-builder.Services.AddControllersWithViews()
-    .AddRazorRuntimeCompilation(); // For development
-
-// 5. Configure cookie settings
+// 4. Configure Cookie Settings
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
-    options.AccessDeniedPath = "/Account/AccessDenied";
     options.Cookie.HttpOnly = true;
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
-    options.SlidingExpiration = true;
 });
 
-// 6. Additional Services
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<IPerfumeService, PerfumeService>();
-builder.Services.AddScoped<ICartService, CartService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IPaymentService, PaymentService>(); // ✅ REGISTERED HERE
+// 5. Add Controllers with Views
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// 7. Middleware Pipeline
-if (app.Environment.IsDevelopment())
+// 6. Static Files Configuration (CRITICAL FOR LAYOUT)
+app.UseStaticFiles(new StaticFileOptions
 {
-    app.UseDeveloperExceptionPage();
-}
-else
+    OnPrepareResponse = ctx =>
+    {
+        // Cache static files for 1 year in production
+        if (!app.Environment.IsDevelopment())
+        {
+            ctx.Context.Response.Headers.Append(
+                "Cache-Control",
+                "public,max-age=31536000");
+        }
+    }
+});
+
+// 7. Error Handling
+if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
-app.UseStaticFiles(new StaticFileOptions
-{
-    OnPrepareResponse = ctx =>
-    {
-        ctx.Context.Response.Headers.Append(
-            "Cache-Control", "public,max-age=31536000");
-    }
-});
-
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -95,26 +71,16 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 // 9. Database Initialization
-using (var scope = app.Services.CreateScope())
+try
 {
-    var services = scope.ServiceProvider;
-    try
-    {
-        var context = services.GetRequiredService<AppDbContext>();
-        var userManager = services.GetRequiredService<UserManager<User>>();
-        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
-        await context.Database.MigrateAsync();
-        await DbInitializer.Initialize(context, userManager, roleManager);
-    }
-    catch (Exception ex)
-    {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while seeding the database");
-    }
+    using var scope = app.Services.CreateScope();
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    await context.Database.MigrateAsync();
 }
-
-// 10. Health Check Endpoint
-app.MapGet("/health", () => Results.Ok());
+catch (Exception ex)
+{
+    var logger = app.Services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "Migration failed");
+}
 
 await app.RunAsync();
