@@ -27,9 +27,6 @@ namespace PerfumeAPI.Controllers.Api
             _logger = logger;
         }
 
-        /// <summary>
-        /// Register a new user account
-        /// </summary>
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -66,9 +63,6 @@ namespace PerfumeAPI.Controllers.Api
             }
         }
 
-        /// <summary>
-        /// Authenticate and generate JWT token
-        /// </summary>
         [HttpPost("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -101,8 +95,8 @@ namespace PerfumeAPI.Controllers.Api
             var claims = new List<Claim>
             {
                 new(JwtRegisteredClaimNames.Sub, user.Id),
-                new(JwtRegisteredClaimNames.Email, user.Email),
-                new(JwtRegisteredClaimNames.Name, user.UserName),
+                new(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
+                new(JwtRegisteredClaimNames.Name, user.UserName ?? string.Empty),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

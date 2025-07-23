@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
+using PerfumeAPI.Models;
 using PerfumeAPI.Models.Entities;
 using System.Diagnostics;
-using PerfumeAPI.Models; 
 
 namespace PerfumeAPI.Controllers
 {

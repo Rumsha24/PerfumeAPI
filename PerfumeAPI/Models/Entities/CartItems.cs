@@ -13,19 +13,22 @@ namespace PerfumeAPI.Models.Entities
         public int CartId { get; set; }
 
         [ForeignKey("CartId")]
-        public Cart Cart { get; set; }
+        public virtual Cart Cart { get; set; } = null!;
 
         [Required]
         public int ProductId { get; set; }
 
         [ForeignKey("ProductId")]
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; } = null!;
 
         [Required]
-        [Range(1, int.MaxValue)]
+        [Range(1, 100, ErrorMessage = "Quantity must be between 1 and 100")]
         public int Quantity { get; set; }
 
         public DateTime AddedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
+
+        [NotMapped]
+        public decimal ItemTotal => Quantity * (Product?.Price ?? 0);
     }
 }

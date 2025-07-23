@@ -4,45 +4,47 @@ namespace PerfumeAPI.Models.DTOs
 {
     public class UserDto
     {
-        public string Id { get; set; }
-        public string Email { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string ShippingAddress { get; set; }
+        public string Id { get; set; } = string.Empty;
+
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string ShippingAddress { get; set; } = string.Empty;
         public DateTime MemberSince { get; set; }
+        public string? ProfileImage { get; set; }
     }
 
-    public class UserRegisterDto
+    public class UserUpdateDto
     {
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        [StringLength(50, ErrorMessage = "First name cannot exceed 50 characters")]
+        public string? FirstName { get; set; }
 
-        [Required]
-        [StringLength(100, MinimumLength = 6)]
-        public string Password { get; set; }
+        [StringLength(50, ErrorMessage = "Last name cannot exceed 50 characters")]
+        public string? LastName { get; set; }
 
-        [Required]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
+        [StringLength(200, ErrorMessage = "Address cannot exceed 200 characters")]
+        public string? ShippingAddress { get; set; }
 
-        [Required]
-        public string FirstName { get; set; }
-
-        [Required]
-        public string LastName { get; set; }
-
-        [Required]
-        public string ShippingAddress { get; set; }
+        public IFormFile? ProfileImage { get; set; }
     }
 
-    public class UserLoginDto
+    public class UserPasswordChangeDto
     {
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        [DataType(DataType.Password)]
+        public string CurrentPassword { get; set; } = string.Empty;
 
         [Required]
-        public string Password { get; set; }
+        [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$",
+            ErrorMessage = "Password must contain uppercase, lowercase, number, and special character")]
+        public string NewPassword { get; set; } = string.Empty;
+
+        [DataType(DataType.Password)]
+        [Compare("NewPassword", ErrorMessage = "Passwords do not match")]
+        public string ConfirmNewPassword { get; set; } = string.Empty;
     }
 }

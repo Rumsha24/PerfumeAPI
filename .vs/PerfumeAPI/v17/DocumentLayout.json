@@ -1,94 +1,146 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\",
+  "WorkspaceRootPath": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\views\\perfume\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\perfume\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\controllers\\api\\authapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\api\\authapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\views\\perfume\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\perfume\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\views\\home\\story.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\home\\story.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\commentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\views\\order\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\order\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\controllers\\api\\cartapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\api\\cartapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\views\\comment\\_commentlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\comment\\_commentlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\models\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\services\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\services\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\services\\paymentservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\services\\perfumeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\services\\perfumeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\views\\shared\\_header.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\shared\\_header.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\views\\order\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\order\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\orderitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\entities\\cartitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\cartitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\hp\\source\\repos\\perfumeapi\\perfumeapi\\perfumeapi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\dtos\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\dtos\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\controllers\\api\\orderapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\api\\orderapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\views\\product\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\product\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\entities\\commentimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\commentimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\views\\comment\\_commentform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\comment\\_commentform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\entities\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\entities\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\dtos\\productupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\dtos\\productupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\dtos\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\dtos\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\dtos\\commentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\dtos\\commentdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\dtos\\cartitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\dtos\\cartitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\dtos\\cartdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\dtos\\cartdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\models\\dtos\\authdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\dtos\\authdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\controllers\\api\\productapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\api\\productapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\views\\order\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\order\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -98,301 +150,469 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 17,
+          "SelectedChildIndex": 2,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Order\\Index.cshtml",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Order\\Index.cshtml",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Order\\Index.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\Order\\Index.cshtml",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-23T02:27:52.038Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Perfume\\Index.cshtml",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Perfume\\Index.cshtml",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Perfume\\Index.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\Perfume\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-23T02:00:22.845Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Perfume\\Details.cshtml",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Perfume\\Details.cshtml",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Perfume\\Details.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\Perfume\\Details.cshtml",
-              "ViewState": "AgIAAB8BAAAAAAAAAAAAAB8BAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-23T01:59:59.088Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Data\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "PerfumeAPI\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T01:54:46.801Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DbInitializer.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Data\\DbInitializer.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Data\\DbInitializer.cs",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Data\\DbInitializer.cs",
-              "RelativeToolTip": "PerfumeAPI\\Data\\DbInitializer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T01:54:45.065Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "CartService.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Services\\CartService.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Services\\CartService.cs",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Services\\CartService.cs",
-              "RelativeToolTip": "PerfumeAPI\\Services\\CartService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T01:54:43.414Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "OrderService.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Services\\OrderService.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Services\\OrderService.cs",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Services\\OrderService.cs",
-              "RelativeToolTip": "PerfumeAPI\\Services\\OrderService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T01:54:41.945Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "PaymentService.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Services\\PaymentService.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Services\\PaymentService.cs",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Services\\PaymentService.cs",
-              "RelativeToolTip": "PerfumeAPI\\Services\\PaymentService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T01:54:39.121Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "PerfumeService.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Services\\PerfumeService.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Services\\PerfumeService.cs",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Services\\PerfumeService.cs",
-              "RelativeToolTip": "PerfumeAPI\\Services\\PerfumeService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-23T01:54:37.491Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "_ViewStart.cshtml",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\_ViewStart.cshtml",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\_ViewStart.cshtml",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\_ViewStart.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\_ViewStart.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-23T00:48:50.691Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\_ViewImports.cshtml",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\_ViewImports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-23T00:48:34.216Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "PerfumeAPI\\appsettings.json",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\appsettings.json",
-              "RelativeToolTip": "PerfumeAPI\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-22T20:12:23.115Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "PerfumeAPI\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "PerfumeAPI\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-07-22T20:05:59.524Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Program.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Program.cs",
-              "RelativeToolTip": "PerfumeAPI\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-22T18:34:26.63Z",
-              "EditorCaption": ""
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAIMAAAAApJmZmRkcwKYAAABpAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Layout.cshtml*",
+              "RelativeToolTip": "PerfumeAPI\\Views\\Shared\\_Layout.cshtml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJgBAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-22T18:08:20.854Z",
+              "WhenOpened": "2025-07-23T17:48:33.004Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ErrorViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\ErrorViewModel.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\ErrorViewModel.cs",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\ErrorViewModel.cs",
-              "RelativeToolTip": "PerfumeAPI\\Models\\ErrorViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\ProductController.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "PerfumeAPI\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAowGcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-22T18:16:04.598Z",
+              "WhenOpened": "2025-07-23T15:25:05.291Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AuthApiController.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\Api\\AuthApiController.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\Api\\AuthApiController.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\Api\\AuthApiController.cs",
+              "RelativeToolTip": "PerfumeAPI\\Controllers\\Api\\AuthApiController.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwIIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:33:40.826Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Story.cshtml",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Home\\Story.cshtml",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Home\\Story.cshtml",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Home\\Story.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\Home\\Story.cshtml",
-              "ViewState": "AgIAABMAAACA/////38fwAAAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-22T18:09:24.646Z",
+              "Title": "CommentController.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\CommentController.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\CommentController.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\CommentController.cs",
+              "RelativeToolTip": "PerfumeAPI\\Controllers\\CommentController.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAowHsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:59:13.042Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAKcAAAAAAAAAAADwv1kCAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-22T18:09:13.163Z",
+              "DocumentIndex": 4,
+              "Title": "CartApiController.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\Api\\CartApiController.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\Api\\CartApiController.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\Api\\CartApiController.cs",
+              "RelativeToolTip": "PerfumeAPI\\Controllers\\Api\\CartApiController.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAowDcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:34:17.575Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Properties\\launchSettings.json",
-              "RelativeToolTip": "PerfumeAPI\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-22T20:12:41.114Z",
+              "DocumentIndex": 5,
+              "Title": "_CommentList.cshtml",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Comment\\_CommentList.cshtml",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Comment\\_CommentList.cshtml",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Comment\\_CommentList.cshtml",
+              "RelativeToolTip": "PerfumeAPI\\Views\\Comment\\_CommentList.cshtml",
+              "ViewState": "AgIAABcAAAAAAAAAAAAowDQAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-23T17:01:12.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Order.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\Order.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Order.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\Order.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA9wC0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:53:50.009Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Program.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Program.cs",
+              "RelativeToolTip": "PerfumeAPI\\Program.cs",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAowJoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T17:11:32.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Order\\Details.cshtml",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Order\\Details.cshtml",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Order\\Details.cshtml",
+              "RelativeToolTip": "PerfumeAPI\\Views\\Order\\Details.cshtml",
+              "ViewState": "AgIAAGYAAAAAAAAAAADwv20AAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-23T17:12:28.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "PerfumeAPI\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T17:34:26.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CartItems.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\CartItems.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\CartItems.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\CartItems.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\CartItems.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAiwCEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:53:07.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "OrderItem.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\OrderItem.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\OrderItem.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\OrderItem.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\OrderItem.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAA7wCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:54:04.682Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Services\\OrderService.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Services\\OrderService.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Services\\OrderService.cs",
+              "RelativeToolTip": "PerfumeAPI\\Services\\OrderService.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAUwF4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T17:31:03.808Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "_Header.cshtml",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Header.cshtml",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Shared\\_Header.cshtml",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Header.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\Shared\\_Header.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAiAAAAAAAAAA==",
+              "Title": "OrderDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\OrderDTO.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\DTOs\\OrderDTO.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\OrderDTO.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\DTOs\\OrderDTO.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAswDYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:51:48.899Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "OrderApiController.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\Api\\OrderApiController.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\Api\\OrderApiController.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\Api\\OrderApiController.cs",
+              "RelativeToolTip": "PerfumeAPI\\Controllers\\Api\\OrderApiController.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAcwFsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:35:12.45Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "PerfumeAPI\\Controllers\\OrderController.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAUwG8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:34:57.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Product\\Details.cshtml",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Product\\Details.cshtml",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Product\\Details.cshtml",
+              "RelativeToolTip": "PerfumeAPI\\Views\\Product\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-22T18:08:34.406Z",
+              "WhenOpened": "2025-07-23T14:44:16.715Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "CommentImage.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\CommentImage.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\CommentImage.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\CommentImage.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\CommentImage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:53:33.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "_CommentForm.cshtml",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Comment\\_CommentForm.cshtml",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Comment\\_CommentForm.cshtml",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Comment\\_CommentForm.cshtml",
+              "RelativeToolTip": "PerfumeAPI\\Views\\Comment\\_CommentForm.cshtml",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAkwCMAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-23T16:42:45.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Product.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\Product.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Product.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\Product.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAiwDoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:54:14.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\User.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\User.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAiwCMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:54:30.209Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 21,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "PerfumeAPI\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAZAAAAAAAAAA==",
+              "Title": "Comment.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Comment.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\Comment.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Comment.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\Comment.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAiwCYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-22T18:07:16.853Z"
+              "WhenOpened": "2025-07-23T16:53:20.322Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Product.cs",
-              "DocumentMoniker": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Product.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\Product.cs",
-              "ToolTip": "C:\\Users\\hp\\source\\repos\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Product.cs",
-              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\Product.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 22,
+              "Title": "Cart.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Cart.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\Cart.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Cart.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\Cart.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAiwB0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-22T18:10:22.813Z",
+              "WhenOpened": "2025-07-23T16:52:53.007Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "UserDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\UserDTO.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\DTOs\\UserDTO.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\UserDTO.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\DTOs\\UserDTO.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAiwDEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:52:37.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ProductUpdateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\ProductUpdateDTO.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\DTOs\\ProductUpdateDTO.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\ProductUpdateDTO.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\DTOs\\ProductUpdateDTO.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAA4wCEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:52:15.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ProductDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\ProductDTO.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\DTOs\\ProductDTO.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\ProductDTO.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\DTOs\\ProductDTO.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAA4wEcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:52:03.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "CommentDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\CommentDTO.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\DTOs\\CommentDTO.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\CommentDTO.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\DTOs\\CommentDTO.cs",
+              "ViewState": "AgIAABIAAACAmZmZmdkpwCQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:51:33.492Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "CartItemDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\CartItemDTO.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\DTOs\\CartItemDTO.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\CartItemDTO.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\DTOs\\CartItemDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:51:21.114Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "CartDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\CartDTO.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\DTOs\\CartDTO.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\CartDTO.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\DTOs\\CartDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:51:08.906Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "AuthDTO.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\AuthDTO.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\DTOs\\AuthDTO.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\AuthDTO.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\DTOs\\AuthDTO.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAA4wC8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:50:51.248Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ProductApiController.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\Api\\ProductApiController.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\Api\\ProductApiController.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\Api\\ProductApiController.cs",
+              "RelativeToolTip": "PerfumeAPI\\Controllers\\Api\\ProductApiController.cs",
+              "ViewState": "AgIAAIUAAAAgAAAAAAAmwJUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T15:26:06.595Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "PerfumeAPI\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:34:41.24Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "PerfumeAPI\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAADgAAAAAlpmZmZn3v3sAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-23T16:30:06.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Product\\Index.cshtml",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Product\\Index.cshtml",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Product\\Index.cshtml",
+              "RelativeToolTip": "PerfumeAPI\\Views\\Product\\Index.cshtml",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAkwJgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-23T14:43:41.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Order\\Index.cshtml",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Order\\Index.cshtml",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Order\\Index.cshtml",
+              "RelativeToolTip": "PerfumeAPI\\Views\\Order\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-23T14:43:31.921Z",
               "EditorCaption": ""
             }
           ]

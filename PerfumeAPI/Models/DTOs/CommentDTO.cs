@@ -6,17 +6,16 @@ namespace PerfumeAPI.Models.DTOs
     {
         public int Id { get; set; }
 
-        [Required]
-        [Range(1, 5)]
+        [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
         public int Rating { get; set; }
 
-        [Required]
-        [StringLength(2000)]
-        public string Text { get; set; }
+        [StringLength(2000, ErrorMessage = "Comment cannot exceed 2000 characters")]
+        public string Text { get; set; } = string.Empty;
 
-        public string UserName { get; set; }
+        public string UserName { get; set; } = string.Empty;
+        public string UserAvatar { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; }
-        public List<string> ImageUrls { get; set; } = new();
+        public List<string> ImageUrls { get; set; } = new List<string>();
     }
 
     public class CommentCreateDto
@@ -25,13 +24,14 @@ namespace PerfumeAPI.Models.DTOs
         public int ProductId { get; set; }
 
         [Required]
-        [Range(1, 5)]
+        [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
         public int Rating { get; set; }
 
         [Required]
-        [StringLength(2000)]
-        public string Text { get; set; }
+        [StringLength(2000, ErrorMessage = "Comment cannot exceed 2000 characters")]
+        public string Text { get; set; } = string.Empty;
 
+        [MaxLength(3, ErrorMessage = "Maximum 3 images allowed")]
         public List<IFormFile>? Images { get; set; }
     }
 }

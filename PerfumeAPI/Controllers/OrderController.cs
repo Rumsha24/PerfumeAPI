@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿// Controllers/OrderController.cs
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models.Entities;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace PerfumeAPI.Controllers
 {
@@ -87,22 +89,21 @@ namespace PerfumeAPI.Controllers
             {
                 UserId = userId,
                 ShippingAddress = shippingAddress,
-                OrderDate = DateTime.UtcNow,
                 Status = "Processing",
-                OrderNumber = Guid.NewGuid().ToString()[..8].ToUpper(),
+                OrderDate = DateTime.UtcNow,
                 Items = cart.Items.Select(i => new OrderItem
                 {
                     ProductId = i.ProductId,
                     Quantity = i.Quantity,
                     PriceAtPurchase = i.Product.Price
                 }).ToList(),
-                TotalAmount = cart.Items.Sum(i => i.Product.Price * i.Quantity) +
-                             (cart.Items.FirstOrDefault()?.Product?.ShippingCost ?? 0)
+                TotalAmount = cart.Items.Sum(i => i.Product.Price * i.Quantity)
             };
+
+            order.GenerateOrderNumber();
 
             _context.Orders.Add(order);
             _context.CartItems.RemoveRange(cart.Items);
-
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Details", new { id = order.Id });

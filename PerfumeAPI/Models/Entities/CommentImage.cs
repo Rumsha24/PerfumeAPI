@@ -1,14 +1,21 @@
-﻿namespace PerfumeAPI.Models.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PerfumeAPI.Models.Entities
 {
     public class CommentImage
     {
+        [Key]
         public int Id { get; set; }
-        public string ImageUrl { get; set; }
 
-        // Foreign key
+        [Required]
+        [StringLength(500)]
+        public string ImageUrl { get; set; } = string.Empty;
+
+        [Required]
         public int CommentId { get; set; }
 
-        // Navigation property
-        public Comment Comment { get; set; }
+        [ForeignKey("CommentId")]
+        public virtual Comment Comment { get; set; } = null!;
     }
 }

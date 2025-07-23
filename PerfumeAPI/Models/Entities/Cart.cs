@@ -10,11 +10,21 @@ namespace PerfumeAPI.Models.Entities
         public int Id { get; set; }
 
         [Required]
-        public string UserId { get; set; }
+        [StringLength(450)] // Matches IdentityUser.Id length
+        public string UserId { get; set; } = string.Empty;
 
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public virtual User User { get; set; } = null!;
 
-        public List<CartItem> Items { get; set; } = new List<CartItem>();
+        public virtual ICollection<CartItem> Items { get; set; } = new HashSet<CartItem>();
+
+        [NotMapped]
+        public decimal Subtotal => Items?.Sum(i => i.Quantity * i.Product.Price) ?? 0;
+
+        [NotMapped]
+        public decimal ShippingTotal => Items?.FirstOrDefault()?.Product?.ShippingCost ?? 0;
+
+        [NotMapped]
+        public decimal GrandTotal => Subtotal + ShippingTotal;
     }
 }

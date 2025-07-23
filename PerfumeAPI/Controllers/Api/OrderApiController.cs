@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace PerfumeAPI.Controllers.Api
 {
-    [Route("api/[controller]")]
+    [Route("api/orders")]
     [ApiController]
     [Authorize]
     public class OrderApiController : ControllerBase
@@ -19,7 +19,6 @@ namespace PerfumeAPI.Controllers.Api
             _context = context;
         }
 
-        // GET: api/order
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
@@ -37,7 +36,6 @@ namespace PerfumeAPI.Controllers.Api
                 .ToListAsync();
         }
 
-        // POST: api/order
         [HttpPost]
         public async Task<ActionResult<Order>> CreateOrder([FromBody] OrderCreateDto dto)
         {
@@ -52,7 +50,6 @@ namespace PerfumeAPI.Controllers.Api
                 return Unauthorized();
             }
 
-            // Get user's cart
             var cart = await _context.Carts
                 .Include(c => c.Items)
                 .ThenInclude(i => i.Product)
@@ -63,7 +60,6 @@ namespace PerfumeAPI.Controllers.Api
                 return BadRequest("Cart is empty");
             }
 
-            // Create order
             var order = new Order
             {
                 UserId = userId,
@@ -81,8 +77,6 @@ namespace PerfumeAPI.Controllers.Api
             };
 
             _context.Orders.Add(order);
-
-            // Clear cart
             _context.CartItems.RemoveRange(cart.Items);
 
             await _context.SaveChangesAsync();

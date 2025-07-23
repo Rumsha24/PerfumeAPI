@@ -33,17 +33,26 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
 });
 
-// 5. Add Controllers with Views
+// 5. Add Controllers with Views and API Explorer
 builder.Services.AddControllersWithViews();
+builder.Services.AddEndpointsApiExplorer();
+
+// 6. Add HttpContextAccessor for accessing User in services
+builder.Services.AddHttpContextAccessor();
+
+// 7. Configure JSON Options for API responses
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.PropertyNamingPolicy = null;
+});
 
 var app = builder.Build();
 
-// 6. Static Files Configuration (CRITICAL FOR LAYOUT)
+// 8. Static Files Configuration
 app.UseStaticFiles(new StaticFileOptions
 {
     OnPrepareResponse = ctx =>
     {
-        // Cache static files for 1 year in production
         if (!app.Environment.IsDevelopment())
         {
             ctx.Context.Response.Headers.Append(
@@ -53,7 +62,7 @@ app.UseStaticFiles(new StaticFileOptions
     }
 });
 
-// 7. Error Handling
+// 9. Error Handling
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -65,17 +74,23 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// 8. Endpoints
+// 10. Endpoints
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// 9. Database Initialization
+app.MapControllers();
+
+// 11. Database Initialization
 try
 {
     using var scope = app.Services.CreateScope();
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
     await context.Database.MigrateAsync();
+    await SeedData.Initialize(context, userManager, roleManager);
 }
 catch (Exception ex)
 {
@@ -84,3 +99,57 @@ catch (Exception ex)
 }
 
 await app.RunAsync();
+
+public static class SeedData
+{
+    public static async Task Initialize(AppDbContext context,
+        UserManager<User> userManager,
+        RoleManager<IdentityRole> roleManager)
+    {
+        if (!await roleManager.RoleExistsAsync("Admin"))
+        {
+            await roleManager.CreateAsync(new IdentityRole("Admin"));
+        }
+
+        if (await userManager.FindByEmailAsync("admin@perfume.com") == null)
+        {
+            var admin = new User
+            {
+                UserName = "admin@perfume.com",
+                Email = "admin@perfume.com"
+            };
+
+            var result = await userManager.CreateAsync(admin, "Admin123!");
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(admin, "Admin");
+            }
+        }
+
+        if (!context.Products.Any())
+        {
+            context.Products.AddRange(
+                new Product
+                {
+                    Name = "Eau de Parfum",
+                    Description = "Luxury fragrance with floral notes",
+                    Price = 89.99m,
+                    ShippingCost = 5.99m,
+                    FragranceType = "Floral",
+                    Size = "100ml",
+                    IsFeatured = true
+                },
+                new Product
+                {
+                    Name = "Woody Essence",
+                    Description = "Rich woody fragrance for men",
+                    Price = 75.50m,
+                    ShippingCost = 5.99m,
+                    FragranceType = "Woody",
+                    Size = "50ml"
+                }
+            );
+            await context.SaveChangesAsync();
+        }
+    }
+}
