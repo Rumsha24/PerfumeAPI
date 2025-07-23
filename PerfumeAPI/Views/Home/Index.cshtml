@@ -1,158 +1,602 @@
 ﻿@model IEnumerable<PerfumeAPI.Models.Entities.Product>
+@using PerfumeAPI
+@using PerfumeAPI.Models
+@using PerfumeAPI.Models.Entities
+@using PerfumeAPI.Models.DTOs
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
+    Layout = "_Layout";
     ViewData["Title"] = "Luxury Perfumes | NOIRE ESSENCE";
 }
 
-<!-- Hero Carousel -->
-<div id="perfumeCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
+<style>
+    :root {
+        --deep-red: #590D22;
+        --rich-red: #800F2F;
+        --vibrant-red: #A4133C;
+        --primary-red: #C9184A;
+        --bright-pink: #FF4D6D;
+        --soft-pink: #FF758F;
+        --light-pink: #FF8FA3;
+        --pale-pink: #FFB3C1;
+        --very-pale-pink: #FFCCD5;
+        --almost-white: #FFF0F3;
+        --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Previous Carousel Styles */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: 80px;
+    }
+
+    .carousel-slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-slide {
+        min-width: 100%;
+        position: relative;
+    }
+
+    .hero-section {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        padding: 160px 20px;
+        text-align: center;
+        color: white;
+    }
+
+    .hero-content h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 4.5rem;
+        color: white;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1.4rem;
+        max-width: 700px;
+        margin: 0 auto;
+        color: var(--very-pale-pink);
+    }
+
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.3);
+        color: white;
+        border: none;
+        padding: 15px;
+        cursor: pointer;
+        z-index: 10;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .carousel-btn.prev {
+            left: 20px;
+        }
+
+        .carousel-btn.next {
+            right: 20px;
+        }
+
+    .carousel-indicators {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .carousel-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .carousel-indicator.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+    /* Content Sections */
+    .content-section {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    /* Badges */
+    .badge-pill {
+        padding: 10px 24px;
+        border-radius: 20px;
+        font-weight: bold;
+    }
+
+    /* Intro Text */
+    .intro-text {
+        font-size: 1.25rem;
+        line-height: 1.9;
+        max-width: 800px;
+        margin: 0 auto 80px;
+        text-align: center;
+    }
+
+    /* Collection Grid */
+    .collection-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 40px;
+        margin: 80px 0;
+    }
+
+    .collection-card {
+        border-radius: 16px;
+        padding: 40px 30px;
+        background: white;
+        transition: var(--transition);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        border: 1px solid var(--very-pale-pink);
+    }
+
+        .collection-card h3 {
+            color: var(--primary-red);
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--very-pale-pink);
+        }
+
+    /* Benefits Grid */
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 50px;
+        margin: 80px 0;
+    }
+
+    .benefit-card {
+        text-align: center;
+        padding: 40px 30px;
+        background: white;
+        border-radius: 16px;
+        transition: var(--transition);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        border: 1px solid var(--very-pale-pink);
+    }
+
+    .benefit-icon {
+        font-size: 3.5rem;
+        margin-bottom: 24px;
+        color: var(--primary-red);
+    }
+
+    /* Perfume Brands Row */
+    .perfumes-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+        margin-bottom: 40px;
+    }
+
+    .perfume-card {
+        width: 300px;
+        margin-bottom: 24px;
+        background: #fff0f3;
+        border: 1.5px solid #c9184a;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        text-align: center;
+    }
+
+        .perfume-card img {
+            height: 110px;
+            background: #fff0f3;
+            border-radius: 10px;
+            padding: 8px;
+        }
+
+        .perfume-card div {
+            font-weight: bold;
+            color: #c9184a;
+            margin-top: 10px;
+        }
+
+    /* View All Button */
+    .btn-view-all {
+        background: #c9184a;
+        color: #fff0f3;
+        border: none;
+        padding: 10px 32px;
+        border-radius: 6px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px #ffb3c1;
+        transition: all 0.3s ease;
+    }
+
+        .btn-view-all:hover {
+            background: #a4133c;
+            box-shadow: 0 4px 12px #ff8fa3;
+        }
+
+    /* Featured Products */
+    .featured-products {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 40px;
+        margin: 80px 0;
+    }
+
+    /* Testimonial */
+    .testimonial {
+        font-style: italic;
+        text-align: center;
+        margin: 100px auto;
+        max-width: 900px;
+        padding: 60px;
+        background: var(--almost-white);
+        border-radius: 20px;
+        position: relative;
+    }
+
+    /* Scroll progress */
+    .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: var(--primary-red);
+        width: 0%;
+        z-index: 1000;
+        transition: width 0.1s ease;
+    }
+
+    /* Floating CTA */
+    .floating-cta {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: var(--primary-red);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        box-shadow: 0 6px 20px rgba(201,24,74,0.3);
+        z-index: 999;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+        .floating-cta:hover {
+            background: var(--vibrant-red);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+    /* Responsive adjustments */
+    @@media (max-width: 768px) {
+        .hero-content h1 {
+            font-size: 3rem;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+        }
+
+        .collection-grid, .benefits-grid, .featured-products {
+            grid-template-columns: 1fr;
+        }
+
+        .perfumes-row {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+
+<!-- Previous Carousel Implementation with Your Content -->
+<div class="carousel-container">
+    <div class="carousel-slides">
+        <div class="carousel-slide">
             <div class="hero-section" style="background-image: url('/images/hero1.jpg')">
                 <div class="hero-content text-center">
-                    <h1 class="display-3 fw-light mb-4">ELEVATE YOUR SENSES</h1>
-                    <p class="lead mb-5">Discover our exclusive collection of artisanal fragrances</p>
+                    <h1>ELEVATE YOUR SENSES</h1>
+                    <p>Discover our exclusive collection of artisanal fragrances</p>
                     <a asp-controller="Perfume" asp-action="Index" class="btn btn-light btn-lg px-5">Explore</a>
                 </div>
             </div>
         </div>
-        <div class="carousel-item">
+        <div class="carousel-slide">
             <div class="hero-section" style="background-image: url('/images/hero2.jpg')">
                 <div class="hero-content text-center">
-                    <h1 class="display-3 fw-light mb-4">TIMELESS ELEGANCE</h1>
-                    <p class="lead mb-5">Crafted with rare ingredients from around the world</p>
+                    <h1>TIMELESS ELEGANCE</h1>
+                    <p>Crafted with rare ingredients from around the world</p>
                     <a href="#" class="btn btn-light btn-lg px-5">New Arrivals</a>
                 </div>
             </div>
         </div>
     </div>
+    <button class="carousel-btn prev">❮</button>
+    <button class="carousel-btn next">❯</button>
+    <div class="carousel-indicators">
+        <div class="carousel-indicator active"></div>
+        <div class="carousel-indicator"></div>
+    </div>
 </div>
 
-<!-- Featured Collections -->
-<div class="container py-5">
-    <div class="text-center mb-5">
-        <h2 class="display-5 fw-light mb-3">SIGNATURE COLLECTIONS</h2>
-        <p class="text-muted">Discover our most coveted fragrances</p>
+<!-- Scroll progress indicator -->
+<div class="scroll-progress"></div>
+
+<!-- Floating CTA Button -->
+<div class="floating-cta" id="floatingCta">
+    <i class="fas fa-phone-alt"></i>
+</div>
+
+<!-- Main Content -->
+<div class="container text-center mb-4">
+    <div class="row justify-content-center g-3">
+        <div class="col-auto">
+            <span class="badge rounded-pill" style="background:#ffb3c1; color:#590d22; padding:10px 24px;">✨ Luxury Scents</span>
+        </div>
+        <div class="col-auto">
+            <span class="badge rounded-pill" style="background:#ffccd5; color:#590d22; padding:10px 24px;">🌿 Natural Ingredients</span>
+        </div>
+        <div class="col-auto">
+            <span class="badge rounded-pill" style="background:#fff0f3; color:#a4133c; padding:10px 24px; border:1.5px solid #ffb3c1;">🌎 Sustainably Made</span>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <div class="intro-text" id="introText">
+        <p>Discover the art of fragrance at Noire Essence, where each scent tells a story of elegance, identity, and timeless allure. Our carefully curated collection features the world's most exquisite perfumes and colognes, from iconic designer brands to exclusive niche creations.</p>
     </div>
 
-    <div class="row g-4">
-        @foreach (var product in Model)
+    <h2 id="collectionsTitle">Featured Collections</h2>
+    <div class="collection-grid">
+        <div class="collection-card" id="collection1">
+            <h3>Luxury Scents</h3>
+            <ul>
+                <li><strong>Signature Collections</strong>: Our most beloved fragrances</li>
+                <li><strong>Designer Exclusives</strong>: Authentic perfumes from top fashion houses</li>
+                <li><strong>Niche Creations</strong>: Rare, artisanal scents</li>
+            </ul>
+        </div>
+
+        <div class="collection-card" id="collection2">
+            <h3>New Arrivals</h3>
+            <ul>
+                <li><strong>Seasonal Limited Editions</strong>: Capture the essence of each season</li>
+                <li><strong>Emerging Brands</strong>: Discover tomorrow's iconic fragrances</li>
+                <li><strong>Reformulated Classics</strong>: Beloved scents with modern twists</li>
+            </ul>
+        </div>
+
+        <div class="collection-card" id="collection3">
+            <h3>Vintage Collection</h3>
+            <ul>
+                <li><strong>Discontinued Treasures</strong>: Rare finds from fragrance history</li>
+                <li><strong>Retro Classics</strong>: The scents that defined generations</li>
+                <li><strong>Collector's Items</strong>: Highly sought-after vintage formulations</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 id="benefitsTitle">Why Choose Noire Essence?</h2>
+    <div class="benefits-grid">
+        <div class="benefit-card" id="benefit1">
+            <div class="benefit-icon">✓</div>
+            <h3>Authenticity Guarantee</h3>
+            <p>Every product is 100% genuine with verifiable provenance and direct from manufacturers.</p>
+        </div>
+        <div class="benefit-card" id="benefit2">
+            <div class="benefit-icon">✧</div>
+            <h3>Expert Curation</h3>
+            <p>Our fragrance specialists with decades of experience select only the finest quality scents.</p>
+        </div>
+        <div class="benefit-card" id="benefit3">
+            <div class="benefit-icon">♥</div>
+            <h3>Personalized Service</h3>
+            <p>Get tailored recommendations based on your preferences with our fragrance matching quiz.</p>
+        </div>
+        <div class="benefit-card" id="benefit4">
+            <div class="benefit-icon">♻</div>
+            <h3>Sustainable Packaging</h3>
+            <p>Beautiful presentation that respects the environment with recyclable and biodegradable materials.</p>
+        </div>
+    </div>
+
+    <!-- Top Perfume & Cologne Brands -->
+    <h1 class="featured-perfumes-title" style="text-align:center; color:#c9184a;">Top Perfume & Cologne Brands</h1>
+    <div class="perfumes-row">
+        <div class="perfume-card">
+            <a href="https://www.jeanpaulgaultier.com">
+                <img src="/images/7.png" alt="Jean Paul Gaultier">
+            </a>
+            <div>Jean Paul Gaultier</div>
+        </div>
+        <div class="perfume-card">
+            <a href="https://www.versace.com">
+                <img src="/images/9.jpg" alt="Versace">
+            </a>
+            <div>Versace</div>
+        </div>
+        <div class="perfume-card">
+            <a href="https://www.armani.com">
+                <img src="/images/14.jpeg" alt="Giorgio Armani">
+            </a>
+            <div>Giorgio Armani</div>
+        </div>
+        <div class="perfume-card">
+            <a href="https://www.dolcegabbana.com">
+                <img src="/images/18.avif" alt="D&G">
+            </a>
+            <div>D&G</div>
+        </div>
+        <div class="perfume-card">
+            <a href="https://www.calvinklein.com">
+                <img src="/images/21.png" alt="Calvin Klein">
+            </a>
+            <div>Calvin Klein</div>
+        </div>
+    </div>
+    <div class="text-center mb-5">
+        <a asp-controller="Brands" asp-action="Index" class="btn btn-view-all">
+            VIEW ALL BRANDS
+        </a>
+    </div>
+
+    <h2 id="productsTitle">Customer Favorites</h2>
+    <div class="featured-products">
+        @foreach (var product in Model.Take(4))
         {
-            <div class="col-md-3">
-                <div class="card border-0 h-100 perfume-card">
-                    <div class="perfume-badge">BESTSELLER</div>
-                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" onerror="this.onerror=null;this.src='/images/default-perfume.jpg';">
-                    <div class="card-body text-center">
-                        <h5 class="card-title fw-light">@product.Name</h5>
-                        <p class="text-muted small">@product.FragranceFamily</p>
-                        <p class="text-dark h5">@product.Price.ToString("C")</p>
-                    </div>
-                    <div class="card-footer bg-transparent border-0">
-                        <a asp-controller="Perfume" asp-action="Details" asp-route-id="@product.Id"
-                           class="btn btn-outline-dark w-100">Discover</a>
-                    </div>
-                </div>
+            <div class="product-card">
+                <img src="@product.ImageUrl" alt="@product.Name" onerror="this.onerror=null;this.src='/images/default-perfume.jpg';">
+                <h3>@product.Name</h3>
+                <span class="price">@product.Price.ToString("C")</span>
+                <form method="post" asp-controller="Cart" asp-action="AddToCart">
+                    <input type="hidden" name="productId" value="@product.Id">
+                    <input type="number" name="quantity" value="1" min="1" class="form-control mb-2">
+                    <button type="submit" class="btn btn-dark w-100">Add to Cart</button>
+                </form>
             </div>
         }
     </div>
-</div>
 
-<!-- Fragrance Families -->
-<div class="bg-light py-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="display-5 fw-light">EXPLORE OUR FRAGRANCE FAMILIES</h2>
-        </div>
-
-        <div class="row g-4">
-            @foreach (var family in ViewBag.FragranceFamilies as List<string> ?? new List<string>())
-            {
-                <div class="col-md-3">
-                    <div class="fragrance-family-card text-center p-4">
-                        <div class="family-icon mb-3">
-                            <i class="fas fa-spa fa-2x"></i>
-                        </div>
-                        <h5>@family</h5>
-                        <a href="#" class="stretched-link"></a>
-                    </div>
-                </div>
-            }
-        </div>
+    <div class="testimonial" id="testimonial">
+        <p>A fragrance is more than a scent - it's an invisible accessory that completes your style, a signature that lingers even after you've left the room.</p>
+        <p>- Sophia Laurent, Founder of Noire Essence</p>
     </div>
 </div>
 
-@section Styles {
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-        }
+@section Scripts {
+    <script>
+        // Carousel JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelector('.carousel-slides');
+            const slideItems = document.querySelectorAll('.carousel-slide');
+            const prevBtn = document.querySelector('.carousel-btn.prev');
+            const nextBtn = document.querySelector('.carousel-btn.next');
+            const indicators = document.querySelectorAll('.carousel-indicator');
 
-        h1, h2, h3, h4, h5 {
-            font-family: 'Playfair Display', serif;
-        }
+            let currentIndex = 0;
+            const slideCount = slideItems.length;
+            let slideInterval;
 
-        .hero-section {
-            height: 80vh;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            position: relative;
-        }
+            function goToSlide(index) {
+                currentIndex = (index + slideCount) % slideCount;
+                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-            .hero-section::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.4);
+                // Update indicators
+                indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === currentIndex);
+                });
             }
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            padding: 2rem;
-        }
-
-        .perfume-card {
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-            .perfume-card:hover {
-                transform: translateY(-10px);
-                box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
             }
 
-        .perfume-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #000;
-            color: #fff;
-            padding: 5px 10px;
-            font-size: 12px;
-            z-index: 10;
-        }
-
-        .fragrance-family-card {
-            background: white;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-            .fragrance-family-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
             }
 
-        .family-icon {
-            color: #8e6c88;
-        }
-    </style>
+            function startAutoSlide() {
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+
+            // Button click events
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoSlide();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoSlide();
+            });
+
+            // Indicator click events
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    goToSlide(index);
+                    resetAutoSlide();
+                });
+            });
+
+            function resetAutoSlide() {
+                clearInterval(slideInterval);
+                startAutoSlide();
+            }
+
+            // Start auto-sliding
+            startAutoSlide();
+
+            // Pause on hover
+            const carousel = document.querySelector('.carousel-container');
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                startAutoSlide();
+            });
+
+            // Scroll progress indicator
+            const scrollProgress = document.querySelector('.scroll-progress');
+            if (scrollProgress) {
+                window.addEventListener('scroll', function() {
+                    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrollProgressValue = (scrollTop / scrollHeight) * 100;
+                    scrollProgress.style.width = scrollProgressValue + '%';
+                });
+            }
+
+            // Floating CTA click handler
+            document.getElementById('floatingCta')?.addEventListener('click', function() {
+                alert('Contact our fragrance specialists at +1 (555) 123-4567');
+            });
+
+            // Intersection Observer for animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Observe all animated elements
+            document.querySelectorAll('.collection-card, .benefit-card, .product-card, .testimonial, .floating-cta').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 }

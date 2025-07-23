@@ -1,5 +1,4 @@
 ﻿@model PerfumeAPI.Models.Entities.Product
-
 @{
     ViewData["Title"] = Model.Name;
 }
@@ -7,12 +6,27 @@
 <div class="container my-5">
     <div class="row">
         <div class="col-md-6">
-            <img src="@Model.ImageUrl" class="img-fluid rounded" alt="@Model.Name">
+            <img src="@(Model.ImageUrl ?? "/images/default-perfume.jpg")"
+                 class="img-fluid rounded"
+                 alt="@Model.Name"
+                 onerror="this.onerror=null;this.src='/images/default-perfume.jpg';">
+
+            <!-- Additional Product Images Carousel -->
+            <div class="mt-3">
+                <div class="d-flex">
+                    <div class="thumb-img mx-1 border p-1">
+                        <img src="@(Model.ImageUrl ?? "/images/default-perfume.jpg")" class="img-thumbnail" style="width:80px;height:80px;object-fit:cover;">
+                    </div>
+                    <!-- Repeat for additional images if available -->
+                </div>
+            </div>
         </div>
+
         <div class="col-md-6">
             <h1>@Model.Name</h1>
-            <p class="text-muted">@Model.FragranceType | @Model.Size</p>
+            <p class="text-muted">@Model.FragranceType | @Model.FragranceFamily | @Model.Size</p>
 
+            <!-- Rating Section -->
             <div class="mb-3">
                 @{
                     var avgRating = Model.Comments?.Any() == true ? Model.Comments.Average(c => c.Rating) : 0;
@@ -29,17 +43,20 @@
                 </div>
             </div>
 
+            <!-- Product Description -->
             <p class="lead">@Model.Description</p>
 
+            <!-- Price Section -->
             <div class="d-flex align-items-center mb-4">
                 <span class="h3 me-3">@Model.Price.ToString("C")</span>
                 <span class="text-muted">+ @Model.ShippingCost.ToString("C") shipping</span>
             </div>
 
+            <!-- Add to Cart Section -->
             <div class="d-flex mb-4">
                 <div class="input-group me-3" style="width: 120px;">
                     <button class="btn btn-outline-secondary decrement" type="button">-</button>
-                    <input type="text" class="form-control text-center quantity" value="1">
+                    <input type="number" class="form-control text-center quantity" value="1" min="1">
                     <button class="btn btn-outline-secondary increment" type="button">+</button>
                 </div>
                 <button class="btn btn-primary add-to-cart" data-id="@Model.Id">
@@ -47,19 +64,89 @@
                 </button>
             </div>
 
+            <!-- Product Details Card -->
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Product Details</h5>
                     <ul class="list-unstyled">
-                        <li><strong>Fragrance Type:</strong> @Model.FragranceType</li>
+                        <li><strong>Fragrance Family:</strong> @Model.FragranceFamily</li>
+                        <li><strong>Type:</strong> @Model.FragranceType</li>
                         <li><strong>Size:</strong> @Model.Size</li>
                         <li><strong>Shipping:</strong> @Model.ShippingCost.ToString("C")</li>
+                        <li><strong>Ingredients:</strong> Premium alcohol, fragrance oils, distilled water</li>
+                        <li><strong>Longevity:</strong> 8-12 hours</li>
+                        <li><strong>Sillage:</strong> Moderate</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Product Features -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Key Features</h5>
+                    <ul>
+                        <li>Handcrafted with premium ingredients</li>
+                        <li>Unisex fragrance suitable for all occasions</li>
+                        <li>Eco-friendly packaging</li>
+                        <li>Vegan and cruelty-free</li>
+                        <li>Made in France</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Product Tabs Section -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">Description</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab">Details</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="how-to-use-tab" data-bs-toggle="tab" data-bs-target="#how-to-use" type="button" role="tab">How To Use</button>
+                </li>
+            </ul>
+            <div class="tab-content p-3 border border-top-0" id="productTabsContent">
+                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                    <p>@Model.Description</p>
+                    <p>Our signature fragrance combines top notes of bergamot and lemon with a heart of jasmine and rose, resting on a base of sandalwood and musk. Perfect for daytime wear with a sophisticated edge.</p>
+                </div>
+                <div class="tab-pane fade" id="details" role="tabpanel">
+                    <h5>Composition</h5>
+                    <ul>
+                        <li><strong>Top Notes:</strong> Bergamot, Lemon, Green Notes</li>
+                        <li><strong>Middle Notes:</strong> Jasmine, Rose, Lily of the Valley</li>
+                        <li><strong>Base Notes:</strong> Sandalwood, Musk, Amber</li>
+                    </ul>
+                    <h5 class="mt-3">Technical Specifications</h5>
+                    <ul>
+                        <li><strong>Concentration:</strong> Eau de Parfum (15-20%)</li>
+                        <li><strong>Volume:</strong> @Model.Size</li>
+                        <li><strong>Alcohol Content:</strong> 80%</li>
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="how-to-use" role="tabpanel">
+                    <h5>Application Guide</h5>
+                    <p>For best results, apply to pulse points:</p>
+                    <ul>
+                        <li>Spray on wrists and dab behind ears</li>
+                        <li>Apply to base of throat</li>
+                        <li>For longer lasting scent, apply to moisturized skin</li>
+                        <li>Hold bottle 3-6 inches from skin when spraying</li>
+                    </ul>
+                    <div class="alert alert-info mt-3">
+                        <i class="fas fa-info-circle me-2"></i> Avoid direct contact with clothing as some oils may stain.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Reviews Section -->
     <div class="row mt-5">
         <div class="col-12">
             <h3>Customer Reviews</h3>
@@ -98,7 +185,7 @@
                     <div class="card mb-3">
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
-                                <h5>@comment.User.UserName</h5>
+                                <h5>@comment.User?.UserName</h5>
                                 <div class="text-warning">
                                     @for (int i = 1; i <= 5; i++)
                                     {
@@ -118,11 +205,33 @@
             }
         </div>
     </div>
+
+    <!-- Related Products Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3>You May Also Like</h3>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                <!-- Example related products - these would come from your model in a real implementation -->
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="/images/related-1.jpg" class="card-img-top" alt="Related Product">
+                        <div class="card-body">
+                            <h5 class="card-title">Midnight Oud</h5>
+                            <p class="card-text text-muted">Woody | 100ml</p>
+                            <p class="h5 text-primary">$89.00</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Repeat for 3 more products -->
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
+            // Quantity controls
             $('.increment').click(function () {
                 const $input = $(this).siblings('.quantity');
                 let value = parseInt($input.val()) || 1;
@@ -135,6 +244,7 @@
                 if (value > 1) $input.val(value - 1);
             });
 
+            // Star rating input
             $('.rating-input i').hover(function () {
                 const rating = $(this).data('rating');
                 $(this).prevAll().addBack().removeClass('far').addClass('fas');
@@ -146,6 +256,7 @@
                 $('#selectedRating').val(rating);
             });
 
+            // Add to cart functionality
             $('.add-to-cart').click(function () {
                 const productId = $(this).data('id');
                 const quantity = parseInt($('.quantity').val()) || 1;
@@ -166,6 +277,12 @@
                     $('.cart-count').text(data.count);
                 });
             }
+
+            // Initialize product tabs
+            $('#productTabs button').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
         });
     </script>
 }

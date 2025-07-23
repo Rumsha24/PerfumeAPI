@@ -1,8 +1,7 @@
-﻿@using PerfumeAPI.Models.Entities
-
-@model IEnumerable<Product>
+﻿@model IEnumerable<PerfumeAPI.Models.Entities.Product>
 @{
-    ViewData["Title"] = "Vintage Collections";
+    ViewData["Title"] = "Our Fragrance Collection";
+    Layout = "_Layout";
 }
 
 <div class="container my-5">
@@ -17,6 +16,7 @@
                 <li><a class="dropdown-item" href="?sort=price_asc">Price: Low to High</a></li>
                 <li><a class="dropdown-item" href="?sort=price_desc">Price: High to Low</a></li>
                 <li><a class="dropdown-item" href="?sort=newest">Newest First</a></li>
+                <li><a class="dropdown-item" href="?sort=featured">Featured Items</a></li>
             </ul>
         </div>
     </div>
@@ -26,16 +26,30 @@
         {
             <div class="col">
                 <div class="card h-100 perfume-card">
-                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name">
+                    @if (product.IsFeatured)
+                    {
+                        <span class="position-absolute top-0 end-0 badge bg-danger mt-2 me-2">
+                            Featured
+                        </span>
+                    }
+                    <img src="@(product.ImageUrl ?? "/images/default-perfume.jpg")"
+                         class="card-img-top p-3"
+                         alt="@product.Name"
+                         onerror="this.onerror=null;this.src='/images/default-perfume.jpg';">
                     <div class="card-body">
                         <h5 class="card-title">@product.Name</h5>
-                        <p class="card-text text-muted">@product.FragranceType | @product.Size</p>
+                        <p class="card-text text-muted">@product.FragranceType | @product.FragranceFamily | @product.Size</p>
+                        <p class="card-text">@product.Description</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <span class="h5 text-primary">@product.Price.ToString("C")</span>
-                            <button class="btn btn-sm btn-outline-primary add-to-cart"
-                                    data-id="@product.Id">
-                                <i class="fas fa-cart-plus"></i> Add
-                            </button>
+                            <form method="post" asp-controller="Cart" asp-action="AddToCart" class="d-flex">
+                                <input type="hidden" name="productId" value="@product.Id" />
+                                <input type="number" name="quantity" value="1" min="1"
+                                       class="form-control form-control-sm me-2" style="width: 60px;" />
+                                <button type="submit" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-cart-plus"></i> Add
+                                </button>
+                            </form>
                         </div>
                     </div>
                     <div class="card-footer bg-white">
@@ -53,23 +67,36 @@
 @section Scripts {
     <script>
         $(document).ready(function() {
-            $('.add-to-cart').click(function() {
-                const productId = $(this).data('id');
+            // Toastr notifications configuration
+            toastr.options = {
+                "closeButton": true,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": true
+            };
 
-                $.post('/api/cart', { productId: productId, quantity: 1 })
-                    .done(function() {
+            // Handle form submission
+            $('form').submit(function(e) {
+                e.preventDefault();
+                const form = $(this);
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: 'POST',
+                    data: form.serialize(),
+                    success: function() {
                         toastr.success('Added to cart!');
                         updateCartCount();
-                    })
-                    .fail(function() {
+                    },
+                    error: function() {
                         toastr.error('Please login first');
                         window.location.href = '/Account/Login';
-                    });
+                    }
+                });
             });
 
             function updateCartCount() {
-                $.get('/api/cart/count', function(data) {
-                    $('.cart-count').text(data.count);
+                $.get('/Cart/GetCartCount', function(data) {
+                    $('.cart-count').text(data);
                 });
             }
         });
@@ -78,11 +105,47 @@
     <style>
         .perfume-card {
             transition: transform 0.3s;
+            border: 1px solid #FFCCD5;
         }
 
             .perfume-card:hover {
                 transform: translateY(-5px);
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                box-shadow: 0 10px 20px rgba(201, 24, 74, 0.1);
+            }
+
+        .card-img-top {
+            height: 250px;
+            object-fit: contain;
+            background-color: #FFF0F3;
+        }
+
+        .card-title {
+            color: #590D22;
+            font-weight: bold;
+        }
+
+        .text-primary {
+            color: #C9184A !important;
+        }
+
+        .btn-outline-primary {
+            color: #C9184A;
+            border-color: #C9184A;
+        }
+
+            .btn-outline-primary:hover {
+                background-color: #C9184A;
+                color: white;
+            }
+
+        .btn-outline-secondary {
+            color: #800F2F;
+            border-color: #800F2F;
+        }
+
+            .btn-outline-secondary:hover {
+                background-color: #800F2F;
+                color: white;
             }
     </style>
 }
