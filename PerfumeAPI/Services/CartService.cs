@@ -41,6 +41,9 @@ namespace PerfumeAPI.Services
 
         public async Task AddToCartAsync(string userId, int productId, int quantity = 1)
         {
+            if (string.IsNullOrWhiteSpace(userId))
+                throw new ArgumentException("User ID cannot be empty", nameof(userId));
+
             if (quantity < 1)
                 throw new ArgumentOutOfRangeException(nameof(quantity), "Quantity must be at least 1");
 
@@ -50,11 +53,19 @@ namespace PerfumeAPI.Services
                 var product = await _context.Products.FindAsync(productId)
                     ?? throw new ProductNotFoundException(productId);
 
+                // Check stock availability
+                if (product.StockQuantity < quantity)
+                    throw new InsufficientStockException(productId, product.StockQuantity, quantity);
+
                 var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == productId);
 
                 if (existingItem != null)
                 {
-                    existingItem.Quantity += quantity;
+                    var newTotalQuantity = existingItem.Quantity + quantity;
+                    if (product.StockQuantity < newTotalQuantity)
+                        throw new InsufficientStockException(productId, product.StockQuantity, newTotalQuantity);
+
+                    existingItem.Quantity = newTotalQuantity;
                     existingItem.UpdatedAt = DateTime.UtcNow;
                 }
                 else
@@ -80,17 +91,18 @@ namespace PerfumeAPI.Services
 
         public async Task RemoveFromCartAsync(string userId, int productId)
         {
+            if (string.IsNullOrWhiteSpace(userId))
+                throw new ArgumentException("User ID cannot be empty", nameof(userId));
+
             try
             {
                 var cart = await GetUserCartAsync(userId);
-                var item = cart.Items.FirstOrDefault(i => i.ProductId == productId);
+                var item = cart.Items.FirstOrDefault(i => i.ProductId == productId)
+                    ?? throw new CartItemNotFoundException(productId);
 
-                if (item != null)
-                {
-                    _context.CartItems.Remove(item);
-                    await _context.SaveChangesAsync();
-                    _logger.LogInformation("Removed product {ProductId} from cart for user {UserId}", productId, userId);
-                }
+                _context.CartItems.Remove(item);
+                await _context.SaveChangesAsync();
+                _logger.LogInformation("Removed product {ProductId} from cart for user {UserId}", productId, userId);
             }
             catch (Exception ex)
             {
@@ -101,6 +113,9 @@ namespace PerfumeAPI.Services
 
         public async Task UpdateQuantityAsync(string userId, int productId, int quantity)
         {
+            if (string.IsNullOrWhiteSpace(userId))
+                throw new ArgumentException("User ID cannot be empty", nameof(userId));
+
             if (quantity < 1)
                 throw new ArgumentOutOfRangeException(nameof(quantity), "Quantity must be at least 1");
 
@@ -109,6 +124,12 @@ namespace PerfumeAPI.Services
                 var cart = await GetUserCartAsync(userId);
                 var item = cart.Items.FirstOrDefault(i => i.ProductId == productId)
                     ?? throw new CartItemNotFoundException(productId);
+
+                var product = await _context.Products.FindAsync(productId)
+                    ?? throw new ProductNotFoundException(productId);
+
+                if (product.StockQuantity < quantity)
+                    throw new InsufficientStockException(productId, product.StockQuantity, quantity);
 
                 item.Quantity = quantity;
                 item.UpdatedAt = DateTime.UtcNow;
@@ -124,6 +145,9 @@ namespace PerfumeAPI.Services
 
         public async Task ClearCartAsync(string userId)
         {
+            if (string.IsNullOrWhiteSpace(userId))
+                throw new ArgumentException("User ID cannot be empty", nameof(userId));
+
             try
             {
                 var cart = await GetUserCartAsync(userId);
@@ -140,6 +164,9 @@ namespace PerfumeAPI.Services
 
         public async Task<int> GetCartItemCountAsync(string userId)
         {
+            if (string.IsNullOrWhiteSpace(userId))
+                throw new ArgumentException("User ID cannot be empty", nameof(userId));
+
             try
             {
                 var cart = await GetUserCartAsync(userId);
@@ -154,6 +181,9 @@ namespace PerfumeAPI.Services
 
         public async Task<CartDto> GetCartDtoAsync(string userId)
         {
+            if (string.IsNullOrWhiteSpace(userId))
+                throw new ArgumentException("User ID cannot be empty", nameof(userId));
+
             try
             {
                 var cart = await GetUserCartAsync(userId);
@@ -165,8 +195,8 @@ namespace PerfumeAPI.Services
                     {
                         ProductId = i.ProductId,
                         Quantity = i.Quantity,
-                        ProductName = i.Product?.Name,
-                        ProductImage = i.Product?.ImageUrl,
+                        ProductName = i.Product?.Name ?? "Unknown Product",
+                        ProductImage = i.Product?.ImageUrl ?? "/images/default-perfume.jpg",
                         Price = i.Product?.Price ?? 0,
                         AddedAt = i.AddedAt,
                         UpdatedAt = i.UpdatedAt
@@ -180,7 +210,7 @@ namespace PerfumeAPI.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error getting cart DTO for user {UserId}", userId);
-                throw;
+                throw new CartServiceException("Could not retrieve cart DTO", ex);
             }
         }
 
@@ -210,5 +240,20 @@ namespace PerfumeAPI.Services
     {
         public CartItemNotFoundException(int productId)
             : base($"Cart item for product ID {productId} not found") { }
+    }
+
+    public class InsufficientStockException : Exception
+    {
+        public int ProductId { get; }
+        public int AvailableStock { get; }
+        public int RequestedQuantity { get; }
+
+        public InsufficientStockException(int productId, int availableStock, int requestedQuantity)
+            : base($"Insufficient stock for product {productId}. Available: {availableStock}, Requested: {requestedQuantity}")
+        {
+            ProductId = productId;
+            AvailableStock = availableStock;
+            RequestedQuantity = requestedQuantity;
+        }
     }
 }

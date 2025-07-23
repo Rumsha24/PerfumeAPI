@@ -30,10 +30,25 @@ namespace PerfumeAPI.Models.DTOs
         [StringLength(50, ErrorMessage = "Fragrance type cannot exceed 50 characters")]
         public string FragranceType { get; set; } = string.Empty;
 
+        [StringLength(50)]
+        public string? FragranceFamily { get; set; }
+
         [Required]
         [StringLength(20, ErrorMessage = "Size cannot exceed 20 characters")]
         public string Size { get; set; } = string.Empty;
 
+        // Inventory Properties
+        [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Stock quantity cannot be negative")]
+        public int StockQuantity { get; set; }
+
+        [Required]
+        public bool IsInStock { get; set; }
+
+        [Display(Name = "Low Stock")]
+        public bool IsLowStock { get; set; }
+
+        // Product Metrics
         public double AverageRating { get; set; }
         public int ReviewCount { get; set; }
         public bool IsFeatured { get; set; }
@@ -62,11 +77,21 @@ namespace PerfumeAPI.Models.DTOs
         [StringLength(50, ErrorMessage = "Fragrance type cannot exceed 50 characters")]
         public string FragranceType { get; set; } = string.Empty;
 
+        [StringLength(50)]
+        public string? FragranceFamily { get; set; }
+
         [Required]
         [StringLength(20, ErrorMessage = "Size cannot exceed 20 characters")]
         public string Size { get; set; } = string.Empty;
 
+        // Inventory Properties for Creation
+        [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Initial stock cannot be negative")]
+        public int InitialStock { get; set; } = 0;
+
         [Required]
         public IFormFile ImageFile { get; set; } = null!;
     }
+
+   
 }

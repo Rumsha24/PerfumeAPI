@@ -8,9 +8,8 @@
 <div class="container my-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1>Order #@Model.OrderNumber</h1>
-        <span class="badge
-              @(Model.Status == "Delivered" ? "bg-success" :
-                                            Model.Status == "Cancelled" ? "bg-danger" : "bg-primary")">
+        <span class="badge @(Model.Status == "Delivered" ? "bg-success" :
+                                          Model.Status == "Cancelled" ? "bg-danger" : "bg-primary")">
             @Model.Status
         </span>
     </div>
@@ -35,13 +34,13 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="~/images/products/@item.Product.ImageUrl"
+                                            <img src="~/images/products/@(item.Product?.ImageUrl ?? "default-product.jpg")"
                                                  class="img-thumbnail me-3"
                                                  style="width: 60px; height: 60px; object-fit: cover;"
-                                                 alt="@item.Product.Name">
+                                                 alt="@item.Product?.Name">
                                             <div>
-                                                <h6 class="mb-1">@item.Product.Name</h6>
-                                                <small class="text-muted">@item.Product.FragranceType</small>
+                                                <h6 class="mb-1">@item.Product?.Name</h6>
+                                                <small class="text-muted">@item.Product?.FragranceType</small>
                                             </div>
                                         </div>
                                     </td>
@@ -102,7 +101,7 @@
                                 <small>@Model.OrderDate.ToString("MMMM dd, yyyy")</small>
                             </li>
                             <li class="@(Model.Status == "Shipped" || Model.Status == "Delivered" ? "completed" :
-                                                                                                          Model.Status == "Processing" ? "pending" : "")">
+                                                                      Model.Status == "Processing" ? "pending" : "")">
                                 <i class="fas fa-truck"></i>
                                 <span>Shipped</span>
                                 @if (Model.ShippedDate.HasValue)
@@ -111,7 +110,7 @@
                                 }
                             </li>
                             <li class="@(Model.Status == "Delivered" ? "completed" :
-                                                                                                          Model.Status == "Shipped" ? "pending" : "")">
+                                                                      Model.Status == "Shipped" ? "pending" : "")">
                                 <i class="fas fa-home"></i>
                                 <span>Delivered</span>
                                 @if (Model.DeliveredDate.HasValue)
@@ -135,8 +134,7 @@
             @if (Model.Status == "Processing")
             {
                 <div class="text-center">
-                    <button class="btn btn-outline-danger" id="cancelOrder"
-                            data-id="@Model.Id">
+                    <button class="btn btn-outline-danger" id="cancelOrder" data-id="@Model.Id">
                         Cancel Order
                     </button>
                 </div>
@@ -164,7 +162,7 @@
                             window.location.reload();
                         },
                         error: function (xhr) {
-                            alert('Failed to cancel the order. ' + xhr.responseText);
+                            alert('Failed to cancel the order. ' + (xhr.responseJSON?.message || xhr.statusText));
                             $btn.prop('disabled', false).text('Cancel Order');
                         }
                     });

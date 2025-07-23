@@ -1,11 +1,19 @@
 ﻿@model PerfumeAPI.Models.Entities.Product
 @using Microsoft.AspNetCore.Identity
 @inject UserManager<PerfumeAPI.Models.Entities.User> UserManager
+
 @{
     ViewData["Title"] = Model.Name;
+
+    // Process comments once at the top
+    var validComments = Model.Comments?.Where(c => c != null).ToList() ?? new List<PerfumeAPI.Models.Entities.Comment>();
+    var hasReviews = validComments.Any();
+    var avgRating = hasReviews ? validComments.Average(c => c.Rating) : 0;
+    var reviewCount = validComments.Count;
 }
 
 <div class="container my-5">
+    <!-- Product Header Section -->
     <div class="row">
         <div class="col-md-6">
             <img src="@(Model.ImageUrl ?? "/images/default-perfume.jpg")"
@@ -13,27 +21,25 @@
                  alt="@Model.Name"
                  onerror="this.onerror=null;this.src='/images/default-perfume.jpg';">
 
-            <!-- Additional Product Images Carousel -->
+            <!-- Thumbnail Images -->
             <div class="mt-3">
                 <div class="d-flex">
                     <div class="thumb-img mx-1 border p-1">
-                        <img src="@(Model.ImageUrl ?? "/images/default-perfume.jpg")" class="img-thumbnail" style="width:80px;height:80px;object-fit:cover;">
+                        <img src="@(Model.ImageUrl ?? "/images/default-perfume.jpg")"
+                             class="img-thumbnail"
+                             style="width:80px;height:80px;object-fit:cover;"
+                             alt="@Model.Name">
                     </div>
-                    <!-- Repeat for additional images if available -->
                 </div>
             </div>
         </div>
 
         <div class="col-md-6">
             <h1>@Model.Name</h1>
-            <p class="text-muted">@Model.FragranceType | @Model.FragranceFamily | @Model.Size</p>
+            <p class="text-muted">@Model.FragranceType | @(Model.FragranceFamily ?? "Unspecified") | @Model.Size</p>
 
             <!-- Rating Section -->
             <div class="mb-3">
-                @{
-                    var avgRating = Model.Comments?.Any() == true ? Model.Comments.Average(c => c.Rating) : 0;
-                    var reviewCount = Model.Comments?.Count ?? 0;
-                }
                 <div class="rating mb-2">
                     @for (int i = 1; i <= 5; i++)
                     {
@@ -45,7 +51,7 @@
                 </div>
             </div>
 
-            <!-- Product Description -->
+            <!-- Product Info -->
             <p class="lead">@Model.Description</p>
 
             <!-- Price Section -->
@@ -55,50 +61,44 @@
             </div>
 
             <!-- Add to Cart Section -->
-            <div class="d-flex mb-4">
-                <div class="input-group me-3" style="width: 120px;">
-                    <button class="btn btn-outline-secondary decrement" type="button">-</button>
-                    <input type="number" class="form-control text-center quantity" value="1" min="1">
-                    <button class="btn btn-outline-secondary increment" type="button">+</button>
+            @if (Model.StockQuantity > 0)
+            {
+                <div class="d-flex mb-4">
+                    <div class="input-group me-3" style="width: 120px;">
+                        <button class="btn btn-outline-secondary decrement" type="button">-</button>
+                        <input type="number" class="form-control text-center quantity"
+                               value="1" min="1" max="@Model.StockQuantity">
+                        <button class="btn btn-outline-secondary increment" type="button">+</button>
+                    </div>
+                    <button class="btn btn-primary add-to-cart" data-id="@Model.Id">
+                        <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                    </button>
                 </div>
-                <button class="btn btn-primary add-to-cart" data-id="@Model.Id">
-                    <i class="fas fa-cart-plus me-2"></i>Add to Cart
+            }
+            else
+            {
+                <button class="btn btn-secondary" disabled>
+                    <i class="fas fa-times-circle me-2"></i>Out of Stock
                 </button>
-            </div>
+            }
 
             <!-- Product Details Card -->
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Product Details</h5>
                     <ul class="list-unstyled">
-                        <li><strong>Fragrance Family:</strong> @Model.FragranceFamily</li>
+                        <li><strong>Fragrance Family:</strong> @(Model.FragranceFamily ?? "Not specified")</li>
                         <li><strong>Type:</strong> @Model.FragranceType</li>
                         <li><strong>Size:</strong> @Model.Size</li>
                         <li><strong>Shipping:</strong> @Model.ShippingCost.ToString("C")</li>
-                        <li><strong>Ingredients:</strong> Premium alcohol, fragrance oils, distilled water</li>
-                        <li><strong>Longevity:</strong> 8-12 hours</li>
-                        <li><strong>Sillage:</strong> Moderate</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Product Features -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Key Features</h5>
-                    <ul>
-                        <li>Handcrafted with premium ingredients</li>
-                        <li>Unisex fragrance suitable for all occasions</li>
-                        <li>Eco-friendly packaging</li>
-                        <li>Vegan and cruelty-free</li>
-                        <li>Made in France</li>
+                        <li><strong>Availability:</strong> @(Model.StockQuantity > 0 ? "In Stock" : "Out of Stock")</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Product Tabs Section -->
+    <!-- Product Tabs -->
     <div class="row mt-4">
         <div class="col-12">
             <ul class="nav nav-tabs" id="productTabs" role="tablist">
@@ -108,14 +108,11 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab">Details</button>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="how-to-use-tab" data-bs-toggle="tab" data-bs-target="#how-to-use" type="button" role="tab">How To Use</button>
-                </li>
             </ul>
+
             <div class="tab-content p-3 border border-top-0" id="productTabsContent">
                 <div class="tab-pane fade show active" id="description" role="tabpanel">
                     <p>@Model.Description</p>
-                    <p>Our signature fragrance combines top notes of bergamot and lemon with a heart of jasmine and rose, resting on a base of sandalwood and musk. Perfect for daytime wear with a sophisticated edge.</p>
                 </div>
                 <div class="tab-pane fade" id="details" role="tabpanel">
                     <h5>Composition</h5>
@@ -124,41 +121,22 @@
                         <li><strong>Middle Notes:</strong> Jasmine, Rose, Lily of the Valley</li>
                         <li><strong>Base Notes:</strong> Sandalwood, Musk, Amber</li>
                     </ul>
-                    <h5 class="mt-3">Technical Specifications</h5>
-                    <ul>
-                        <li><strong>Concentration:</strong> Eau de Parfum (15-20%)</li>
-                        <li><strong>Volume:</strong> @Model.Size</li>
-                        <li><strong>Alcohol Content:</strong> 80%</li>
-                    </ul>
-                </div>
-                <div class="tab-pane fade" id="how-to-use" role="tabpanel">
-                    <h5>Application Guide</h5>
-                    <p>For best results, apply to pulse points:</p>
-                    <ul>
-                        <li>Spray on wrists and dab behind ears</li>
-                        <li>Apply to base of throat</li>
-                        <li>For longer lasting scent, apply to moisturized skin</li>
-                        <li>Hold bottle 3-6 inches from skin when spraying</li>
-                    </ul>
-                    <div class="alert alert-info mt-3">
-                        <i class="fas fa-info-circle me-2"></i> Avoid direct contact with clothing as some oils may stain.
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Customer Reviews Section -->
+    <!-- Reviews Section -->
     <div class="row mt-5">
         <div class="col-12">
             <h3>Customer Reviews</h3>
 
-            @if (User.Identity.IsAuthenticated)
+            @if (User.Identity?.IsAuthenticated == true)
             {
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">Add Your Review</h5>
-                        <form id="commentForm" enctype="multipart/form-data">
+                        <form id="commentForm">
                             <input type="hidden" name="ProductId" value="@Model.Id">
                             <div class="mb-3">
                                 <label class="form-label">Rating</label>
@@ -169,18 +147,10 @@
                                     }
                                     <input type="hidden" name="Rating" id="selectedRating" value="5">
                                 </div>
-                                <span id="ratingError" class="text-danger small"></span>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Review</label>
                                 <textarea name="Text" class="form-control" rows="3" required></textarea>
-                                <span id="textError" class="text-danger small"></span>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Upload Images (Optional, max 3)</label>
-                                <input type="file" name="Images" class="form-control" multiple accept="image/*">
-                                <div class="form-text">Maximum 5MB per image. Allowed: JPG, PNG, GIF</div>
-                                <span id="imageError" class="text-danger small"></span>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit Review</button>
                         </form>
@@ -195,17 +165,14 @@
             }
 
             <div id="commentsContainer">
-                @if (Model.Comments?.Any() == true)
+                @if (hasReviews)
                 {
-                    foreach (var comment in Model.Comments.OrderByDescending(c => c.CreatedAt))
+                    foreach (var comment in validComments.OrderByDescending(c => c.CreatedAt))
                     {
-                        <div class="card mb-3 comment-card" data-comment-id="@comment.Id">
+                        <div class="card mb-3">
                             <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <div>
-                                        <h5>@comment.User?.UserName</h5>
-                                        <p class="text-muted small mb-2">@comment.CreatedAt.ToString("MMMM dd, yyyy")</p>
-                                    </div>
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="card-title">@comment.User?.UserName</h5>
                                     <div class="text-warning">
                                         @for (int i = 1; i <= 5; i++)
                                         {
@@ -213,28 +180,8 @@
                                         }
                                     </div>
                                 </div>
-                                <p class="mt-2">@comment.Text</p>
-
-                                @if (comment.Images?.Any() == true)
-                                {
-                                    <div class="comment-images mt-3">
-                                        @foreach (var image in comment.Images)
-                                        {
-                                            <a href="@image.ImageUrl" data-lightbox="comment-@comment.Id-images">
-                                                <img src="@image.ImageUrl" class="img-thumbnail me-2 mb-2" style="width: 100px; height: 100px; object-fit: cover;">
-                                            </a>
-                                        }
-                                    </div>
-                                }
-
-                                @if (User.Identity.IsAuthenticated && UserManager.GetUserId(User) == comment.UserId)
-                                {
-                                    <div class="mt-3">
-                                        <button class="btn btn-sm btn-outline-danger delete-comment" data-comment-id="@comment.Id">
-                                            <i class="fas fa-trash-alt"></i> Delete
-                                        </button>
-                                    </div>
-                                }
+                                <p class="text-muted small">@comment.CreatedAt.ToString("MMMM dd, yyyy")</p>
+                                <p class="card-text">@comment.Text</p>
                             </div>
                         </div>
                     }
@@ -246,62 +193,17 @@
             </div>
         </div>
     </div>
-
-    <!-- Related Products Section -->
-    <div class="row mt-5">
-        <div class="col-12">
-            <h3>You May Also Like</h3>
-            <div class="row row-cols-1 row-cols-md-4 g-4">
-                <!-- Example related products - these would come from your model in a real implementation -->
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="/images/related-1.jpg" class="card-img-top" alt="Related Product">
-                        <div class="card-body">
-                            <h5 class="card-title">Midnight Oud</h5>
-                            <p class="card-text text-muted">Woody | 100ml</p>
-                            <p class="h5 text-primary">$89.00</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Repeat for 3 more products -->
-            </div>
-        </div>
-    </div>
 </div>
 
-@section Styles {
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-    <style>
-        .rating-input i {
-            cursor: pointer;
-            font-size: 1.5rem;
-            margin-right: 0.25rem;
-            transition: all 0.2s;
-        }
-
-        .comment-card {
-            transition: all 0.3s;
-        }
-
-            .comment-card:hover {
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            }
-
-        .comment-images img:hover {
-            transform: scale(1.05);
-        }
-    </style>
-}
-
 @section Scripts {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script>
         $(document).ready(function () {
             // Quantity controls
             $('.increment').click(function () {
                 const $input = $(this).siblings('.quantity');
                 let value = parseInt($input.val()) || 1;
-                $input.val(value + 1);
+                const max = parseInt($input.attr('max')) || 100;
+                if (value < max) $input.val(value + 1);
             });
 
             $('.decrement').click(function () {
@@ -310,7 +212,7 @@
                 if (value > 1) $input.val(value - 1);
             });
 
-            // Star rating input
+            // Rating stars
             $('.rating-input i').hover(function () {
                 const rating = $(this).data('rating');
                 $(this).prevAll().addBack().removeClass('far').addClass('fas');
@@ -322,156 +224,18 @@
                 $('#selectedRating').val(rating);
             });
 
-            // Add to cart functionality
+            // Add to cart
             $('.add-to-cart').click(function () {
                 const productId = $(this).data('id');
                 const quantity = parseInt($('.quantity').val()) || 1;
 
                 $.post('/api/cart', { productId: productId, quantity: quantity })
                     .done(function () {
-                        toastr.success('Added to cart!');
-                        updateCartCount();
+                        alert('Added to cart!');
                     })
                     .fail(function () {
-                        toastr.error('Please log in to add items to your cart.');
-                        window.location.href = '/Account/Login?returnUrl=' + encodeURIComponent(window.location.pathname);
+                        alert('Please log in to add items to your cart.');
                     });
-            });
-
-            // Comment form submission
-            $('#commentForm').submit(function(e) {
-                e.preventDefault();
-                clearErrors();
-
-                const formData = new FormData(this);
-
-                $.ajax({
-                    url: '/api/Comment',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        toastr.success('Review submitted successfully!');
-                        $('#commentForm')[0].reset();
-                        $('.rating-input i').removeClass('fas').addClass('far');
-                        $('.rating-input i:lt(5)').removeClass('far').addClass('fas');
-                        $('#selectedRating').val(5);
-                        loadComments();
-                    },
-                    error: function(xhr) {
-                        if (xhr.status === 400) {
-                            const errors = xhr.responseJSON.errors;
-                            if (errors) {
-                                if (errors.Rating) {
-                                    $('#ratingError').text(errors.Rating[0]);
-                                }
-                                if (errors.Text) {
-                                    $('#textError').text(errors.Text[0]);
-                                }
-                                if (errors.Images) {
-                                    $('#imageError').text(errors.Images[0]);
-                                }
-                            } else {
-                                toastr.error(xhr.responseJSON?.message || 'Error submitting review');
-                            }
-                        } else {
-                            toastr.error('An error occurred. Please try again.');
-                        }
-                    }
-                });
-            });
-
-            // Delete comment
-            $(document).on('click', '.delete-comment', function() {
-                const commentId = $(this).data('comment-id');
-                if (confirm('Are you sure you want to delete this review?')) {
-                    $.ajax({
-                        url: `/api/Comment/${commentId}`,
-                        type: 'DELETE',
-                        success: function() {
-                            toastr.success('Review deleted successfully');
-                            $(`[data-comment-id="${commentId}"]`).remove();
-                            if ($('#commentsContainer .comment-card').length === 0) {
-                                $('#commentsContainer').html('<div class="alert alert-info">No reviews yet. Be the first to review!</div>');
-                            }
-                        },
-                        error: function() {
-                            toastr.error('Failed to delete review');
-                        }
-                    });
-                }
-            });
-
-            function loadComments() {
-                $.get(`/api/Comment/product/${@Model.Id}`, function(comments) {
-                    if (comments.length > 0) {
-                        let html = '';
-                        comments.forEach(comment => {
-                            html += `
-                                <div class="card mb-3 comment-card" data-comment-id="${comment.id}">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between align-items-start">
-                                            <div>
-                                                <h5>${comment.userName}</h5>
-                                                <p class="text-muted small mb-2">${new Date(comment.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                                            </div>
-                                            <div class="text-warning">
-                                                ${Array.from({length: 5}, (_, i) =>
-                                                    `<i class="${i < comment.rating ? 'fas' : 'far'} fa-star"></i>`
-                                                ).join('')}
-                                            </div>
-                                        </div>
-                                        <p class="mt-2">${comment.text}</p>`;
-
-                            if (comment.imageUrls && comment.imageUrls.length > 0) {
-                                html += `<div class="comment-images mt-3">`;
-                                comment.imageUrls.forEach(url => {
-                                    html += `<a href="${url}" data-lightbox="comment-${comment.id}-images">
-                                                <img src="${url}" class="img-thumbnail me-2 mb-2" style="width: 100px; height: 100px; object-fit: cover;">
-                                            </a>`;
-                                });
-                                html += `</div>`;
-                            }
-
-                            if (@User.Identity.IsAuthenticated.ToString().ToLower() && '@UserManager.GetUserId(User)' === comment.userId) {
-                                html += `<div class="mt-3">
-                                            <button class="btn btn-sm btn-outline-danger delete-comment" data-comment-id="${comment.id}">
-                                                <i class="fas fa-trash-alt"></i> Delete
-                                            </button>
-                                        </div>`;
-                            }
-
-                            html += `</div></div>`;
-                        });
-                        $('#commentsContainer').html(html);
-                    } else {
-                        $('#commentsContainer').html('<div class="alert alert-info">No reviews yet. Be the first to review!</div>');
-                    }
-                });
-            }
-
-            function clearErrors() {
-                $('#ratingError, #textError, #imageError').text('');
-            }
-
-            function updateCartCount() {
-                $.get('/api/cart/count', function (data) {
-                    $('.cart-count').text(data.count);
-                });
-            }
-
-            // Initialize product tabs
-            $('#productTabs button').click(function (e) {
-                e.preventDefault();
-                $(this).tab('show');
-            });
-
-            // Initialize lightbox
-            lightbox.option({
-                'resizeDuration': 200,
-                'wrapAround': true,
-                'albumLabel': 'Image %1 of %2'
             });
         });
     </script>
