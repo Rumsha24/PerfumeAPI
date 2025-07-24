@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\views\\product\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\product\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\users\\rumsh\\onedrive - conestoga college\\desktop\\perfumeapi\\perfumeapi\\perfumeapi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,14 +27,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Product\\Details.cshtml",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Product\\Details.cshtml",
-              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Product\\Details.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\Product\\Details.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPEAAAABAAAAAAAAAA==",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAKIAAAAAAAAAAAAAAKwAAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-23T22:50:04.878Z",
+              "WhenOpened": "2025-07-23T22:59:39.092Z",
               "EditorCaption": ""
             }
           ]
