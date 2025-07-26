@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PerfumeAPI.Services.Interfaces
 {
-    public interface IPerfumeService
+    public interface IProductService
     {
         Task<IEnumerable<Product>> GetAllProductsAsync();
         Task<Product?> GetProductByIdAsync(int id);

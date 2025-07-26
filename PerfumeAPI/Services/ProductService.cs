@@ -5,15 +5,17 @@ using PerfumeAPI.Models.Entities;
 using PerfumeAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using System;
 
 namespace PerfumeAPI.Services
 {
-    public class PerfumeService : IPerfumeService
+    public class ProductService : IProductService
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public PerfumeService(AppDbContext context, IWebHostEnvironment env)
+        public ProductService(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
             _env = env;
@@ -24,6 +26,7 @@ namespace PerfumeAPI.Services
             return await _context.Products
                 .Include(p => p.Comments)
                 .ThenInclude(c => c.User)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
@@ -37,11 +40,6 @@ namespace PerfumeAPI.Services
 
         public async Task<Product> CreateProductAsync(ProductCreateDto productDto)
         {
-            if (productDto == null)
-            {
-                throw new ArgumentNullException(nameof(productDto));
-            }
-
             var product = new Product
             {
                 Name = productDto.Name,
@@ -49,9 +47,10 @@ namespace PerfumeAPI.Services
                 Price = productDto.Price,
                 ShippingCost = productDto.ShippingCost,
                 FragranceType = productDto.FragranceType,
+                FragranceFamily = productDto.FragranceFamily,
                 Size = productDto.Size,
-                CreatedAt = DateTime.UtcNow,
-                ImageUrl = "" // default empty string to satisfy required member
+                StockQuantity = productDto.InitialStock,
+                CreatedAt = DateTime.UtcNow
             };
 
             if (productDto.ImageFile != null)
@@ -61,17 +60,11 @@ namespace PerfumeAPI.Services
 
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
-
             return product;
         }
 
         public async Task UpdateProductAsync(int id, ProductUpdateDto productDto)
         {
-            if (productDto == null)
-            {
-                throw new ArgumentNullException(nameof(productDto));
-            }
-
             var product = await _context.Products.FindAsync(id);
             if (product == null)
             {
@@ -83,8 +76,14 @@ namespace PerfumeAPI.Services
             product.Price = productDto.Price;
             product.ShippingCost = productDto.ShippingCost;
             product.FragranceType = productDto.FragranceType ?? product.FragranceType;
+            product.FragranceFamily = productDto.FragranceFamily;
             product.Size = productDto.Size ?? product.Size;
             product.UpdatedAt = DateTime.UtcNow;
+
+            if (productDto.StockAdjustment != 0)
+            {
+                product.UpdateStock(productDto.StockAdjustment);
+            }
 
             if (productDto.ImageFile != null)
             {
@@ -117,11 +116,6 @@ namespace PerfumeAPI.Services
 
         public async Task AddCommentAsync(CommentCreateDTO commentDto, string userId)
         {
-            if (commentDto == null)
-            {
-                throw new ArgumentNullException(nameof(commentDto));
-            }
-
             var comment = new Comment
             {
                 ProductId = commentDto.ProductId,
@@ -133,32 +127,10 @@ namespace PerfumeAPI.Services
 
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
-
-            if (commentDto.Images != null && commentDto.Images.Count > 0)
-            {
-                foreach (var imageFile in commentDto.Images)
-                {
-                    if (imageFile != null)
-                    {
-                        var imageUrl = await SaveImageAsync(imageFile);
-                        _context.CommentImages.Add(new CommentImage
-                        {
-                            CommentId = comment.Id,
-                            ImageUrl = imageUrl
-                        });
-                    }
-                }
-                await _context.SaveChangesAsync();
-            }
         }
 
         private async Task<string> SaveImageAsync(IFormFile imageFile)
         {
-            if (imageFile == null || imageFile.Length == 0)
-            {
-                throw new ArgumentException("Invalid image file");
-            }
-
             var uploadsFolder = Path.Combine(_env.WebRootPath, "images", "products");
             if (!Directory.Exists(uploadsFolder))
             {
@@ -178,10 +150,7 @@ namespace PerfumeAPI.Services
 
         private void DeleteImage(string imageUrl)
         {
-            if (string.IsNullOrEmpty(imageUrl))
-            {
-                return;
-            }
+            if (string.IsNullOrEmpty(imageUrl)) return;
 
             var imagePath = Path.Combine(_env.WebRootPath, imageUrl.TrimStart('/'));
             if (File.Exists(imagePath))
