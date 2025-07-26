@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "VdOTk6s9wKs=",
+  "dgSpecHash": "r/lND+K5ubM=",
   "success": true,
   "projectFilePath": "C:\\Users\\rumsh\\OneDrive - Conestoga College\\Desktop\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI.csproj",
   "expectedPackageFiles": [
@@ -64,6 +64,7 @@
     "C:\\Users\\rumsh\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.21.0\\microsoft.visualstudio.azure.containers.tools.targets.1.21.0.nupkg.sha512",
     "C:\\Users\\rumsh\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\rumsh\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
+    "C:\\Users\\rumsh\\.nuget\\packages\\sixlabors.imagesharp\\3.1.10\\sixlabors.imagesharp.3.1.10.nupkg.sha512",
     "C:\\Users\\rumsh\\.nuget\\packages\\swashbuckle.aspnetcore\\6.6.2\\swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
     "C:\\Users\\rumsh\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.6.2\\swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "C:\\Users\\rumsh\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.6.2\\swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",

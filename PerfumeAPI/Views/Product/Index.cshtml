@@ -1,35 +1,46 @@
 ﻿@model IEnumerable<PerfumeAPI.Models.Entities.Product>
 @{
     ViewData["Title"] = "Our Fragrance Collection";
-    Layout = "_Layout";
 }
 
 <div class="container my-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="display-5 fw-bold text-dark">Our Fragrance Collection</h1>
-        <div class="d-flex">
-            <!-- Sort Dropdown -->
-            <div class="dropdown me-2">
-                <button class="btn btn-outline-dark dropdown-toggle" type="button"
-                        id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-sort me-1"></i> Sort By
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-                    <li><a class="dropdown-item" href="?sort=price_asc"><i class="fas fa-sort-amount-down-alt me-2"></i>Price: Low to High</a></li>
-                    <li><a class="dropdown-item" href="?sort=price_desc"><i class="fas fa-sort-amount-down me-2"></i>Price: High to Low</a></li>
-                    <li><a class="dropdown-item" href="?sort=newest"><i class="fas fa-star me-2"></i>Newest First</a></li>
-                    <li><a class="dropdown-item" href="?sort=featured"><i class="fas fa-award me-2"></i>Featured Items</a></li>
-                </ul>
-            </div>
+        <h1 class="display-5 fw-bold">@ViewData["Title"]</h1>
 
-            <!-- Search Box -->
-            <div class="input-group" style="width: 250px;">
-                <input type="text" class="form-control" placeholder="Search fragrances..."
-                       id="searchInput" value="@Context.Request.Query["search"]">
-                <button class="btn btn-outline-dark" type="button" id="searchButton">
+        <!-- Sort Dropdown -->
+        <div class="dropdown">
+            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="sortDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-sort me-1"></i> Sort By
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                <li><a class="dropdown-item" href="?sort=name">Name (A-Z)</a></li>
+                <li><a class="dropdown-item" href="?sort=price_asc">Price (Low to High)</a></li>
+                <li><a class="dropdown-item" href="?sort=price_desc">Price (High to Low)</a></li>
+                <li><a class="dropdown-item" href="?sort=newest">Newest First</a></li>
+                <li><a class="dropdown-item" href="?sort=featured">Featured Items</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Filter and Search Section -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search fragrances..." id="searchInput">
+                <button class="btn btn-outline-secondary" type="button" id="searchButton">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
+        </div>
+        <div class="col-md-6">
+            <select class="form-select" id="fragranceFamilyFilter">
+                <option value="">All Fragrance Families</option>
+                @foreach (var family in ViewBag.AvailableFamilies as List<string> ?? new List<string>())
+                {
+                    <option value="@family">@family</option>
+                }
+            </select>
         </div>
     </div>
 
@@ -58,7 +69,7 @@
                                 <i class="fas fa-crown me-1"></i> Featured
                             </span>
                         }
-                        @if (product.StockQuantity <= 10)
+                        @if (product.IsLowStock)
                         {
                             <span class="position-absolute top-0 start-0 badge bg-warning text-dark mt-2 ms-2">
                                 <i class="fas fa-exclamation-circle me-1"></i> Low Stock
@@ -115,7 +126,20 @@
 
                             <!-- Price and Actions -->
                             <div class="d-flex justify-content-between align-items-center mt-auto">
-                                <span class="h5 text-primary fw-bold">@product.Price.ToString("C")</span>
+                                <div>
+                                    <span class="h5 text-primary fw-bold">@product.Price.ToString("C")</span>
+                                    <p class="text-muted small mb-0">
+                                        <i class="fas fa-shipping-fast me-1"></i>
+                                @if (product.ShippingCost == 0)
+                                        {
+                                            <span class="text-success">Free shipping</span>
+                                        }
+                                        else
+                                        {
+                                            @product.ShippingCost.ToString("C")
+                                        }
+                                    </p>
+                                </div>
                                 <div>
                                     <a asp-action="Details" asp-route-id="@product.Id"
                                        class="btn btn-sm btn-outline-primary me-2">
@@ -133,22 +157,29 @@
                         </div>
                     </div>
                 </div>
-                }
+            }
         </div>
 
         <!-- Pagination -->
         <nav aria-label="Product pagination" class="mt-4">
             <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="?page=@(ViewBag.CurrentPage - 1)&sort=@ViewBag.SortOrder&family=@ViewBag.CurrentFamily&search=@ViewBag.CurrentSearch">
                         <i class="fas fa-chevron-left"></i>
                     </a>
                 </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">
+
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="?page=@i&sort=@ViewBag.SortOrder&family=@ViewBag.CurrentFamily&search=@ViewBag.CurrentSearch">
+                            @i
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                    <a class="page-link" href="?page=@(ViewBag.CurrentPage + 1)&sort=@ViewBag.SortOrder&family=@ViewBag.CurrentFamily&search=@ViewBag.CurrentSearch">
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </li>
@@ -160,20 +191,22 @@
 @section Scripts {
     <script>
         $(document).ready(function() {
+            // Initialize filter dropdown with current selection
+            $('#fragranceFamilyFilter').val('@ViewBag.CurrentFamily');
+
             // Search functionality
-            $('#searchButton').click(searchProducts);
-            $('#searchInput').keypress(function(e) {
-                if (e.which === 13) searchProducts();
+            $('#searchButton').click(function() {
+                const searchTerm = $('#searchInput').val().trim();
+                const familyFilter = $('#fragranceFamilyFilter').val();
+                window.location.href = `?search=${encodeURIComponent(searchTerm)}&family=${encodeURIComponent(familyFilter)}`;
             });
 
-            function searchProducts() {
+            // Filter change handler
+            $('#fragranceFamilyFilter').change(function() {
+                const familyFilter = $(this).val();
                 const searchTerm = $('#searchInput').val().trim();
-                if (searchTerm) {
-                    window.location.href = `?search=${encodeURIComponent(searchTerm)}`;
-                } else {
-                    window.location.href = '@Url.Action("Index")';
-                }
-            }
+                window.location.href = `?family=${encodeURIComponent(familyFilter)}&search=${encodeURIComponent(searchTerm)}`;
+            });
 
             // Add to cart functionality
             $('.add-to-cart').click(function() {
@@ -181,74 +214,57 @@
                 const productName = $(this).data('product-name');
                 const productPrice = $(this).data('product-price');
 
-                // Get existing cart or initialize empty array
-                let cart = JSON.parse(localStorage.getItem('perfumeCart')) || [];
+                $.post('/Cart/AddToCart', { productId: productId, quantity: 1 })
+                    .done(function(response) {
+                        updateCartCount(response.cartItemCount);
 
-                // Check if product already in cart
-                const existingItem = cart.find(item => item.id === productId);
-
-                if (existingItem) {
-                    existingItem.quantity += 1;
-                } else {
-                    cart.push({
-                        id: productId,
-                        name: productName,
-                        price: productPrice,
-                        quantity: 1,
-                        image: $(this).closest('.card').find('img').attr('src')
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Added to Cart!',
+                            html: `<strong>${productName}</strong><br>Price: ${productPrice.toFixed(2)}`,
+                            toast: true,
+                            position: 'bottom-end',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    })
+                    .fail(function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Login Required',
+                            text: 'Please sign in to add items to your cart',
+                            confirmButtonText: 'Login',
+                            showCancelButton: true
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '/Identity/Account/Login?returnUrl=' + window.location.pathname;
+                            }
+                        });
                     });
-                }
-
-                // Save updated cart
-                localStorage.setItem('perfumeCart', JSON.stringify(cart));
-
-                // Update UI
-                updateCartCount();
-                showToast(`${productName} added to cart!`, 'success');
             });
 
-            function updateCartCount() {
-                const cart = JSON.parse(localStorage.getItem('perfumeCart')) || [];
-                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-                $('.cart-counter').text(totalItems).addClass('animate__animated animate__bounceIn');
-                setTimeout(() => $('.cart-counter').removeClass('animate__animated animate__bounceIn'), 1000);
+            // Update cart count in navbar
+            function updateCartCount(count) {
+                $('.cart-count').text(count).addClass('animate__animated animate__bounceIn');
+                setTimeout(() => {
+                    $('.cart-count').removeClass('animate__animated animate__bounceIn');
+                }, 1000);
             }
-
-            function showToast(message, type) {
-                // Using Toastr if available
-                if (typeof toastr !== 'undefined') {
-                    toastr[type](message, '', {
-                        positionClass: "toast-bottom-right",
-                        timeOut: 2000,
-                        closeButton: true
-                    });
-                } else {
-                    // Fallback to alert
-                    alert(`${type.toUpperCase()}: ${message}`);
-                }
-            }
-
-            // Initialize cart count on page load
-            updateCartCount();
         });
     </script>
 
     <style>
-        /* Card Styles */
         .perfume-card {
             transition: all 0.3s ease;
             border: 1px solid #e9ecef;
             border-radius: 10px;
-            overflow: hidden;
         }
 
             .perfume-card:hover {
                 transform: translateY(-5px);
                 box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-                border-color: #dee2e6;
             }
 
-        /* Image Container */
         .product-image-container {
             height: 250px;
             display: flex;
@@ -260,7 +276,7 @@
 
         .card-img-top {
             max-height: 100%;
-            width: auto;
+            max-width: 100%;
             object-fit: contain;
             transition: transform 0.5s ease;
         }
@@ -269,45 +285,6 @@
             transform: scale(1.05);
         }
 
-        /* Typography */
-        .card-title {
-            color: #212529;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .text-primary {
-            color: #0d6efd !important;
-        }
-
-        /* Buttons */
-        .btn-outline-primary {
-            color: #0d6efd;
-            border-color: #0d6efd;
-        }
-
-            .btn-outline-primary:hover {
-                background-color: #0d6efd;
-                color: white;
-            }
-
-        .btn-outline-success {
-            color: #198754;
-            border-color: #198754;
-        }
-
-            .btn-outline-success:hover {
-                background-color: #198754;
-                color: white;
-            }
-
-        /* Badges */
-        .badge {
-            font-weight: 500;
-            padding: 0.35em 0.65em;
-        }
-
-        /* Pagination */
         .page-item.active .page-link {
             background-color: #0d6efd;
             border-color: #0d6efd;
@@ -315,6 +292,14 @@
 
         .page-link {
             color: #0d6efd;
+        }
+
+        .badge.bg-danger {
+            background-color: #dc3545 !important;
+        }
+
+        .badge.bg-warning {
+            background-color: #ffc107 !important;
         }
     </style>
 }

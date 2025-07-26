@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models;
 using PerfumeAPI.Models.Entities;
-using Microsoft.Extensions.Logging;
+using PerfumeAPI.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace PerfumeAPI.Controllers
 {
@@ -15,11 +15,16 @@ namespace PerfumeAPI.Controllers
     {
         private readonly AppDbContext _context;
         private readonly ILogger<HomeController> _logger;
+        private readonly IImageService _imageService;
 
-        public HomeController(AppDbContext context, ILogger<HomeController> logger)
+        public HomeController(
+            AppDbContext context,
+            ILogger<HomeController> logger,
+            IImageService imageService)
         {
             _context = context;
             _logger = logger;
+            _imageService = imageService;
         }
 
         public async Task<IActionResult> Index()
@@ -34,6 +39,14 @@ namespace PerfumeAPI.Controllers
 
                 // Get top rated products with fallback
                 var topRatedProducts = await GetTopRatedProductsWithFallback();
+
+                // Ensure all products have valid image URLs
+                foreach (var product in featuredProducts.Concat(topRatedProducts))
+                {
+                    product.ImageUrl = _imageService.GetImageUrl(
+                        product.ImageUrl ?? string.Empty,
+                        "default-perfume.jpg");
+                }
 
                 // Log results for debugging
                 _logger.LogInformation($"Displaying {featuredProducts.Count} featured products");
@@ -104,20 +117,63 @@ namespace PerfumeAPI.Controllers
         [Route("/debug/products")]
         public async Task<IActionResult> DebugProducts()
         {
-            var products = await _context.Products
-                .Include(p => p.Comments)
-                .ToListAsync();
+            try
+            {
+                var products = await _context.Products
+                    .Include(p => p.Comments)
+                    .ToListAsync();
 
-            return Json(products.Select(p => new {
-                p.Id,
-                p.Name,
-                p.IsFeatured,
-                p.ImageUrl,
-                p.Price,
-                HasImage = !string.IsNullOrEmpty(p.ImageUrl),
-                ReviewCount = p.Comments.Count,
-                AverageRating = p.Comments.Any() ? p.Comments.Average(c => c.Rating) : 0
-            }));
+                var result = products.Select(p => new {
+                    p.Id,
+                    p.Name,
+                    p.IsFeatured,
+                    OriginalImageUrl = p.ImageUrl,
+                    ResolvedImageUrl = _imageService.GetImageUrl(p.ImageUrl ?? string.Empty, "default-perfume.jpg"),
+                    HasImage = !string.IsNullOrEmpty(p.ImageUrl),
+                    ReviewCount = p.Comments.Count,
+                    AverageRating = p.Comments.Any() ? p.Comments.Average(c => c.Rating) : 0
+                });
+
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error in DebugProducts endpoint");
+                return StatusCode(500, new { Error = "Failed to retrieve product data" });
+            }
+        }
+
+        // New endpoint to get image URLs safely
+        [Route("/api/products/{id}/image")]
+        public async Task<IActionResult> GetProductImage(int id)
+        {
+            try
+            {
+                var product = await _context.Products
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(p => p.Id == id);
+
+                if (product == null)
+                {
+                    return NotFound(new { Message = "Product not found" });
+                }
+
+                var imageUrl = _imageService.GetImageUrl(
+                    product.ImageUrl ?? string.Empty, // FIX: Ensure non-null argument
+                    "default-perfume.jpg");
+
+                return Ok(new { ImageUrl = imageUrl });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error getting product image for ID: {ProductId}", id);
+                return StatusCode(500, new { Error = "Failed to retrieve image" });
+            }
+        }
+
+        public IActionResult Story()
+        {
+            return View();
         }
     }
 }

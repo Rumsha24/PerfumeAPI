@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models.Entities;
+using PerfumeAPI.Services;
 using System.Security.Claims;
 
 namespace PerfumeAPI.Controllers
@@ -12,13 +13,16 @@ namespace PerfumeAPI.Controllers
     {
         private readonly AppDbContext _context;
         private readonly ILogger<ProductController> _logger;
+        private readonly IImageService _imageService;
 
         public ProductController(
             AppDbContext context,
-            ILogger<ProductController> logger)
+            ILogger<ProductController> logger,
+            IImageService imageService)
         {
             _context = context;
             _logger = logger;
+            _imageService = imageService;
         }
 
         // GET: products/
@@ -28,37 +32,35 @@ namespace PerfumeAPI.Controllers
         [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Index(
             string sortOrder = "name",
-            string fragranceFamily = "",
-            string searchQuery = "",
+            string family = "",
+            string search = "",
             int page = 1,
             int pageSize = 12)
         {
             try
             {
-                // Store view data for sorting/filtering
-                ViewData["CurrentSort"] = sortOrder;
-                ViewData["CurrentFamily"] = fragranceFamily;
-                ViewData["CurrentSearch"] = searchQuery;
-                ViewData["CurrentPage"] = page;
-                ViewData["PageSize"] = pageSize;
+                ViewBag.SortOrder = sortOrder;
+                ViewBag.CurrentFamily = family;
+                ViewBag.CurrentSearch = search;
+                ViewBag.CurrentPage = page;
+                ViewBag.PageSize = pageSize;
 
-                // Base query with includes
                 var query = _context.Products
                     .Include(p => p.Comments)
                     .AsNoTracking()
                     .AsQueryable();
 
                 // Apply filters
-                if (!string.IsNullOrEmpty(fragranceFamily))
+                if (!string.IsNullOrEmpty(family))
                 {
-                    query = query.Where(p => p.FragranceFamily == fragranceFamily);
+                    query = query.Where(p => p.FragranceFamily == family);
                 }
 
-                if (!string.IsNullOrEmpty(searchQuery))
+                if (!string.IsNullOrEmpty(search))
                 {
                     query = query.Where(p =>
-                        p.Name.Contains(searchQuery) ||
-                        p.Description.Contains(searchQuery));
+                        p.Name.Contains(search) ||
+                        p.Description.Contains(search));
                 }
 
                 // Apply sorting
@@ -72,22 +74,18 @@ namespace PerfumeAPI.Controllers
                     _ => query.OrderBy(p => p.Name) // Default
                 };
 
-                // Get total count for pagination
+                // Pagination
                 var totalCount = await query.CountAsync();
                 var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
-
-                // Validate page number
                 page = Math.Max(1, Math.Min(page, totalPages));
-                ViewData["TotalPages"] = totalPages;
+                ViewBag.TotalPages = totalPages;
 
-                // Execute query
                 var products = await query
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
                     .ToListAsync();
 
-                // Get available fragrance families for filter dropdown
-                ViewData["AvailableFamilies"] = await _context.Products
+                ViewBag.AvailableFamilies = await _context.Products
                     .Where(p => !string.IsNullOrEmpty(p.FragranceFamily))
                     .Select(p => p.FragranceFamily!)
                     .Distinct()
@@ -122,7 +120,6 @@ namespace PerfumeAPI.Controllers
                     return NotFound();
                 }
 
-                // Calculate average rating for display
                 ViewBag.AverageRating = product.Comments.Any() ?
                     product.Comments.Average(c => c.Rating) : 0;
 
@@ -140,14 +137,16 @@ namespace PerfumeAPI.Controllers
         [HttpGet("create")]
         public IActionResult Create()
         {
-            return View();
+            return View(new Product());
         }
 
         // POST: products/create
         [Authorize(Roles = "Admin")]
         [HttpPost("create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([FromForm] Product product, IFormFile imageFile)
+        public async Task<IActionResult> Create(
+            [Bind("Name,Description,Price,ShippingCost,FragranceType,FragranceFamily,Size,StockQuantity,IsFeatured")] Product product,
+            IFormFile imageFile)
         {
             try
             {
@@ -156,21 +155,11 @@ namespace PerfumeAPI.Controllers
                     // Handle image upload
                     if (imageFile != null && imageFile.Length > 0)
                     {
-                        var uploadsFolder = Path.Combine("wwwroot", "images", "products");
-                        if (!Directory.Exists(uploadsFolder))
-                        {
-                            Directory.CreateDirectory(uploadsFolder);
-                        }
-
-                        var uniqueFileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
-                        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await imageFile.CopyToAsync(fileStream);
-                        }
-
-                        product.ImageUrl = $"/images/products/{uniqueFileName}";
+                        product.ImageUrl = await _imageService.SaveImage(imageFile);
+                    }
+                    else
+                    {
+                        product.ImageUrl = "/images/default-perfume.jpg";
                     }
 
                     product.CreatedAt = DateTime.UtcNow;
@@ -179,6 +168,7 @@ namespace PerfumeAPI.Controllers
                     _context.Add(product);
                     await _context.SaveChangesAsync();
 
+                    TempData["SuccessMessage"] = $"{product.Name} created successfully!";
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -208,7 +198,10 @@ namespace PerfumeAPI.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost("edit/{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [FromForm] Product product, IFormFile imageFile)
+        public async Task<IActionResult> Edit(
+            int id,
+            [Bind("Id,Name,Description,Price,ShippingCost,FragranceType,FragranceFamily,Size,StockQuantity,IsFeatured,ImageUrl")] Product product,
+            IFormFile imageFile)
         {
             if (id != product.Id)
             {
@@ -217,52 +210,44 @@ namespace PerfumeAPI.Controllers
 
             try
             {
-                var existingProduct = await _context.Products.FindAsync(id);
-                if (existingProduct == null)
+                if (ModelState.IsValid)
                 {
-                    return NotFound();
-                }
-
-                // Handle image update
-                if (imageFile != null && imageFile.Length > 0)
-                {
-                    var uploadsFolder = Path.Combine("wwwroot", "images", "products");
-                    var uniqueFileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
-                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    var existingProduct = await _context.Products.FindAsync(id);
+                    if (existingProduct == null)
                     {
-                        await imageFile.CopyToAsync(fileStream);
+                        return NotFound();
                     }
 
-                    // Delete old image if it exists
-                    if (!string.IsNullOrEmpty(existingProduct.ImageUrl))
+                    // Handle image update
+                    if (imageFile != null && imageFile.Length > 0)
                     {
-                        var oldImagePath = Path.Combine("wwwroot", existingProduct.ImageUrl.TrimStart('/'));
-                        if (System.IO.File.Exists(oldImagePath))
+                        // Delete old image if it exists and isn't the default
+                        if (!string.IsNullOrEmpty(existingProduct.ImageUrl) &&
+                            !existingProduct.ImageUrl.Contains("default-perfume"))
                         {
-                            System.IO.File.Delete(oldImagePath);
+                            await _imageService.DeleteImage(existingProduct.ImageUrl);
                         }
+
+                        existingProduct.ImageUrl = await _imageService.SaveImage(imageFile);
                     }
 
-                    existingProduct.ImageUrl = $"/images/products/{uniqueFileName}";
+                    // Update other properties
+                    existingProduct.Name = product.Name;
+                    existingProduct.Description = product.Description;
+                    existingProduct.Price = product.Price;
+                    existingProduct.ShippingCost = product.ShippingCost;
+                    existingProduct.FragranceType = product.FragranceType;
+                    existingProduct.FragranceFamily = product.FragranceFamily;
+                    existingProduct.Size = product.Size;
+                    existingProduct.StockQuantity = product.StockQuantity;
+                    existingProduct.IsFeatured = product.IsFeatured;
+                    existingProduct.IsInStock = product.StockQuantity > 0;
+                    existingProduct.UpdatedAt = DateTime.UtcNow;
+
+                    await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = $"{product.Name} updated successfully!";
+                    return RedirectToAction(nameof(Index));
                 }
-
-                // Update other properties
-                existingProduct.Name = product.Name;
-                existingProduct.Description = product.Description;
-                existingProduct.Price = product.Price;
-                existingProduct.ShippingCost = product.ShippingCost;
-                existingProduct.FragranceType = product.FragranceType;
-                existingProduct.FragranceFamily = product.FragranceFamily;
-                existingProduct.Size = product.Size;
-                existingProduct.StockQuantity = product.StockQuantity;
-                existingProduct.IsFeatured = product.IsFeatured;
-                existingProduct.IsInStock = product.StockQuantity > 0;
-                existingProduct.UpdatedAt = DateTime.UtcNow;
-
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
@@ -292,28 +277,36 @@ namespace PerfumeAPI.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost("delete/{id}")]
         [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            try
             {
-                return NotFound();
-            }
-
-            // Delete associated image if it exists
-            if (!string.IsNullOrEmpty(product.ImageUrl))
-            {
-                var imagePath = Path.Combine("wwwroot", product.ImageUrl.TrimStart('/'));
-                if (System.IO.File.Exists(imagePath))
+                var product = await _context.Products.FindAsync(id);
+                if (product == null)
                 {
-                    System.IO.File.Delete(imagePath);
+                    return NotFound();
                 }
+
+                // Delete associated image if it exists and isn't the default
+                if (!string.IsNullOrEmpty(product.ImageUrl) &&
+                    !product.ImageUrl.Contains("default-perfume"))
+                {
+                    await _imageService.DeleteImage(product.ImageUrl);
+                }
+
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = $"{product.Name} deleted successfully!";
+                return RedirectToAction(nameof(Index));
             }
-
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting product ID: {ProductId}", id);
+                TempData["ErrorMessage"] = "An error occurred while deleting the product";
+                return RedirectToAction(nameof(Delete), new { id });
+            }
         }
 
         // POST: products/comment
