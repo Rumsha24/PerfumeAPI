@@ -115,7 +115,7 @@ namespace PerfumeAPI.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddCommentAsync(CommentCreateDto commentDto, string userId)
+        public async Task AddCommentAsync(CommentCreateDTO commentDto, string userId)
         {
             if (commentDto == null)
             {

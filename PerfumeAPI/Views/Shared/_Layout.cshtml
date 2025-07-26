@@ -32,9 +32,12 @@
 
     <style>
         :root {
-            --perfume-gold: #d4af37;
+            --perfume-primary: #B486AB;
+            --perfume-secondary: #82667F;
+            --perfume-accent: #DD9AC2;
+            --perfume-light: #F8E8EA;
             --perfume-dark: #1a1a1a;
-            --perfume-light: #f8f5f0;
+            --perfume-pale: #FDF8F9;
         }
 
         body {
@@ -50,14 +53,19 @@
 
         .navbar {
             background-color: var(--perfume-dark) !important;
-            border-bottom: 1px solid var(--perfume-gold);
+            border-bottom: 1px solid var(--perfume-primary);
         }
 
         .nav-link {
             letter-spacing: 1px;
             text-transform: uppercase;
             font-size: 0.9rem;
+            color: var(--perfume-light) !important;
         }
+
+            .nav-link:hover {
+                color: var(--perfume-primary) !important;
+            }
 
         .perfume-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -74,7 +82,7 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            background: var(--perfume-gold);
+            background: var(--perfume-primary);
             color: var(--perfume-dark);
             padding: 5px 15px;
             font-size: 0.8rem;
@@ -84,23 +92,28 @@
         footer {
             background-color: var(--perfume-dark);
             color: var(--perfume-light);
-            border-top: 1px solid var(--perfume-gold);
+            border-top: 1px solid var(--perfume-primary);
         }
 
-        .bg-gold {
-            background-color: var(--perfume-gold) !important;
+        .bg-primary {
+            background-color: var(--perfume-primary) !important;
             color: var(--perfume-dark);
-            font-size: 0.7rem;
-            padding: 0.25em 0.6em;
-            min-width: 1.5em;
+        }
+
+        .btn-outline-light:hover {
+            color: var(--perfume-dark) !important;
+            background-color: var(--perfume-primary) !important;
+            border-color: var(--perfume-primary) !important;
         }
 
         .nav-link .fa-shopping-bag {
             transition: transform 0.3s ease;
+            color: var(--perfume-light);
         }
 
         .nav-link:hover .fa-shopping-bag {
             transform: scale(1.1);
+            color: var(--perfume-primary);
         }
 
         .cart-dropdown {
@@ -127,18 +140,73 @@
         }
 
         .cart-summary {
-            background-color: var(--perfume-light);
+            background-color: var(--perfume-pale);
             padding: 1rem;
             border-top: 1px solid rgba(0,0,0,0.1);
         }
 
         .cart-counter {
             transition: all 0.3s ease;
+            background-color: var(--perfume-primary) !important;
         }
 
         .cart-counter-update {
             transform: scale(1.3);
         }
+
+        /* Keyframes for animations */
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Dropdown menu styling */
+        .dropdown-menu {
+            background-color: var(--perfume-pale);
+            border: 1px solid var(--perfume-primary);
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--perfume-primary);
+            color: white;
+        }
+
+        /* Footer links */
+        footer a {
+            color: var(--perfume-light);
+            transition: color 0.3s;
+        }
+
+            footer a:hover {
+                color: var(--perfume-primary);
+                text-decoration: none;
+            }
+
+        /* Social media icons */
+        .social-links a {
+            color: var(--perfume-light);
+            transition: color 0.3s;
+        }
+
+            .social-links a:hover {
+                color: var(--perfume-primary);
+            }
+
+        /* Back to top button */
+        #back-to-top {
+            background-color: var(--perfume-primary);
+            color: white;
+            border: none;
+        }
+
+            #back-to-top:hover {
+                background-color: var(--perfume-secondary);
+            }
     </style>
 
     @await RenderSectionAsync("Styles", required: false)
@@ -176,7 +244,7 @@
                             <a class="nav-link" asp-controller="Home" asp-action="Story">Our Story</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Comment" asp-action="Index">Comments</a>
+                            <a class="nav-link" asp-controller="Comment" asp-action="CommentForm">Comments</a>
                         </li>
                         <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
                             <a class="btn btn-outline-light" asp-controller="Account" asp-action="Index">
@@ -187,7 +255,7 @@
                             <a class="nav-link position-relative" asp-controller="Cart" asp-action="Index" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
                                 <span class="sr-only">Shopping Cart</span>
-                                <span class="cart-counter position-absolute top-0 start-100 translate-middle badge rounded-pill bg-gold d-none">
+                                <span class="cart-counter position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary d-none">
                                     0
                                 </span>
                             </a>

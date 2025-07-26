@@ -1,9 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace PerfumeAPI.Models.DTOs
 {
     public class ProductUpdateDto
     {
+        public int Id { get; set; }  // Add this line
+
         [Required]
         [StringLength(100, ErrorMessage = "Name cannot exceed 100 characters")]
         public string Name { get; set; } = string.Empty;

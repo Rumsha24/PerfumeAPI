@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
@@ -12,113 +13,154 @@ namespace PerfumeAPI.Controllers
     public class CommentController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<User> _userManager;
         private readonly IWebHostEnvironment _env;
+        private readonly ILogger<CommentController> _logger;
 
-        public CommentController(AppDbContext context, IWebHostEnvironment env)
+        public CommentController(
+            AppDbContext context,
+            UserManager<User> userManager,
+            IWebHostEnvironment env,
+            ILogger<CommentController> logger)
         {
             _context = context;
+            _userManager = userManager;
             _env = env;
+            _logger = logger;
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Index(int? productId)
+        {
+            try
+            {
+                var query = _context.Comments
+                    .Include(c => c.User)
+                    .Include(c => c.Images)
+                    .Include(c => c.Product)
+                    .OrderByDescending(c => c.CreatedAt);
+
+                if (productId.HasValue)
+                {
+                    query = query.Where(c => c.ProductId == productId.Value)
+                                .OrderByDescending(c => c.CreatedAt);
+                }
+
+                var comments = await query.AsNoTracking().ToListAsync();
+                return View(comments);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error loading comments");
+                return StatusCode(500, "An error occurred while loading comments");
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CommentCreateDto dto)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([FromForm] CommentCreateDTO commentDto)
         {
-            if (!ModelState.IsValid || dto == null)
+            if (!ModelState.IsValid)
             {
-                return RedirectToAction("Details", "Product", new { id = dto?.ProductId });
+                return BadRequest(ModelState);
             }
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userId))
+            try
             {
-                return Unauthorized();
-            }
-
-            var user = await _context.Users.FindAsync(userId);
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            var comment = new Comment
-            {
-                ProductId = dto.ProductId,
-                UserId = userId,
-                Text = dto.Text,
-                Rating = dto.Rating,
-                CreatedAt = DateTime.UtcNow
-            };
-
-            _context.Comments.Add(comment);
-            await _context.SaveChangesAsync();
-
-            if (dto.Images != null && dto.Images.Any())
-            {
-                foreach (var image in dto.Images.Take(3))
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId))
                 {
-                    if (image.Length > 0)
+                    return Unauthorized();
+                }
+
+                var comment = new Comment
+                {
+                    Text = commentDto.Text,
+                    Rating = commentDto.Rating,
+                    ProductId = commentDto.ProductId,
+                    UserId = userId,
+                    CreatedAt = DateTime.UtcNow
+                };
+
+                // Handle image uploads
+                if (commentDto.Images != null && commentDto.Images.Count > 0)
+                {
+                    var uploadsPath = Path.Combine(_env.WebRootPath, "uploads", "comments");
+                    Directory.CreateDirectory(uploadsPath);
+
+                    foreach (var image in commentDto.Images.Take(3))
                     {
-                        var uploadsFolder = Path.Combine(_env.WebRootPath, "images", "comments");
-                        if (!Directory.Exists(uploadsFolder))
+                        if (image.Length > 0 && image.Length <= 5 * 1024 * 1024) // 5MB max
                         {
-                            Directory.CreateDirectory(uploadsFolder);
+                            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
+                            var filePath = Path.Combine(uploadsPath, fileName);
+
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                await image.CopyToAsync(stream);
+                            }
+
+                            comment.Images.Add(new CommentImage
+                            {
+                                ImageUrl = $"/uploads/comments/{fileName}"
+                            });
                         }
-
-                        var uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
-                        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await image.CopyToAsync(fileStream);
-                        }
-
-                        var commentImage = new CommentImage
-                        {
-                            CommentId = comment.Id,
-                            ImageUrl = $"/images/comments/{uniqueFileName}"
-                        };
-
-                        _context.CommentImages.Add(commentImage);
                     }
                 }
-                await _context.SaveChangesAsync();
-            }
 
-            return RedirectToAction("Details", "Product", new { id = dto.ProductId });
+                _context.Comments.Add(comment);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index), new { productId = commentDto.ProductId });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error creating comment");
+                return StatusCode(500, "An error occurred while creating your comment");
+            }
         }
 
         [HttpPost]
-        [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userId))
+            try
             {
-                return Unauthorized();
-            }
-
-            var comment = await _context.Comments
-                .Include(c => c.Images)
-                .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
-
-            if (comment == null)
-            {
-                return NotFound();
-            }
-
-            foreach (var image in comment.Images)
-            {
-                var imagePath = Path.Combine(_env.WebRootPath, image.ImageUrl.TrimStart('/'));
-                if (System.IO.File.Exists(imagePath))
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(userId))
                 {
-                    System.IO.File.Delete(imagePath);
+                    return Unauthorized();
                 }
+
+                var comment = await _context.Comments
+                    .Include(c => c.Images)
+                    .FirstOrDefaultAsync(c => c.Id == id);
+
+                if (comment == null || comment.UserId != userId)
+                {
+                    return NotFound();
+                }
+
+                // Delete associated images
+                foreach (var image in comment.Images)
+                {
+                    var imagePath = Path.Combine(_env.WebRootPath, image.ImageUrl.TrimStart('/'));
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
+                }
+
+                _context.Comments.Remove(comment);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index), new { productId = comment.ProductId });
             }
-
-            _context.Comments.Remove(comment);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction("Details", "Product", new { id = comment.ProductId });
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting comment");
+                return StatusCode(500, "An error occurred while deleting your comment");
+            }
         }
     }
 }

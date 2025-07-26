@@ -18,20 +18,19 @@ namespace PerfumeAPI.Models.DTOs
         public List<string> ImageUrls { get; set; } = new List<string>();
     }
 
-    public class CommentCreateDto
+    public class CommentCreateDTO
     {
-        [Required]
-        public int ProductId { get; set; }
-
-        [Required]
+        [Required(ErrorMessage = "Rating is required")]
         [Range(1, 5, ErrorMessage = "Rating must be between 1 and 5")]
         public int Rating { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Review text is required")]
         [StringLength(2000, ErrorMessage = "Comment cannot exceed 2000 characters")]
         public string Text { get; set; } = string.Empty;
 
-        [MaxLength(3, ErrorMessage = "Maximum 3 images allowed")]
-        public List<IFormFile>? Images { get; set; }
+        [Required(ErrorMessage = "Product ID is required")]
+        public int ProductId { get; set; }
+
+        public List<IFormFile> Images { get; set; } = new List<IFormFile>();
     }
 }

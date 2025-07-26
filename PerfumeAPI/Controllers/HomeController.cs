@@ -3,7 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models;
 using PerfumeAPI.Models.Entities;
-using System.Diagnostics;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PerfumeAPI.Controllers
 {
@@ -22,45 +26,98 @@ namespace PerfumeAPI.Controllers
         {
             try
             {
-                var featuredProducts = await _context.Products
-                    .Where(p => p.IsFeatured)
-                    .OrderByDescending(p => p.CreatedAt)
-                    .Take(4)
-                    .ToListAsync();
+                // Debug logging to verify data exists
+                _logger.LogInformation($"Total products in database: {await _context.Products.CountAsync()}");
 
-                ViewBag.FragranceFamilies = await _context.Products
-                    .Where(p => p.FragranceFamily != null)
-                    .Select(p => p.FragranceFamily)
-                    .Distinct()
-                    .ToListAsync();
+                // Get featured products with fallback
+                var featuredProducts = await GetFeaturedProductsWithFallback();
 
-                return View(featuredProducts);
+                // Get top rated products with fallback
+                var topRatedProducts = await GetTopRatedProductsWithFallback();
+
+                // Log results for debugging
+                _logger.LogInformation($"Displaying {featuredProducts.Count} featured products");
+                _logger.LogInformation($"Displaying {topRatedProducts.Count} top rated products");
+
+                return View(new HomeViewModel
+                {
+                    FeaturedPerfumes = featuredProducts,
+                    CustomerFavorites = topRatedProducts
+                });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error loading featured products");
-                return View(new List<Product>());
+                _logger.LogError(ex, "Error loading homepage data");
+
+                // Return empty lists to prevent null reference exceptions
+                return View(new HomeViewModel
+                {
+                    FeaturedPerfumes = new List<Product>(),
+                    CustomerFavorites = new List<Product>()
+                });
             }
         }
 
-        public IActionResult Story()
+        private async Task<List<Product>> GetFeaturedProductsWithFallback()
         {
-            ViewBag.Awards = new List<string>
+            var products = await _context.Products
+                .Where(p => p.IsFeatured)
+                .OrderByDescending(p => p.CreatedAt)
+                .Take(4)
+                .ToListAsync();
+
+            if (!products.Any())
             {
-                "FiFi Awards 2023 - Best New Fragrance",
-                "Luxe Beauty Prize 2022",
-                "Artisan Perfumer of the Year 2011"
-            };
-            return View();
+                _logger.LogInformation("No featured products found, using newest products as fallback");
+                products = await _context.Products
+                    .OrderByDescending(p => p.CreatedAt)
+                    .Take(4)
+                    .ToListAsync();
+            }
+
+            return products;
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        private async Task<List<Product>> GetTopRatedProductsWithFallback()
         {
-            return View(new ErrorViewModel
+            var products = await _context.Products
+                .Include(p => p.Comments)
+                .Where(p => p.Comments.Any())
+                .OrderByDescending(p => p.Comments.Average(c => c.Rating))
+                .ThenByDescending(p => p.Comments.Count)
+                .Take(4)
+                .ToListAsync();
+
+            if (!products.Any())
             {
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-            });
+                _logger.LogInformation("No rated products found, using random products as fallback");
+                products = await _context.Products
+                    .OrderBy(p => Guid.NewGuid()) // Random order
+                    .Take(4)
+                    .ToListAsync();
+            }
+
+            return products;
+        }
+
+        // Debug endpoint to check raw product data
+        [Route("/debug/products")]
+        public async Task<IActionResult> DebugProducts()
+        {
+            var products = await _context.Products
+                .Include(p => p.Comments)
+                .ToListAsync();
+
+            return Json(products.Select(p => new {
+                p.Id,
+                p.Name,
+                p.IsFeatured,
+                p.ImageUrl,
+                p.Price,
+                HasImage = !string.IsNullOrEmpty(p.ImageUrl),
+                ReviewCount = p.Comments.Count,
+                AverageRating = p.Comments.Any() ? p.Comments.Average(c => c.Rating) : 0
+            }));
         }
     }
 }
