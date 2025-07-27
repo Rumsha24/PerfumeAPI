@@ -11,8 +11,8 @@
         <div class="carousel-item active">
             <div class="hero-image" style="background-image: url('@Url.Content("~/images/products/1.jpg")')">
                 <div class="hero-content">
-                    <h1 class="display-3 fw-bold">ELEVATE YOUR SENSES</h1>
-                    <p class="lead">Discover our exclusive collection of artisanal fragrances</p>
+                    <h1 class="display-3 fw-bold carousel-highlight">ELEVATE YOUR SENSES</h1>
+                    <p class="lead carousel-highlight">Discover our exclusive collection of artisanal fragrances</p>
                     <a asp-controller="Product" asp-action="Index" class="btn btn-light btn-lg px-5">Explore Collection</a>
                 </div>
             </div>
@@ -20,8 +20,8 @@
         <div class="carousel-item">
             <div class="hero-image" style="background-image: url('@Url.Content("~/images/products/15.jpg")')">
                 <div class="hero-content">
-                    <h1 class="display-3 fw-bold">TIMELESS ELEGANCE</h1>
-                    <p class="lead">Crafted with rare ingredients from around the world</p>
+                    <h1 class="display-3 fw-bold carousel-highlight">TIMELESS ELEGANCE</h1>
+                    <p class="lead carousel-highlight">Crafted with rare ingredients from around the world</p>
                     <a href="#" class="btn btn-light btn-lg px-5">New Arrivals</a>
                 </div>
             </div>
@@ -63,7 +63,7 @@
         Our carefully curated collection features the world's most exquisite perfumes and colognes, from iconic designer brands
         to exclusive niche creations.
     </p>
-</section>
+</section> <br /> <br />
 
 <!-- Featured Collections -->
 <section class="container my-6">
@@ -101,6 +101,7 @@
         </div>
     </div>
 </section>
+</br> </br> </br>
 
 <!-- Top Brands -->
 <section class="container my-6">
@@ -110,11 +111,10 @@
                 new { Name = "Jean Paul Gaultier", Image = "7.png", Url = "https://www.jeanpaulgaultier.com" },
                 new { Name = "Versace", Image = "9.jpg", Url = "https://www.versace.com" },
                 new { Name = "Giorgio Armani", Image = "14.jpeg", Url = "https://www.armani.com" },
-                new { Name = "D&G", Image = "18.jpg", Url = "https://www.dolcegabbana.com" },
-                new { Name = "Calvin Klein", Image = "21.png", Url = "https://www.calvinklein.com" }
+                new { Name = "D&G", Image = "18.jpg", Url = "https://www.dolcegabbana.com" }
                 })
         {
-            <div class="col-6 col-md-4 col-lg-2">
+            <div class="col-6 col-md-3">
                 <div class="brand-card">
                     <a href="@brand.Url" target="_blank" rel="noopener noreferrer">
                         <img src="@Url.Content($"~/images/products/{brand.Image}")"
@@ -132,15 +132,15 @@
             View All Brands <i class="fas fa-arrow-right ms-2"></i>
         </a>
     </div>
-</section>
+</section> <br/> <br /> <br /> 
 
 <!-- Customer Favorites -->
 <section class="container my-6">
     <h2 class="text-center mb-5">Customer Favorites</h2>
     <div class="row g-4">
-        @foreach (var product in Model.CustomerFavorites.Take(4))
+        @foreach (var product in Model.CustomerFavorites.Take(3))
         {
-            <div class="col-md-6 col-lg-3">
+            <div class="col-md-6 col-lg-4">
                 <div class="product-card">
                     <div class="product-image-container">
                         <img src="@Url.Content(ImageService.GetImageUrl(product.ImageUrl ?? "default-perfume.jpg", "default-perfume.jpg"))"
@@ -190,13 +190,22 @@
 @section Styles {
     <style>
         :root {
-            --purple-dark: #82667F;
-            --purple: #B486AB;
-            --pink: #DD9AC2;
-            --pink-light: #EACBD2;
-            --pink-lighter: #F3DDE0;
-            --pink-lightest: #F8E8EA;
-            --white: #FFFCFD;
+            --bg-lightest: #EBE0FF;
+            --bg-light: #DAC7FF;
+            --bg-soft: #C7ADFF;
+            --bg-mid: #AC8BEE;
+            --primary: #916DD5;
+            --primary-dark: #7151A9;
+            --accent: #AC8BEE;
+            --deep: #573D7F;
+            --darker: #46325D;
+            --near-black: #3F3649;
+            --white: #fff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-lightest) 60%, var(--bg-soft) 100%);
+            color: var(--near-black);
         }
 
         /* Hero Carousel */
@@ -204,24 +213,108 @@
             position: relative;
             overflow: hidden;
             margin-bottom: 4rem;
+            border-radius: 2rem;
+            box-shadow: 0 8px 32px rgba(113, 81, 169, 0.12);
+            background: var(--bg-lightest);
         }
 
         .hero-image {
-            height: 80vh;
+            height: 70vh;
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: white;
+            color: var(--white);
             padding: 2rem;
+            border-radius: 2rem;
+            box-shadow: 0 4px 16px rgba(113, 81, 169, 0.08);
         }
 
         .hero-content {
             max-width: 800px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            background: rgba(113, 81, 169, 0.5);
+            border-radius: 1.5rem;
+            padding: 2rem 3rem;
+            text-shadow: 0 2px 8px rgba(63,54,73,0.2);
         }
+
+            .hero-content h1 {
+                color: var(--bg-lightest);
+                font-size: 3rem;
+                font-weight: 700;
+                margin-bottom: 1rem;
+            }
+
+            .hero-content p {
+                color: var(--bg-mid);
+                font-size: 1.3rem;
+                margin-bottom: 2rem;
+            }
+
+        .btn-light {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            font-weight: 600;
+            border-radius: 2rem;
+            box-shadow: 0 2px 8px rgba(113, 81, 169, 0.12);
+            transition: background 0.3s;
+        }
+
+            .btn-light:hover {
+                background: var(--primary-dark);
+                color: var(--white);
+            }
+
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(113, 81, 169, 0.12);
+        }
+
+            .carousel-control.prev {
+                left: 24px;
+            }
+
+            .carousel-control.next {
+                right: 24px;
+            }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        .indicator {
+            width: 16px;
+            height: 16px;
+            background: var(--bg-mid);
+            border-radius: 50%;
+            opacity: 0.5;
+            cursor: pointer;
+            transition: background 0.3s, opacity 0.3s;
+        }
+
+            .indicator.active {
+                background: var(--primary);
+                opacity: 1;
+            }
 
         /* Badges */
         .badge {
@@ -230,75 +323,272 @@
             font-weight: 600;
             display: inline-flex;
             align-items: center;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 8px rgba(113, 81, 169, 0.08);
+        }
+
+        .bg-pink-light {
+            background: var(--bg-mid);
+            color: var(--deep);
+        }
+
+        .bg-pink-lighter {
+            background: var(--bg-soft);
+            color: var(--deep);
+        }
+
+        .bg-pink-lightest {
+            background: var(--bg-lightest);
+            color: var(--deep);
+        }
+
+        .border-pink {
+            border: 2px solid var(--primary);
         }
 
         /* Collection Cards */
         .collection-card {
-            background: white;
-            border-radius: 1rem;
+            background: var(--white);
+            border-radius: 1.5rem;
             padding: 2rem;
             height: 100%;
-            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.05);
-            border: 1px solid var(--pink-lighter);
-            transition: transform 0.3s ease;
+            box-shadow: 0 0.5rem 1rem rgba(113, 81, 169, 0.08);
+            border: 1px solid var(--bg-soft);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
             .collection-card:hover {
-                transform: translateY(-5px);
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 1rem 2rem rgba(113, 81, 169, 0.16);
+                border-color: var(--primary);
             }
 
-        /* Brand Cards */
-        .brand-card {
-            text-align: center;
-            padding: 1.5rem;
-            background: var(--pink-lightest);
-            border-radius: 0.5rem;
-            border: 1px solid var(--purple);
-        }
-
-            .brand-card img {
-                height: 80px;
-                object-fit: contain;
+            .collection-card h3 {
+                color: var(--primary-dark);
+                font-size: 1.3rem;
                 margin-bottom: 1rem;
             }
 
-        /* Product Cards */
+        .collection-list li {
+            margin-bottom: 0.75rem;
+            color: var(--deep);
+        }
+
+        /* Brand Cards - Larger Version */
+        .brand-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-lightest);
+            border-radius: 1.5rem;
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 16px rgba(113, 81, 169, 0.12);
+            transition: box-shadow 0.3s, transform 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .brand-card:hover {
+                box-shadow: 0 8px 24px rgba(113, 81, 169, 0.2);
+                transform: translateY(-6px) scale(1.03);
+            }
+
+            .brand-card img {
+                height: 120px;
+                width: auto;
+                max-width: 100%;
+                object-fit: contain;
+                margin-bottom: 1.5rem;
+                border-radius: 0.75rem;
+                padding: 1rem;
+                background: var(--white);
+                box-shadow: 0 4px 12px rgba(113, 81, 169, 0.1);
+            }
+
+        .brand-name {
+            color: var(--primary-dark);
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-top: auto;
+        }
+
+        .btn-view-all {
+            background: var(--primary-dark);
+            color: var(--white);
+            border-radius: 2rem;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            box-shadow: 0 2px 8px rgba(113, 81, 169, 0.12);
+            transition: background 0.3s;
+        }
+
+            .btn-view-all:hover {
+                background: var(--primary);
+                color: var(--white);
+            }
+
+        /* Product Cards - Larger Version */
         .product-card {
-            background: white;
-            border-radius: 0.5rem;
+            background: var(--white);
+            border-radius: 1.5rem;
             overflow: hidden;
-            box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            box-shadow: 0 0.5rem 1rem rgba(113, 81, 169, 0.12);
+            transition: box-shadow 0.3s, transform 0.3s;
+            border: 1px solid var(--bg-soft);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
             .product-card:hover {
-                box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
-                transform: translateY(-3px);
+                box-shadow: 0 0.75rem 1.5rem rgba(113, 81, 169, 0.2);
+                transform: translateY(-6px) scale(1.02);
+                border-color: var(--primary);
             }
 
         .product-image-container {
-            height: 200px;
+            height: 280px;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--pink-lightest);
+            background: var(--bg-lightest);
+            padding: 1.5rem;
         }
 
         .product-image {
             max-height: 100%;
             max-width: 100%;
             object-fit: contain;
+            border-radius: 0.75rem;
+            background: var(--bg-soft);
+        }
+
+        .product-badge.featured {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 1rem;
+            padding: 0.5rem 1.25rem;
+            border-radius: 1.5rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(113, 81, 169, 0.12);
+        }
+
+        .product-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-price {
+            color: var(--deep);
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+            .product-actions .btn {
+                flex: 1;
+                padding: 0.5rem;
+                border-radius: 1.5rem;
+                font-weight: 600;
+            }
+
+        .btn-dark {
+            background: var(--primary-dark);
+            color: var(--white);
+            border: none;
+        }
+
+            .btn-dark:hover {
+                background: var(--primary);
+                color: var(--white);
+            }
+
+        .btn-outline-dark {
+            border-color: var(--primary-dark);
+            color: var(--primary-dark);
+            background: var(--white);
+        }
+
+            .btn-outline-dark:hover {
+                background: var(--primary-dark);
+                color: var(--white);
+            }
+
+        /* Testimonial */
+        .testimonial {
+            font-style: italic;
+            text-align: center;
+            margin: 100px auto;
+            max-width: 900px;
+            padding: 60px;
+            background: var(--bg-lightest);
+            border-radius: 2rem;
+            box-shadow: 0 4px 16px rgba(113, 81, 169, 0.10);
+            color: var(--deep);
+        }
+
+            .testimonial blockquote {
+                font-size: 1.5rem;
+                line-height: 1.8;
+                margin-bottom: 24px;
+                color: var(--primary-dark);
+            }
+
+        .testimonial-author {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Highlighted text in carousel */
+        .carousel-highlight {
+            color: #EBE0FF;
+            text-shadow: 0 2px 8px #3F3649;
+            font-weight: 600;
         }
 
         /* Responsive Adjustments */
         @@media (max-width: 768px) {
             .hero-image {
-                height: 60vh;
+                height: 50vh;
             }
 
             .hero-content h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+
+            .testimonial {
+                padding: 30px;
+                margin: 40px auto;
+            }
+
+            .product-image-container {
+                height: 220px;
+            }
+
+            .brand-card img {
+                height: 90px;
             }
         }
     </style>
