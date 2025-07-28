@@ -1,43 +1,45 @@
-﻿@using PerfumeAPI.Models.Entities
+﻿@model PerfumeAPI.Models.Entities.Cart
 
-@model IEnumerable<Product>
-
-@{
-    ViewData["Title"] = "Home";
+<h2>Your Cart</h2>
+@if (!Model.Items.Any())
+{
+    <p>Your cart is empty.</p>
 }
-
-<div class="hero-section text-white d-flex align-items-center justify-content-center"
-     style="background-image: url('/images/hero-bg.jpg');
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            height: 70vh;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);">
-    <div class="text-center bg-dark bg-opacity-50 p-4 rounded">
-        <h1 class="display-3 fw-bold">Noire Essence</h1>
-        <p class="lead">Luxury Fragrances That Define Elegance</p>
-        <a asp-controller="Perfume" asp-action="Index" class="btn btn-light px-4 py-2 shadow-sm mt-3">Shop Now</a>
-    </div>
-</div>
-
-<section class="text-center my-5">
-    <h2 class="mb-4" style="color: #C9184A;">Featured Perfumes</h2>
-    <div class="row g-4">
-        @foreach (var product in Model.Take(3))
-        {
-            <div class="col-md-4">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="@product.ImageUrl" class="card-img-top" style="height: 300px; object-fit: cover;" alt="@product.Name" />
-                    <div class="card-body">
-                        <h5 class="card-title text-primary">@product.Name</h5>
-                        <p class="card-text text-muted">@product.FragranceType - @product.Size</p>
-                        <p class="h5 text-danger">@product.Price.ToString("C")</p>
-                    </div>
-                    <div class="card-footer bg-white border-0">
-                        <a asp-controller="Perfume" asp-action="Details" asp-route-id="@product.Id" class="btn btn-outline-primary w-100">View Details</a>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</section>
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.Product.Name</td>
+                    <td>@item.Product.Price.ToString("C")</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Quantity* item.Product.Price).ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3"><strong>Subtotal:</strong></td>
+                <td>@Model.Subtotal.ToString("C")</td>
+            </tr>
+            <tr>
+                <td colspan="3"><strong>Shipping:</strong></td>
+                <td>@Model.ShippingTotal.ToString("C")</td>
+            </tr>
+            <tr>
+                <td colspan="3"><strong>Grand Total:</strong></td>
+                <td>@Model.GrandTotal.ToString("C")</td>
+            </tr>
+        </tfoot>
+    </table>
+}

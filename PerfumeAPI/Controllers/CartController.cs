@@ -1,205 +1,78 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PerfumeAPI.Models.DTOs;
-using PerfumeAPI.Services;
-using PerfumeAPI.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using PerfumeAPI.Data;
+using PerfumeAPI.Models.Entities;
+using System;
+using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace PerfumeAPI.Controllers
 {
     [Authorize]
+    [Route("cart")]
     public class CartController : Controller
     {
-        private readonly ICartService _cartService;
-        private readonly ILogger<CartController> _logger;
+        private readonly AppDbContext _context;
 
-        public CartController(ICartService cartService, ILogger<CartController> logger)
+        public CartController(AppDbContext context)
         {
-            _cartService = cartService ?? throw new ArgumentNullException(nameof(cartService));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _context = context;
         }
 
-        [HttpGet]
+        // GET: /cart
+        [HttpGet("")]
         public async Task<IActionResult> Index()
         {
-            try
-            {
-                var userId = GetUserId();
-                if (string.IsNullOrEmpty(userId))
-                {
-                    return Unauthorized();
-                }
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                var cartDto = await _cartService.GetCartDtoAsync(userId);
-                return View(cartDto);
-            }
-            catch (Exception ex)
+            if (userId == null)
+                return Unauthorized();
+
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .ThenInclude(i => i.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null)
             {
-                _logger.LogError(ex, "Error loading cart for user {UserId}", GetUserId());
-                return StatusCode(500, "An error occurred while loading your cart");
+                cart = new Cart { UserId = userId };
+                _context.Carts.Add(cart);
+                await _context.SaveChangesAsync();
             }
+
+            return View(cart);
         }
 
-        [HttpPost]
+        [HttpPost("AddToCart")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddToCart(int productId, int quantity = 1)
+        public async Task<IActionResult> AddToCart(int productId, int quantity)
         {
-            try
-            {
-                var userId = GetUserId();
-                if (string.IsNullOrEmpty(userId))
-                {
-                    return Unauthorized();
-                }
+            int cartId = 1; // Replace with user cart logic later
 
-                if (quantity < 1)
-                {
-                    TempData["Error"] = "Quantity must be at least 1";
-                    return RedirectToAction("Details", "Product", new { id = productId });
-                }
+            var existingItem = await _context.CartItems
+                .FirstOrDefaultAsync(ci => ci.CartId == cartId && ci.ProductId == productId);
 
-                await _cartService.AddToCartAsync(userId, productId, quantity);
-                TempData["Success"] = "Product added to cart successfully";
-                return RedirectToAction(nameof(Index));
-            }
-            catch (InsufficientStockException ex)
+            if (existingItem != null)
             {
-                TempData["Error"] = ex.Message;
-                return RedirectToAction("Details", "Product", new { id = productId });
+                existingItem.Quantity += quantity;
+                existingItem.UpdatedAt = DateTime.UtcNow;
             }
-            catch (ProductNotFoundException ex)
+            else
             {
-                TempData["Error"] = ex.Message;
-                return RedirectToAction("Index", "Product");
+                var newItem = new CartItem
+                {
+                    CartId = cartId,
+                    ProductId = productId,
+                    Quantity = quantity
+                };
+                _context.CartItems.Add(newItem);
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error adding product {ProductId} to cart for user {UserId}",
-                    productId, GetUserId());
-                TempData["Error"] = "Failed to add product to cart";
-                return RedirectToAction("Details", "Product", new { id = productId });
-            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateQuantity(int productId, int quantity)
-        {
-            try
-            {
-                var userId = GetUserId();
-                if (string.IsNullOrEmpty(userId))
-                {
-                    return Unauthorized();
-                }
-
-                if (quantity < 1)
-                {
-                    TempData["Error"] = "Quantity must be at least 1";
-                    return RedirectToAction(nameof(Index));
-                }
-
-                await _cartService.UpdateQuantityAsync(userId, productId, quantity);
-                TempData["Success"] = "Quantity updated successfully";
-                return RedirectToAction(nameof(Index));
-            }
-            catch (CartItemNotFoundException ex)
-            {
-                TempData["Error"] = ex.Message;
-                return RedirectToAction(nameof(Index));
-            }
-            catch (InsufficientStockException ex)
-            {
-                TempData["Error"] = ex.Message;
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error updating quantity for product {ProductId} for user {UserId}",
-                    productId, GetUserId());
-                TempData["Error"] = "Failed to update quantity";
-                return RedirectToAction(nameof(Index));
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RemoveItem(int productId)
-        {
-            try
-            {
-                var userId = GetUserId();
-                if (string.IsNullOrEmpty(userId))
-                {
-                    return Unauthorized();
-                }
-
-                await _cartService.RemoveFromCartAsync(userId, productId);
-                TempData["Success"] = "Item removed from cart successfully";
-                return RedirectToAction(nameof(Index));
-            }
-            catch (CartItemNotFoundException ex)
-            {
-                TempData["Error"] = ex.Message;
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error removing product {ProductId} from cart for user {UserId}",
-                    productId, GetUserId());
-                TempData["Error"] = "Failed to remove item from cart";
-                return RedirectToAction(nameof(Index));
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ClearCart()
-        {
-            try
-            {
-                var userId = GetUserId();
-                if (string.IsNullOrEmpty(userId))
-                {
-                    return Unauthorized();
-                }
-
-                await _cartService.ClearCartAsync(userId);
-                TempData["Success"] = "Cart cleared successfully";
-                return RedirectToAction(nameof(Index));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error clearing cart for user {UserId}", GetUserId());
-                TempData["Error"] = "Failed to clear cart";
-                return RedirectToAction(nameof(Index));
-            }
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetCartCount()
-        {
-            try
-            {
-                var userId = GetUserId();
-                if (string.IsNullOrEmpty(userId))
-                {
-                    return Json(new { count = 0 });
-                }
-
-                var count = await _cartService.GetCartItemCountAsync(userId);
-                return Json(new { count });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error getting cart count for user {UserId}", GetUserId());
-                return Json(new { count = 0 });
-            }
-        }
-
-        private string? GetUserId()
-        {
-            return User.FindFirstValue(ClaimTypes.NameIdentifier);
-        }
     }
 }

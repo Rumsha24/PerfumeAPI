@@ -3,6 +3,34 @@
   "WorkspaceRootPath": "C:\\MyProjects\\PerfumeAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\cart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\models\\entities\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\models\\entities\\cartitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\cartitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\controllers\\api\\cartapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\api\\cartapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\views\\comment\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\comment\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -70,10 +98,6 @@
       "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\models\\entities\\cartitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\cartitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\models\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\models\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -92,14 +116,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\perfumeapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\perfumeapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\views\\home\\story.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -132,10 +148,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\controllers\\api\\productapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\controllers\\api\\productapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|c:\\myprojects\\perfumeapi\\perfumeapi\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{25C755A1-77B3-469E-8511-67DE5C27B5B7}|PerfumeAPI\\PerfumeAPI.csproj|solutionrelative:perfumeapi\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -145,7 +157,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -165,15 +177,103 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Cart.cs",
+              "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Cart.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\Cart.cs",
+              "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Cart.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\Cart.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T18:37:34.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "dbo.Products [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/localhost/PerfumeDB_Dev/True/SqlTable/dbo.Products.sql",
+              "ToolTip": "dbo.Products [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-07-28T17:39:59.87Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAkwIsAAABfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-26T15:10:47.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CartController.cs",
+              "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\CartController.cs",
+              "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Controllers\\CartController.cs",
+              "RelativeToolTip": "PerfumeAPI\\Controllers\\CartController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAkwDwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T15:41:11.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CartItems.cs",
+              "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\CartItems.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\CartItems.cs",
+              "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\CartItems.cs",
+              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\CartItems.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T15:56:24.594Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Product\\Index.cshtml",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Product\\Index.cshtml",
+              "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Product\\Index.cshtml",
+              "RelativeToolTip": "PerfumeAPI\\Views\\Product\\Index.cshtml",
+              "ViewState": "AgIAAH8AAAAAAAAAAAAkwJ4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-26T06:23:40.088Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Cart\\Index.cshtml",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Cart\\Index.cshtml",
+              "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Cart\\Index.cshtml",
+              "RelativeToolTip": "PerfumeAPI\\Views\\Cart\\Index.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-28T18:26:38.496Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "SelectProduct.cshtml",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Comment\\SelectProduct.cshtml",
               "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Comment\\SelectProduct.cshtml",
@@ -186,7 +286,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "CommentViewModel.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\ViewModels\\CommentViewModel.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Models\\ViewModels\\CommentViewModel.cs",
@@ -199,17 +299,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "dbo.Products [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/localhost/PerfumeDB_Dev/True/SqlTable/dbo.Products.sql",
-              "ToolTip": "dbo.Products [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-07-28T17:39:59.87Z",
+              "DocumentIndex": 6,
+              "Title": "CartApiController.cs",
+              "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Controllers\\Api\\CartApiController.cs",
+              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\Api\\CartApiController.cs",
+              "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Controllers\\Api\\CartApiController.cs",
+              "RelativeToolTip": "PerfumeAPI\\Controllers\\Api\\CartApiController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T18:26:10.602Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "CommentController.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Controllers\\CommentController.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\CommentController.cs",
@@ -222,20 +325,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Comment\\Index.cshtml",
               "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Comment\\Index.cshtml",
               "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Comment\\Index.cshtml",
               "RelativeToolTip": "PerfumeAPI\\Views\\Comment\\Index.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAEQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAcwC4AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-07-28T15:45:34.825Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "Comment.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Comment.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\Comment.cs",
@@ -248,7 +351,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 12,
               "Title": "CommentCreateDTO.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\CommentCreateDTO.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Models\\DTOs\\CommentCreateDTO.cs",
@@ -261,7 +364,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Data\\AppDbContext.cs",
@@ -274,7 +377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 14,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Program.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Program.cs",
@@ -287,7 +390,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 16,
               "Title": "DbInitializer.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Data\\DbInitializer.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Data\\DbInitializer.cs",
@@ -300,7 +403,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 17,
               "Title": "CommentImage.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\CommentImage.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\CommentImage.cs",
@@ -313,7 +416,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 19,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\Product.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\Product.cs",
@@ -326,7 +429,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 18,
               "Title": "CartItemDto.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\DTOs\\CartItemDto.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Models\\DTOs\\CartItemDto.cs",
@@ -339,7 +442,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 20,
               "Title": "_ValidationScriptsPartial.cshtml",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
@@ -351,7 +454,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 23,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\appsettings.json",
               "RelativeDocumentMoniker": "PerfumeAPI\\appsettings.json",
@@ -363,7 +466,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 21,
               "Title": "DesignTimeDbContextFactory.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Data\\DesignTimeDbContextFactory.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Data\\DesignTimeDbContextFactory.cs",
@@ -375,7 +478,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 22,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\AccountController.cs",
@@ -387,19 +490,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "CartItems.cs",
-              "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\CartItems.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\CartItems.cs",
-              "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\CartItems.cs",
-              "RelativeToolTip": "PerfumeAPI\\Models\\Entities\\CartItems.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T15:56:24.594Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\User.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\User.cs",
@@ -411,7 +502,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 25,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\appsettings.Development.json",
               "RelativeDocumentMoniker": "PerfumeAPI\\appsettings.Development.json",
@@ -423,7 +514,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 26,
               "Title": ".gitignore",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\.gitignore",
               "RelativeDocumentMoniker": "PerfumeAPI\\.gitignore",
@@ -435,7 +526,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 27,
               "Title": "Dockerfile",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Dockerfile",
               "RelativeDocumentMoniker": "PerfumeAPI\\Dockerfile",
@@ -447,7 +538,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 28,
               "Title": "PerfumeAPI.csproj",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\PerfumeAPI.csproj",
               "RelativeDocumentMoniker": "PerfumeAPI\\PerfumeAPI.csproj",
@@ -459,31 +550,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "CartController.cs",
-              "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Controllers\\CartController.cs",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\CartController.cs",
-              "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Controllers\\CartController.cs",
-              "RelativeToolTip": "PerfumeAPI\\Controllers\\CartController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-28T15:41:11.202Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAM8AAAAAAAAAAADgv+cAAABaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-26T15:10:47.421Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 31,
               "Title": "HomeViewModel.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Models\\Entities\\HomeViewModel.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Models\\Entities\\HomeViewModel.cs",
@@ -495,7 +562,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 29,
               "Title": "Story.cshtml",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Home\\Story.cshtml",
               "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Home\\Story.cshtml",
@@ -507,7 +574,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 32,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\HomeController.cs",
@@ -519,7 +586,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 33,
               "Title": "ImageService.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Services\\ImageService.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Services\\ImageService.cs",
@@ -531,7 +598,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 30,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Home\\Index.cshtml",
@@ -543,7 +610,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 35,
               "Title": "ProductController.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Controllers\\ProductController.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\ProductController.cs",
@@ -555,7 +622,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 34,
               "Title": "IImageService.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Services\\Interfaces\\IImageService.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Services\\Interfaces\\IImageService.cs",
@@ -567,7 +634,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 36,
               "Title": "ProductApiController.cs",
               "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Controllers\\Api\\ProductApiController.cs",
               "RelativeDocumentMoniker": "PerfumeAPI\\Controllers\\Api\\ProductApiController.cs",
@@ -576,18 +643,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAJUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-26T14:13:53.294Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Product\\Index.cshtml",
-              "RelativeDocumentMoniker": "PerfumeAPI\\Views\\Product\\Index.cshtml",
-              "ToolTip": "C:\\MyProjects\\PerfumeAPI\\PerfumeAPI\\Views\\Product\\Index.cshtml",
-              "RelativeToolTip": "PerfumeAPI\\Views\\Product\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-26T06:23:40.088Z"
             }
           ]
         }
