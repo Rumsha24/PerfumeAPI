@@ -9,3 +9,23 @@ C:\Users\rumsh\OneDrive - Conestoga College\Desktop\PerfumeAPI\PerfumeAPI\obj\De
 C:\Users\rumsh\OneDrive - Conestoga College\Desktop\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.RazorAssemblyInfo.cache
 C:\Users\rumsh\OneDrive - Conestoga College\Desktop\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.RazorAssemblyInfo.cs
 C:\Users\rumsh\OneDrive - Conestoga College\Desktop\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.sourcelink.json
+C:\Users\solan\Downloads\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.csproj.AssemblyReference.cache
+C:\Users\solan\Downloads\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\solan\Downloads\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.AssemblyInfoInputs.cache
+C:\Users\solan\Downloads\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.AssemblyInfo.cs
+C:\Users\solan\Downloads\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.csproj.CoreCompileInputs.cache
+C:\Users\solan\Downloads\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\solan\Downloads\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\solan\Downloads\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.RazorAssemblyInfo.cache
+C:\Users\solan\Downloads\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.RazorAssemblyInfo.cs
+C:\Users\solan\Downloads\PerfumeAPI\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.sourcelink.json
+C:\MyProjects\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.csproj.AssemblyReference.cache
+C:\MyProjects\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\MyProjects\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.AssemblyInfoInputs.cache
+C:\MyProjects\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.AssemblyInfo.cs
+C:\MyProjects\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.csproj.CoreCompileInputs.cache
+C:\MyProjects\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\MyProjects\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\MyProjects\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.RazorAssemblyInfo.cache
+C:\MyProjects\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.RazorAssemblyInfo.cs
+C:\MyProjects\PerfumeAPI\obj\Debug\net8.0\PerfumeAPI.sourcelink.json

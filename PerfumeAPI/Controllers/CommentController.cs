@@ -30,30 +30,26 @@ namespace PerfumeAPI.Controllers
         }
 
         [AllowAnonymous]
+        
         public async Task<IActionResult> Index(int? productId)
         {
-            try
+            if (productId == null)
             {
-                var query = _context.Comments
-                    .Include(c => c.User)
-                    .Include(c => c.Images)
-                    .Include(c => c.Product)
-                    .OrderByDescending(c => c.CreatedAt);
-
-                if (productId.HasValue)
-                {
-                    query = query.Where(c => c.ProductId == productId.Value)
-                                .OrderByDescending(c => c.CreatedAt);
-                }
-
-                var comments = await query.AsNoTracking().ToListAsync();
-                return View(comments);
+                // Option A: Show a list of products with links to comment pages
+                var products = await _context.Products.AsNoTracking().ToListAsync();
+                return View("SelectProduct", products);
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error loading comments");
-                return StatusCode(500, "An error occurred while loading comments");
-            }
+
+            // Existing code to get comments for the product
+            var comments = await _context.Comments
+                .Where(c => c.ProductId == productId.Value)
+                .Include(c => c.User)
+                .Include(c => c.Images)
+                .OrderByDescending(c => c.CreatedAt)
+                .ToListAsync();
+
+            ViewBag.ProductId = productId.Value;
+            return View(comments);
         }
 
         [HttpPost]
@@ -62,105 +58,77 @@ namespace PerfumeAPI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
-            }
-
-            try
-            {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (string.IsNullOrEmpty(userId))
-                {
-                    return Unauthorized();
-                }
-
-                var comment = new Comment
-                {
-                    Text = commentDto.Text,
-                    Rating = commentDto.Rating,
-                    ProductId = commentDto.ProductId,
-                    UserId = userId,
-                    CreatedAt = DateTime.UtcNow
-                };
-
-                // Handle image uploads
-                if (commentDto.Images != null && commentDto.Images.Count > 0)
-                {
-                    var uploadsPath = Path.Combine(_env.WebRootPath, "uploads", "comments");
-                    Directory.CreateDirectory(uploadsPath);
-
-                    foreach (var image in commentDto.Images.Take(3))
-                    {
-                        if (image.Length > 0 && image.Length <= 5 * 1024 * 1024) // 5MB max
-                        {
-                            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
-                            var filePath = Path.Combine(uploadsPath, fileName);
-
-                            using (var stream = new FileStream(filePath, FileMode.Create))
-                            {
-                                await image.CopyToAsync(stream);
-                            }
-
-                            comment.Images.Add(new CommentImage
-                            {
-                                ImageUrl = $"/uploads/comments/{fileName}"
-                            });
-                        }
-                    }
-                }
-
-                _context.Comments.Add(comment);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index), new { productId = commentDto.ProductId });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error creating comment");
-                return StatusCode(500, "An error occurred while creating your comment");
-            }
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id)
-        {
-            try
-            {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (string.IsNullOrEmpty(userId))
-                {
-                    return Unauthorized();
-                }
-
-                var comment = await _context.Comments
+                ViewBag.ProductId = commentDto.ProductId;
+                var comments = await _context.Comments
+                    .Where(c => c.ProductId == commentDto.ProductId)
                     .Include(c => c.Images)
-                    .FirstOrDefaultAsync(c => c.Id == id);
+                    .Include(c => c.User)
+                    .OrderByDescending(c => c.CreatedAt)
+                    .ToListAsync();
 
-                if (comment == null || comment.UserId != userId)
-                {
-                    return NotFound();
-                }
+                return View("Index", comments);
+            }
 
-                // Delete associated images
-                foreach (var image in comment.Images)
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Confirm product exists before adding comment
+            var productExists = await _context.Products.AnyAsync(p => p.Id == commentDto.ProductId);
+            if (!productExists)
+            {
+                ModelState.AddModelError("", "The product you are trying to review does not exist.");
+                ViewBag.ProductId = commentDto.ProductId;
+                var comments = await _context.Comments
+                    .Where(c => c.ProductId == commentDto.ProductId)
+                    .Include(c => c.Images)
+                    .Include(c => c.User)
+                    .OrderByDescending(c => c.CreatedAt)
+                    .ToListAsync();
+
+                return View("Index", comments);
+            }
+
+            var comment = new Comment
+            {
+                Text = commentDto.Text,
+                Rating = commentDto.Rating,
+                ProductId = commentDto.ProductId,
+                UserId = userId,
+                CreatedAt = DateTime.UtcNow,
+                Images = new List<CommentImage>()
+            };
+
+            if (commentDto.Images != null && commentDto.Images.Count > 0)
+            {
+                var uploadsPath = Path.Combine(_env.WebRootPath, "uploads", "comments");
+                Directory.CreateDirectory(uploadsPath);
+
+                foreach (var image in commentDto.Images.Take(3))
                 {
-                    var imagePath = Path.Combine(_env.WebRootPath, image.ImageUrl.TrimStart('/'));
-                    if (System.IO.File.Exists(imagePath))
+                    if (image != null && image.Length > 0 && image.Length <= 5 * 1024 * 1024) // max 5 MB
                     {
-                        System.IO.File.Delete(imagePath);
+                        var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
+                        var filePath = Path.Combine(uploadsPath, fileName);
+
+                        using var stream = new FileStream(filePath, FileMode.Create);
+                        await image.CopyToAsync(stream);
+
+                        comment.Images.Add(new CommentImage
+                        {
+                            ImageUrl = $"/uploads/comments/{fileName}"
+                        });
                     }
                 }
-
-                _context.Comments.Remove(comment);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index), new { productId = comment.ProductId });
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error deleting comment");
-                return StatusCode(500, "An error occurred while deleting your comment");
-            }
+
+            _context.Comments.Add(comment);
+            await _context.SaveChangesAsync();
+
+            // Redirect back to comments for this product
+            return RedirectToAction("Index", new { productId = commentDto.ProductId });
         }
     }
 }

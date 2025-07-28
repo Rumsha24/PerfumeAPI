@@ -1,0 +1,67 @@
+﻿@model IEnumerable<PerfumeAPI.Models.Entities.Product>
+
+@{
+    ViewData["Title"] = "Select a Product";
+}
+
+<style>
+    /* Container styling */
+    ul.select-product-list {
+        list-style: none;
+        padding: 0;
+        max-width: 600px;
+        margin: 2rem auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+        /* Each product item */
+        ul.select-product-list li {
+            background: #f8f9fa;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            /* Link styling */
+            ul.select-product-list li a {
+                text-decoration: none;
+                color: #2c3e50;
+                font-size: 1.2rem;
+                display: block;
+            }
+
+            /* Hover effect */
+            ul.select-product-list li:hover {
+                background-color: #e9f1ff;
+                box-shadow: 0 4px 12px rgba(0, 120, 255, 0.25);
+            }
+
+            ul.select-product-list li a:hover {
+                color: #007bff;
+            }
+
+    /* Heading */
+    h2.select-product-title {
+        text-align: center;
+        font-weight: 700;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        color: #34495e;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+</style>
+
+<h2 class="select-product-title">Select a Product to View Comments</h2>
+
+<ul class="select-product-list">
+    @foreach (var product in Model)
+    {
+        <li>
+            <a href="@Url.Action("Index", "Comment", new { productId = product.Id })">
+                @product.Name
+            </a>
+        </li>
+    }
+</ul>

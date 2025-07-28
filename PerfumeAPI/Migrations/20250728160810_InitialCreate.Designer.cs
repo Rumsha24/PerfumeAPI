@@ -9,18 +9,18 @@ using PerfumeAPI.Data;
 
 #nullable disable
 
-namespace PerfumeAPI.Data.Migrations
+namespace PerfumeAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250726034135_ProjectCreate")]
-    partial class ProjectCreate
+    [Migration("20250728160810_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.7")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -188,7 +188,9 @@ namespace PerfumeAPI.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("AddedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
 
                     b.Property<int>("CartId")
                         .HasColumnType("int");
@@ -410,22 +412,6 @@ namespace PerfumeAPI.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Description = "Sample product",
-                            FragranceType = "",
-                            IsFeatured = false,
-                            IsInStock = true,
-                            Name = "Noir Essence",
-                            Price = 100.00m,
-                            ShippingCost = 0m,
-                            Size = "",
-                            StockQuantity = 10
-                        });
                 });
 
             modelBuilder.Entity("PerfumeAPI.Models.Entities.User", b =>
@@ -591,7 +577,7 @@ namespace PerfumeAPI.Data.Migrations
                     b.HasOne("PerfumeAPI.Models.Entities.Product", "Product")
                         .WithMany("CartItems")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Cart");

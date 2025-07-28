@@ -1,0 +1,51 @@
+﻿/* Header Styles */
+.navbar {
+    padding: 1rem 0;
+    background-color: #000 !important;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.nav-link {
+    color: #fff !important;
+    font-weight: 500;
+    margin: 0 10px;
+    position: relative;
+}
+
+    .nav-link:hover {
+        color: #d4af37 !important;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background: #d4af37;
+        bottom: 0;
+        left: 0;
+        transition: width 0.3s;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #d4af37;
+    color: #000;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
