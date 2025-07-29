@@ -8,15 +8,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - NOIRE ESSENCE</title>
-    <meta name="description" content="NOIRE ESSENCE - Luxury perfumes crafted with passion since 1923" />
-    <meta name="keywords" content="perfume, luxury, fragrance, eau de parfum" />
+    <meta name="description" content="NOIRE ESSENCE - Luxury perfumes crafted with passion since 1923">
+    <meta name="keywords" content="perfume, luxury, fragrance, eau de parfum">
 
     <link rel="icon" href="~/favicon.ico" type="image/x-icon" asp-append-version="true" />
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-          crossorigin="anonymous" />
+          crossorigin="anonymous">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -24,15 +24,344 @@
           crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
     <style>
-        /* Your existing CSS here (no changes) */
+        :root {
+            --perfume-primary: #B486AB;
+            --perfume-secondary: #82667F;
+            --perfume-accent: #DD9AC2;
+            --perfume-light: #F8E8EA;
+            --perfume-dark: #1a1a1a;
+            --perfume-pale: #FDF8F9;
+            --card-shadow: 0 10px 30px rgba(180, 134, 171, 0.2);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--perfume-light);
+            color: var(--perfume-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-weight: 500;
+        }
+
+        .navbar {
+            background-color: var(--perfume-dark) !important;
+            border-bottom: 1px solid var(--perfume-primary);
+        }
+
+        .nav-link {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            color: var(--perfume-light) !important;
+        }
+
+            .nav-link:hover {
+                color: var(--perfume-primary) !important;
+            }
+
+        /* Enhanced Card Styling */
+        .perfume-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            overflow: hidden;
+            border-radius: 12px;
+            background: white;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+            .perfume-card:hover {
+                transform: translateY(-10px);
+                box-shadow: var(--card-shadow);
+            }
+
+        .card-img-container {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img-top {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .perfume-card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            color: var(--perfume-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .card-text {
+            color: var(--perfume-secondary);
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .card-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--perfume-primary);
+            margin-bottom: 1rem;
+        }
+
+        .perfume-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--perfume-primary);
+            color: var(--perfume-dark);
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 20px;
+            z-index: 1;
+        }
+
+        /* Footer Enhancements */
+        footer {
+            background-color: var(--perfume-dark);
+            color: var(--perfume-light);
+            border-top: 1px solid var(--perfume-primary);
+            margin-top: auto;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--perfume-light);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .footer-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--perfume-light);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+            .footer-heading:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 50px;
+                height: 2px;
+                background: var(--perfume-primary);
+            }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+            .footer-links li {
+                margin-bottom: 0.75rem;
+            }
+
+            .footer-links a {
+                color: var(--perfume-light);
+                text-decoration: none;
+                transition: color 0.3s ease;
+                font-size: 0.9rem;
+            }
+
+                .footer-links a:hover {
+                    color: var(--perfume-primary);
+                    padding-left: 5px;
+                }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+            .social-links a {
+                color: var(--perfume-light);
+                font-size: 1.2rem;
+                transition: all 0.3s ease;
+            }
+
+                .social-links a:hover {
+                    color: var(--perfume-primary);
+                    transform: translateY(-3px);
+                }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Other Styles */
+        .bg-primary {
+            background-color: var(--perfume-primary) !important;
+            color: var(--perfume-dark);
+        }
+
+        .btn-outline-light:hover {
+            color: var(--perfume-dark) !important;
+            background-color: var(--perfume-primary) !important;
+            border-color: var(--perfume-primary) !important;
+        }
+
+        .nav-link .fa-shopping-bag {
+            transition: transform 0.3s ease;
+            color: var(--perfume-light);
+        }
+
+        .nav-link:hover .fa-shopping-bag {
+            transform: scale(1.1);
+            color: var(--perfume-primary);
+        }
+
+        .cart-dropdown {
+            width: 350px;
+            padding: 0;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .cart-item {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: background-color 0.2s;
+        }
+
+            .cart-item:hover {
+                background-color: rgba(0,0,0,0.02);
+            }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+        }
+
+        .cart-summary {
+            background-color: var(--perfume-pale);
+            padding: 1rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .cart-counter {
+            transition: all 0.3s ease;
+            background-color: var(--perfume-primary) !important;
+        }
+
+        .cart-counter-update {
+            transform: scale(1.3);
+        }
+
+        .dropdown-menu {
+            background-color: var(--perfume-pale);
+            border: 1px solid var(--perfume-primary);
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--perfume-primary);
+            color: white;
+        }
+
+        #back-to-top {
+            background-color: var(--perfume-primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+            #back-to-top:hover {
+                background-color: var(--perfume-secondary);
+                transform: translateY(-3px);
+            }
+
+        /* Grid Layout for Products */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        /* Section Styling */
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+        }
+
+            .section-title:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 80px;
+                height: 3px;
+                background: var(--perfume-primary);
+            }
+
+        /* User dropdown styles */
+        .user-greeting {
+            color: var(--perfume-light);
+            padding-right: 1rem;
+        }
+
+        .user-dropdown {
+            min-width: 200px;
+        }
+
+            .user-dropdown .dropdown-item {
+                padding: 0.5rem 1rem;
+            }
+
+            .user-dropdown .dropdown-divider {
+                margin: 0.25rem 0;
+            }
     </style>
 
     @await RenderSectionAsync("Styles", required: false)
@@ -68,38 +397,52 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             var currentUser = await UserManager.GetUserAsync(User);
-                            <li class="nav-item ms-lg-3 mt-2 mt-lg-0 d-flex align-items-center">
-                                <span class="nav-link pe-3">
-                                    <i class="fas fa-user me-1"></i> Hello, @currentUser?.FirstName
-                                </span>
-                                <form method="post" asp-controller="Account" asp-action="Logout" class="m-0">
-                                    <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
-                                </form>
+                            <li class="nav-item dropdown ms-lg-3">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-circle me-2" style="font-size: 1.2rem;"></i>
+                                    <span class="user-greeting">Hello, @currentUser?.FirstName</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end user-dropdown" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="fas fa-user me-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="History"><i class="fas fa-history me-2"></i>Order History</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form method="post" asp-controller="Account" asp-action="Logout" class="m-0">
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
                         }
                         else
                         {
-                            <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
-                                <a class="btn btn-outline-light" asp-controller="Account" asp-action="Register">
-                                    <i class="fas fa-user me-1"></i> Account
-                                </a>
+                            <li class="nav-item ms-lg-3">
+                                <div class="d-flex">
+                                    <a class="btn btn-outline-light me-2" asp-controller="Account" asp-action="Login">
+                                        <i class="fas fa-sign-in-alt me-1"></i> Login
+                                    </a>
+                                    <a class="btn btn-primary" asp-controller="Account" asp-action="Register">
+                                        <i class="fas fa-user-plus me-1"></i> Register
+                                    </a>
+                                </div>
                             </li>
                         }
-
 
                         <li class="nav-item dropdown ms-lg-2">
                             <a class="nav-link position-relative" asp-controller="Cart" asp-action="Index" id="cartDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
-                                <span class="sr-only">Shopping Cart</span>
-                                <span class="cart-counter position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary d-none">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary d-none" style="min-width: 1.5rem; height: 1.5rem; display: flex; align-items: center; justify-content: center;">
                                     0
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end cart-dropdown" aria-labelledby="cartDropdown">
-                                <div class="px-3 py-2 border-bottom">
+                                <div class="px-3 py-2 border-bottom d-flex justify-content-between align-items-center">
                                     <h6 class="mb-0">Your Cart</h6>
+                                    <span class="badge bg-primary rounded-pill cart-items-count">0 items</span>
                                 </div>
-                                <div class="cart-items">
+                                <div class="cart-items" style="max-height: 300px; overflow-y: auto;">
                                     <div class="text-center p-4">
                                         <i class="fas fa-shopping-bag fa-2x mb-2 text-muted"></i>
                                         <p class="mb-0">Your cart is empty</p>
@@ -108,7 +451,7 @@
                                 <div class="cart-summary">
                                     <div class="d-flex justify-content-between mb-2">
                                         <span>Subtotal:</span>
-                                        <span class="fw-bold">$0.00</span>
+                                        <span class="fw-bold cart-subtotal">$0.00</span>
                                     </div>
                                     <div class="d-grid gap-2">
                                         <a asp-controller="Cart" asp-action="Index" class="btn btn-dark">View Cart</a>
@@ -132,13 +475,263 @@
 
     <!-- Enhanced Luxury Footer -->
     <footer>
-        <!-- Your existing footer unchanged -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <a href="/" class="footer-logo text-decoration-none">
+                        <i class="fas fa-spa me-2"></i>NOIRE ESSENCE
+                    </a>
+                    <p class="text-white"><b>Timeless fragrances crafted with passion in Grasse, France since 1923.</b></p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="footer-heading">Shop</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Women's Fragrances</a></li>
+                        <li><a href="#">Men's Fragrances</a></li>
+                        <li><a href="#">Unisex Scents</a></li>
+                        <li><a href="#">Gift Sets</a></li>
+                        <li><a href="#">Travel Sizes</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5 class="footer-heading">About</h5>
+                    <ul class="footer-links">
+                        <li><a asp-controller="Home" asp-action="Story">Our Story</a></li>
+                        <li><a href="#">Perfume Making</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-heading">Help</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Store Locator</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="footer-heading">Legal</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright mb-0">
+                    &copy; @DateTime.Now.Year NOIRE ESSENCE. All rights reserved.
+                    <span class="d-block d-sm-inline mt-2 mt-sm-0">Crafted with <i class="fas fa-heart text-danger"></i> in France</span>
+                </p>
+            </div>
+        </div>
     </footer>
 
-    <!-- Bootstrap JS Bundle (required for dropdowns, modals, etc) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ENjdO4Dr2bkBIFxQpeoZ2xDHu20dXb6N5Q9nN90+7M1h0l+hE6z4XYnA1/4L8Nf9"
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="btn btn-outline-secondary position-fixed bottom-0 end-0 m-3 d-none">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
             crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        // Back to top button
+        $(document).ready(function() {
+            // Clear any invalid cart data
+            function clearInvalidCartData() {
+                try {
+                    const savedCart = localStorage.getItem('noireEssenceCart');
+                    if (savedCart) {
+                        const parsed = JSON.parse(savedCart);
+                        if (!Array.isArray(parsed)) {
+                            throw new Error('Cart data is not an array');
+                        }
+                    }
+                } catch (e) {
+                    console.warn('Clearing invalid cart data:', e);
+                    localStorage.removeItem('noireEssenceCart');
+                }
+            }
+
+            clearInvalidCartData();
+
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 300) {
+                    $('#back-to-top').removeClass('d-none');
+                } else {
+                    $('#back-to-top').addClass('d-none');
+                }
+            });
+
+            $('#back-to-top').click(function() {
+                $('html, body').animate({scrollTop: 0}, 'smooth');
+                return false;
+            });
+
+            // Initialize tooltips
+            $('[data-bs-toggle="tooltip"]').tooltip();
+
+            // Cart functionality
+            let cart = [];
+
+            function isValidCartItem(item) {
+                return item &&
+                       item.id &&
+                       typeof item.name === 'string' &&
+                       !isNaN(parseFloat(item.price)) &&
+                       !isNaN(parseInt(item.quantity));
+            }
+
+            function loadCart() {
+                try {
+                    const savedCart = localStorage.getItem('noireEssenceCart');
+                    if (savedCart) {
+                        const parsed = JSON.parse(savedCart);
+                        if (Array.isArray(parsed)) {
+                            cart = parsed.filter(isValidCartItem);
+                            updateCartUI();
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error loading cart:', e);
+                    localStorage.removeItem('noireEssenceCart');
+                }
+            }
+
+            function saveCart() {
+                try {
+                    localStorage.setItem('noireEssenceCart', JSON.stringify(cart));
+                } catch (e) {
+                    console.error('Failed to save cart:', e);
+                }
+            }
+
+            function updateCartUI() {
+                const cartCount = cart.reduce((total, item) => total + (parseInt(item.quantity) || 0), 0);
+                const $cartCounter = $('.cart-counter');
+                const $cartItems = $('.cart-items');
+                const $cartSummary = $('.cart-summary');
+                let subtotal = 0;
+
+                // Update counter
+                $cartCounter.text(cartCount).toggleClass('d-none', cartCount <= 0);
+                $('.cart-items-count').text(cartCount + ' ' + (cartCount === 1 ? 'item' : 'items'));
+
+                // Build items HTML
+                let itemsHTML = '';
+                cart.forEach(item => {
+                    if (!isValidCartItem(item)) return;
+
+                    const price = parseFloat(item.price) || 0;
+                    const quantity = parseInt(item.quantity) || 0;
+                    const total = price * quantity;
+                    subtotal += total;
+
+                    itemsHTML += `
+                        <div class="cart-item d-flex">
+                            <div class="flex-shrink-0">
+                                <img src="https://via.placeholder.com/60?text=${encodeURIComponent(item.name.substring(0,1))}"
+                                     alt="${item.name}" class="cart-item-img rounded">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="mb-1">${item.name}</h6>
+                                <p class="mb-1 small">$${price.toFixed(2)} × ${quantity}</p>
+                                <button class="btn btn-sm btn-outline-danger remove-item" data-id="${item.id}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <div class="flex-shrink-0 ms-2">
+                                $${total.toFixed(2)}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Update UI
+                if (itemsHTML) {
+                    $cartItems.html(itemsHTML);
+                } else {
+                    $cartItems.html(`
+                        <div class="text-center p-4">
+                            <i class="fas fa-shopping-bag fa-2x mb-2 text-muted"></i>
+                            <p class="mb-0">Your cart is empty</p>
+                        </div>
+                    `);
+                }
+
+                $cartSummary.find('span.fw-bold').text('$' + subtotal.toFixed(2));
+            }
+
+            // Add to cart
+            $(document).on('click', '.add-to-cart', function() {
+                const productId = $(this).data('product-id');
+                const productName = $(this).data('product-name') || 'Unknown Product';
+                const productPrice = parseFloat($(this).data('product-price')) || 0;
+
+                if (!productId) {
+                    console.error('Invalid product data');
+                    return;
+                }
+
+                const existingItem = cart.find(item => item.id === productId);
+                if (existingItem) {
+                    existingItem.quantity = (parseInt(existingItem.quantity) || 0) + 1;
+                } else {
+                    cart.push({
+                        id: productId,
+                        name: productName,
+                        price: productPrice,
+                        quantity: 1
+                    });
+                }
+
+                saveCart();
+                updateCartUI();
+
+                // Animate counter
+                $('.cart-counter')
+                    .addClass('cart-counter-update')
+                    .delay(300)
+                    .queue(function() {
+                        $(this).removeClass('cart-counter-update').dequeue();
+                    });
+
+                // Show dropdown
+                new bootstrap.Dropdown(document.getElementById('cartDropdown')).show();
+            });
+
+            // Remove item
+            $(document).on('click', '.remove-item', function() {
+                const productId = $(this).data('id');
+                cart = cart.filter(item => item.id !== productId);
+                saveCart();
+                updateCartUI();
+            });
+
+            // Initialize
+            loadCart();
+        });
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

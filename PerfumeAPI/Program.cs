@@ -4,16 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models.Entities;
 using PerfumeAPI.Services;
+using PerfumeAPI.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // --- Configuration ---
-
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
     ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 // --- Services ---
-
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
@@ -43,8 +42,10 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
-// Your image service registration
+// Register application services
 builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 // MIME types
 var provider = new FileExtensionContentTypeProvider();
@@ -62,7 +63,6 @@ builder.Services.Configure<StaticFileOptions>(options =>
 
 // MVC and Session
 builder.Services.AddControllersWithViews();
-
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -78,7 +78,6 @@ builder.Logging.AddDebug();
 var app = builder.Build();
 
 // --- Middleware pipeline ---
-
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -90,7 +89,6 @@ else
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles(new StaticFileOptions
 {
     ContentTypeProvider = provider,
@@ -101,10 +99,8 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseSession();
 
 app.MapControllerRoute(

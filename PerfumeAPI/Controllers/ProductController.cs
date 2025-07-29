@@ -123,7 +123,7 @@ namespace PerfumeAPI.Controllers
                 ViewBag.AverageRating = product.Comments.Any() ?
                     product.Comments.Average(c => c.Rating) : 0;
 
-                return View(product);
+                return View("ProductDetails", product);
             }
             catch (Exception ex)
             {

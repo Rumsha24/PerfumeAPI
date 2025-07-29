@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PerfumeAPI.Data;
 using PerfumeAPI.Models.Entities;
-using System;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -21,17 +19,15 @@ namespace PerfumeAPI.Controllers
             _context = context;
         }
 
-        // GET: /cart
         [HttpGet("")]
         public async Task<IActionResult> Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null)
-                return Unauthorized();
+            if (userId == null) return Unauthorized();
 
             var cart = await _context.Carts
                 .Include(c => c.Items)
-                    .ThenInclude(i => i.Product)
+                .ThenInclude(i => i.Product)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null)
@@ -44,7 +40,6 @@ namespace PerfumeAPI.Controllers
             return View(cart);
         }
 
-        // POST: /cart/add
         [HttpPost("AddToCart")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToCart(int productId, int quantity)
@@ -52,7 +47,6 @@ namespace PerfumeAPI.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Unauthorized();
 
-            // Find or create cart
             var cart = await _context.Carts
                 .Include(c => c.Items)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
@@ -86,6 +80,47 @@ namespace PerfumeAPI.Controllers
 
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost("Checkout")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Checkout()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId)) return Challenge();
+
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .ThenInclude(i => i.Product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null || !cart.Items.Any())
+            {
+                return RedirectToAction("Index");
+            }
+
+            var order = new Order
+            {
+                UserId = userId,
+                ShippingAddress = "Default Address", // You can modify this
+                Status = "Processing",
+                OrderDate = DateTime.UtcNow,
+                Items = cart.Items.Select(i => new OrderItem
+                {
+                    ProductId = i.ProductId,
+                    Quantity = i.Quantity,
+                    PriceAtPurchase = i.Product.Price
+                }).ToList(),
+                TotalAmount = cart.Items.Sum(i => i.Product.Price * i.Quantity)
+            };
+
+            order.GenerateOrderNumber();
+
+            _context.Orders.Add(order);
+            _context.CartItems.RemoveRange(cart.Items);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", "Order", new { id = order.Id });
         }
     }
 }

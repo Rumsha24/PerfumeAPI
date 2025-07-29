@@ -42,4 +42,9 @@ else
             </tr>
         </tfoot>
     </table>
+
+    <form asp-controller="Cart" asp-action="Checkout" method="post">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Checkout</button>
+    </form>
 }

@@ -1,292 +1,254 @@
-﻿@model PerfumeAPI.Models.Entities.Product
-@using Microsoft.AspNetCore.Identity
-@using System.Security.Claims
-@inject UserManager<PerfumeAPI.Models.Entities.User> UserManager
-
+﻿@model PerfumeAPI.Models.Entities.Order
 @{
-    ViewData["Title"] = Model.Name;
-    var validComments = Model.Comments?.Where(c => c != null).ToList() ?? new List<PerfumeAPI.Models.Entities.Comment>();
-    var hasReviews = validComments.Any();
-    var avgRating = hasReviews ? validComments.Average(c => c.Rating) : 0;
-    var reviewCount = validComments.Count;
+    ViewData["Title"] = $"Order #{Model.OrderNumber}";
 }
 
 <div class="container my-5">
-    <!-- Product Header Section -->
-    <div class="row">
-        <div class="col-md-6">
-            <img src="@(Model.ImageUrl ?? "/images/default-perfume.jpg")"
-                 class="img-fluid rounded"
-                 alt="@Model.Name"
-                 onerror="this.onerror=null;this.src='/images/default-perfume.jpg';">
+    <!-- Order Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-6 fw-bold">
+            <i class="fas fa-receipt me-2 text-primary"></i> Order #@Model.OrderNumber
+        </h1>
+        <span class="badge @GetStatusBadgeClass(Model.Status) fs-6 px-3 py-2">
+            @Model.Status
+        </span>
+    </div>
 
-            <!-- Thumbnail Images -->
-            <div class="mt-3">
-                <div class="d-flex">
-                    <div class="thumb-img mx-1 border p-1">
-                        <img src="@(Model.ImageUrl ?? "/images/default-perfume.jpg")"
-                             class="img-thumbnail"
-                             style="width:80px;height:80px;object-fit:cover;"
-                             alt="@Model.Name">
+    <!-- Order Timeline -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <div class="stepper-wrapper">
+                <div class="stepper-item @(Model.Status == "Processing" ? "active" : "completed")">
+                    <div class="step-counter">
+                        <i class="fas fa-clipboard-list"></i>
                     </div>
+                    <div class="step-name">Processing</div>
+                    <div class="step-date">@Model.OrderDate.ToString("MMM dd")</div>
                 </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <h1>@Model.Name</h1>
-            <p class="text-muted">@Model.FragranceType | @(Model.FragranceFamily ?? "Unspecified") | @Model.Size</p>
-
-            <!-- Rating Section -->
-            <div class="mb-3">
-                <div class="rating mb-2">
-                    @for (int i = 1; i <= 5; i++)
+                <div class="stepper-item @(Model.Status == "Shipped" ? "active" : (Model.Status == "Delivered" ? "completed" : ""))">
+                    <div class="step-counter">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div class="step-name">Shipped</div>
+                    @if (Model.Status == "Shipped" || Model.Status == "Delivered")
                     {
-                        <span class="@(i <= Math.Round(avgRating) ? "text-warning" : "text-secondary")">
-                            <i class="fas fa-star"></i>
-                        </span>
+                        <div class="step-date">@(Model.ShippedDate?.ToString("MMM dd") ?? "Pending")</div>
                     }
-                    <span class="ms-2">(@reviewCount review@(reviewCount == 1 ? "" : "s"))</span>
                 </div>
-            </div>
-
-            <!-- Product Info -->
-            <p class="lead">@Model.Description</p>
-
-            <!-- Price Section -->
-            <div class="d-flex align-items-center mb-4">
-                <span class="h3 me-3">@Model.Price.ToString("C")</span>
-                <span class="text-muted">+ @Model.ShippingCost.ToString("C") shipping</span>
-            </div>
-
-            <!-- Add to Cart Section -->
-            @if (Model.StockQuantity > 0)
-            {
-                <div class="d-flex mb-4">
-                    <div class="input-group me-3" style="width: 120px;">
-                        <button class="btn btn-outline-secondary decrement" type="button">-</button>
-                        <input type="number" class="form-control text-center quantity"
-                               value="1" min="1" max="@Model.StockQuantity">
-                        <button class="btn btn-outline-secondary increment" type="button">+</button>
+                <div class="stepper-item @(Model.Status == "Delivered" ? "active" : "")">
+                    <div class="step-counter">
+                        <i class="fas fa-home"></i>
                     </div>
-                    <button class="btn btn-primary add-to-cart" data-id="@Model.Id">
-                        <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                    </button>
-                </div>
-            }
-            else
-            {
-                <button class="btn btn-secondary" disabled>
-                    <i class="fas fa-times-circle me-2"></i>Out of Stock
-                </button>
-            }
-
-            <!-- Product Details Card -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Product Details</h5>
-                    <ul class="list-unstyled">
-                        <li><strong>Fragrance Family:</strong> @(Model.FragranceFamily ?? "Not specified")</li>
-                        <li><strong>Type:</strong> @Model.FragranceType</li>
-                        <li><strong>Size:</strong> @Model.Size</li>
-                        <li><strong>Shipping:</strong> @Model.ShippingCost.ToString("C")</li>
-                        <li><strong>Availability:</strong> @(Model.StockQuantity > 0 ? "In Stock" : "Out of Stock")</li>
-                    </ul>
+                    <div class="step-name">Delivered</div>
+                    @if (Model.Status == "Delivered")
+                    {
+                        <div class="step-date">@Model.DeliveredDate?.ToString("MMM dd")</div>
+                    }
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Product Tabs -->
-    <div class="row mt-4">
-        <div class="col-12">
-            <ul class="nav nav-tabs" id="productTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">Description</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab">Details</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Reviews (@reviewCount)</button>
-                </li>
-            </ul>
-
-            <div class="tab-content p-3 border border-top-0" id="productTabsContent">
-                <div class="tab-pane fade show active" id="description" role="tabpanel">
-                    <p>@Model.Description</p>
+    <div class="row">
+        <!-- Order Summary -->
+        <div class="col-lg-8 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-boxes me-2"></i>Order Items</h5>
                 </div>
-                <div class="tab-pane fade" id="details" role="tabpanel">
-                    <h5>Composition</h5>
-                    <ul>
-                        <li><strong>Top Notes:</strong> Bergamot, Lemon, Green Notes</li>
-                        <li><strong>Middle Notes:</strong> Jasmine, Rose, Lily of the Valley</li>
-                        <li><strong>Base Notes:</strong> Sandalwood, Musk, Amber</li>
-                    </ul>
-                </div>
-                <div class="tab-pane fade" id="reviews" role="tabpanel">
-                    @if (User.Identity?.IsAuthenticated == true)
-                    {
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Add Your Review</h5>
-                                <form asp-action="Create" asp-controller="Comment" method="post" enctype="multipart/form-data">
-                                    @Html.AntiForgeryToken()
-                                    <input type="hidden" name="ProductId" value="@Model.Id">
-                                    <div class="mb-3">
-                                        <label class="form-label">Rating</label>
-                                        <div class="rating-input">
-                                            @for (int i = 1; i <= 5; i++)
-                                            {
-                                                <i class="far fa-star" data-rating="@i"></i>
-                                            }
-                                            <input type="hidden" name="Rating" id="selectedRating" value="5" required>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Review</label>
-                                        <textarea name="Text" class="form-control" rows="3" required></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Images (optional, max 3)</label>
-                                        <input type="file" name="Images" multiple accept="image/*" class="form-control">
-                                        <small class="text-muted">Max 5MB per image</small>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit Review</button>
-                                </form>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="alert alert-info mb-4">
-                            <a href="/Account/Login?returnUrl=@Context.Request.Path" class="alert-link">Sign in</a> to leave a review.
-                        </div>
-                    }
-
-                    <div id="commentsContainer">
-                        @if (hasReviews)
-                        {
-                            foreach (var comment in validComments.OrderByDescending(c => c.CreatedAt))
-                            {
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <div class="d-flex justify-content-between">
-                                            <h5 class="card-title">@comment.User?.UserName</h5>
-                                            <div class="text-warning">
-                                                @for (int i = 1; i <= 5; i++)
-                                                {
-                                                    <i class="@(i <= comment.Rating ? "fas" : "far") fa-star"></i>
-                                                }
-                                            </div>
-                                        </div>
-                                        <p class="text-muted small">@comment.CreatedAt.ToString("MMMM dd, yyyy")</p>
-                                        <p class="card-text">@comment.Text</p>
-
-                                        @if (comment.Images?.Any() == true)
-                                        {
-                                            <div class="mt-3">
-                                                @foreach (var image in comment.Images)
-                                                {
-                                                    <a href="@image.ImageUrl" data-lightbox="comment-@comment.Id" data-title="Review image">
-                                                        <img src="@image.ImageUrl" class="img-thumbnail" style="width:100px;height:100px;object-fit:cover" alt="Review image">
-                                                    </a>
-                                                }
-                                            </div>
-                                        }
-
-                                        @if (User.Identity?.IsAuthenticated == true && User.FindFirst(ClaimTypes.NameIdentifier)?.Value == comment.UserId)
-                                        {
-                                            <form asp-action="Delete" asp-controller="Comment" method="post" class="mt-3">
-                                                @Html.AntiForgeryToken()
-                                                <input type="hidden" name="id" value="@comment.Id">
-                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this review?')">
-                                                    <i class="fas fa-trash me-1"></i> Delete
-                                                </button>
-                                            </form>
-                                        }
-                                    </div>
-                                </div>
-                            }
-                        }
-                        else
-                        {
-                            <div class="alert alert-info">No reviews yet. Be the first to review!</div>
-                        }
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th style="width: 60px"></th>
+                                    <th>Product</th>
+                                    <th class="text-end">Price</th>
+                                    <th class="text-end">Qty</th>
+                                    <th class="text-end">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Items)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="@(item.Product?.ImageUrl ?? "/images/default-perfume.jpg")"
+                                                 class="img-thumbnail border-0"
+                                                 style="width: 50px; height: 50px; object-fit: cover"
+                                                 onerror="this.onerror=null;this.src='/images/default-perfume.jpg'">
+                                        </td>
+                                        <td>
+                                            <strong>@item.Product?.Name</strong><br>
+                                            <small class="text-muted">@item.Product?.FragranceType</small>
+                                        </td>
+                                        <td class="text-end align-middle">@item.PriceAtPurchase.ToString("C")</td>
+                                        <td class="text-end align-middle">@item.Quantity</td>
+                                        <td class="text-end align-middle">@((item.Quantity * item.PriceAtPurchase).ToString("C"))</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Order Details -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Order Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span>@Model.Items.Sum(i => i.Quantity * i.PriceAtPurchase).ToString("C")</span>
+                    </div>
+                    @* Removed ShippingCost and Discount references *@
+                    <hr>
+                    <div class="d-flex justify-content-between fw-bold fs-5">
+                        <span>Total:</span>
+                        <span>@Model.TotalAmount.ToString("C")</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-truck me-2"></i>Shipping Details</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="mb-2">Shipping Address</h6>
+                    <p class="mb-4">@Model.ShippingAddress</p>
+
+                    @* Removed TrackingNumber and TrackingUrl references *@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Actions -->
+    <div class="d-flex justify-content-between mt-4">
+        <a asp-action="Index" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-1"></i> Back to Orders
+        </a>
+
+        @if (Model.Status == "Processing")
+        {
+            <form asp-action="CancelOrder" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@Model.Id">
+                <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Are you sure you want to cancel this order?')">
+                    <i class="fas fa-times-circle me-1"></i> Cancel Order
+                </button>
+            </form>
+        }
     </div>
 </div>
 
-@section Scripts {
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+@functions {
+    string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Processing" => "bg-warning text-dark",
+            "Shipped" => "bg-info text-white",
+            "Delivered" => "bg-success text-white",
+            "Cancelled" => "bg-danger text-white",
+            "Returned" => "bg-secondary text-white",
+            _ => "bg-light text-dark"
+        };
+    }
+}
 
-    <script>
-        $(document).ready(function () {
-            // Quantity controls
-            $('.increment').click(function () {
-                const $input = $(this).siblings('.quantity');
-                let value = parseInt($input.val()) || 1;
-                const max = parseInt($input.attr('max')) || 100;
-                if (value < max) $input.val(value + 1);
-            });
+@section Styles {
+    <style>
+        .stepper-wrapper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
 
-            $('.decrement').click(function () {
-                const $input = $(this).siblings('.quantity');
-                let value = parseInt($input.val()) || 1;
-                if (value > 1) $input.val(value - 1);
-            });
+        .stepper-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
 
-            // Rating stars
-            $('.rating-input i').hover(function () {
-                const rating = $(this).data('rating');
-                $(this).prevAll().addBack().removeClass('far').addClass('fas');
-                $(this).nextAll().removeClass('fas').addClass('far');
-            });
+            .stepper-item::before {
+                position: absolute;
+                content: "";
+                border-bottom: 2px solid #dee2e6;
+                width: 100%;
+                top: 20px;
+                left: -50%;
+                z-index: 2;
+            }
 
-            $('.rating-input i').click(function () {
-                const rating = $(this).data('rating');
-                $(this).prevAll().addBack().removeClass('far').addClass('fas');
-                $(this).nextAll().removeClass('fas').addClass('far');
-                $('#selectedRating').val(rating);
-            });
+            .stepper-item::after {
+                position: absolute;
+                content: "";
+                border-bottom: 2px solid #dee2e6;
+                width: 100%;
+                top: 20px;
+                left: 50%;
+                z-index: 2;
+            }
 
-            // Form validation
-            $('form').submit(function() {
-                if (!$('#selectedRating').val()) {
-                    alert('Please select a rating');
-                    return false;
-                }
-                return true;
-            });
+            .stepper-item:first-child::before,
+            .stepper-item:last-child::after {
+                content: none;
+            }
 
-            // Add to cart
-            $('.add-to-cart').click(function () {
-                const productId = $(this).data('id');
-                const quantity = parseInt($('.quantity').val()) || 1;
+        .step-counter {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e9ecef;
+            color: #6c757d;
+            margin-bottom: 6px;
+        }
 
-                $.post('/api/cart', { productId: productId, quantity: quantity })
-                    .done(function () {
-                        alert('Added to cart!');
-                    })
-                    .fail(function (xhr) {
-                        if (xhr.status === 401) {
-                            alert('Please log in to add items to your cart.');
-                        } else {
-                            alert('An error occurred while adding to cart.');
-                        }
-                    });
-            });
+        .stepper-item.active .step-counter {
+            background: #0d6efd;
+            color: white;
+        }
 
-            // Initialize lightbox
-            lightbox.option({
-                'resizeDuration': 200,
-                'wrapAround': true,
-                'albumLabel': 'Image %1 of %2'
-            });
-        });
-    </script>
+        .stepper-item.completed .step-counter {
+            background: #198754;
+            color: white;
+        }
+
+        .stepper-item.completed::before {
+            border-bottom: 2px solid #198754;
+        }
+
+        .step-name {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .step-date {
+            font-size: 0.7rem;
+            color: #6c757d;
+            margin-top: 4px;
+        }
+
+        .table th {
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            color: #6c757d;
+        }
+    </style>
 }
