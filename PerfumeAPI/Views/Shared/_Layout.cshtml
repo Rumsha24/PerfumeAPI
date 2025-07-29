@@ -404,7 +404,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end user-dropdown" aria-labelledby="userDropdown">
                                     <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="fas fa-user me-2"></i>Profile</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="History"><i class="fas fa-history me-2"></i>Order History</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="Index"><i class="fas fa-history me-2"></i>Order History</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <form method="post" asp-controller="Account" asp-action="Logout" class="m-0">
@@ -455,7 +455,6 @@
                                     </div>
                                     <div class="d-grid gap-2">
                                         <a asp-controller="Cart" asp-action="Index" class="btn btn-dark">View Cart</a>
-                                        <a asp-controller="Order" asp-action="Checkout" class="btn btn-outline-dark">Checkout</a>
                                     </div>
                                 </div>
                             </div>

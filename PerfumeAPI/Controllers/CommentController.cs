@@ -6,6 +6,7 @@ using PerfumeAPI.Data;
 using PerfumeAPI.Models.DTOs;
 using PerfumeAPI.Models.Entities;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Hosting; // Updated namespace
 
 namespace PerfumeAPI.Controllers
 {
@@ -14,13 +15,13 @@ namespace PerfumeAPI.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<User> _userManager;
-        private readonly IWebHostEnvironment _env;
+        private readonly IWebHostEnvironment _env; // Updated interface
         private readonly ILogger<CommentController> _logger;
 
         public CommentController(
             AppDbContext context,
             UserManager<User> userManager,
-            IWebHostEnvironment env,
+            IWebHostEnvironment env, // Updated parameter type
             ILogger<CommentController> logger)
         {
             _context = context;
@@ -30,17 +31,14 @@ namespace PerfumeAPI.Controllers
         }
 
         [AllowAnonymous]
-        
         public async Task<IActionResult> Index(int? productId)
         {
             if (productId == null)
             {
-                // Option A: Show a list of products with links to comment pages
                 var products = await _context.Products.AsNoTracking().ToListAsync();
                 return View("SelectProduct", products);
             }
 
-            // Existing code to get comments for the product
             var comments = await _context.Comments
                 .Where(c => c.ProductId == productId.Value)
                 .Include(c => c.User)
@@ -75,7 +73,6 @@ namespace PerfumeAPI.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
-            // Confirm product exists before adding comment
             var productExists = await _context.Products.AnyAsync(p => p.Id == commentDto.ProductId);
             if (!productExists)
             {
@@ -108,7 +105,7 @@ namespace PerfumeAPI.Controllers
 
                 foreach (var image in commentDto.Images.Take(3))
                 {
-                    if (image != null && image.Length > 0 && image.Length <= 5 * 1024 * 1024) // max 5 MB
+                    if (image != null && image.Length > 0 && image.Length <= 5 * 1024 * 1024)
                     {
                         var fileName = $"{Guid.NewGuid()}{Path.GetExtension(image.FileName)}";
                         var filePath = Path.Combine(uploadsPath, fileName);
@@ -127,7 +124,6 @@ namespace PerfumeAPI.Controllers
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
 
-            // Redirect back to comments for this product
             return RedirectToAction("Index", new { productId = commentDto.ProductId });
         }
     }
