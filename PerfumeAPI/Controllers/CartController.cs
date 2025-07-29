@@ -26,13 +26,12 @@ namespace PerfumeAPI.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
             if (userId == null)
                 return Unauthorized();
 
             var cart = await _context.Carts
                 .Include(c => c.Items)
-                .ThenInclude(i => i.Product)
+                    .ThenInclude(i => i.Product)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
             if (cart == null)
@@ -45,27 +44,42 @@ namespace PerfumeAPI.Controllers
             return View(cart);
         }
 
+        // POST: /cart/add
         [HttpPost("AddToCart")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddToCart(int productId, int quantity)
         {
-            int cartId = 1; // Replace with user cart logic later
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null) return Unauthorized();
 
-            var existingItem = await _context.CartItems
-                .FirstOrDefaultAsync(ci => ci.CartId == cartId && ci.ProductId == productId);
+            // Find or create cart
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null)
+            {
+                cart = new Cart { UserId = userId };
+                _context.Carts.Add(cart);
+                await _context.SaveChangesAsync();
+            }
+
+            var existingItem = cart.Items.FirstOrDefault(i => i.ProductId == productId);
 
             if (existingItem != null)
             {
                 existingItem.Quantity += quantity;
                 existingItem.UpdatedAt = DateTime.UtcNow;
+                _context.CartItems.Update(existingItem);
             }
             else
             {
                 var newItem = new CartItem
                 {
-                    CartId = cartId,
+                    CartId = cart.Id,
                     ProductId = productId,
-                    Quantity = quantity
+                    Quantity = quantity,
+                    AddedAt = DateTime.UtcNow
                 };
                 _context.CartItems.Add(newItem);
             }
@@ -73,6 +87,5 @@ namespace PerfumeAPI.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
     }
 }

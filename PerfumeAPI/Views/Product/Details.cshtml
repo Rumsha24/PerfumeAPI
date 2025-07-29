@@ -119,27 +119,15 @@
                 <div class="add-to-cart-section mb-4">
                     @if (Model.StockQuantity > 0)
                     {
-                        <form method="post" asp-controller="Cart" asp-action="AddToCart" class="w-100 d-flex align-items-center">
-                            @Html.AntiForgeryToken()
+                        <form method="post" asp-controller="Cart" asp-action="AddToCart">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="productId" value="@Model.Id" />
+    <input type="number" name="quantity" value="1" min="1" max="@Model.StockQuantity" class="form-control d-inline-block w-auto" />
+    <button type="submit" class="btn btn-primary">
+        <i class="fas fa-cart-plus me-1"></i> Add to Cart
+    </button>
+</form>
 
-                            <input type="hidden" name="productId" value="@Model.Id" />
-
-                            <div class="input-group me-3" style="width: 140px;">
-                                <button class="btn btn-outline-secondary decrement" type="button">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-
-                                <input type="number" name="quantity" class="form-control text-center quantity" value="1" min="1" max="@Model.StockQuantity" />
-
-                                <button class="btn btn-outline-secondary increment" type="button">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-lg flex-grow-1">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </form>
                     }
                     else
                     {
