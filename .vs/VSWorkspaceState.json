@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\PerfumeAPI",
+    "\\Views"
   ],
-  "SelectedNode": "\\C:\\Users\\rumsh\\Source\\Repos\\PerfumeAPI",
+  "SelectedNode": "\\PerfumeAPI\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
